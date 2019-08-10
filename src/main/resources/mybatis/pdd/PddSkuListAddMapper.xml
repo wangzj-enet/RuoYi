@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.pdd.pddSkuListAdd.mapper.PddSkuListAddMapper">
+    
+    <resultMap type="PddSkuListAdd" id="PddSkuListAddResult">
+        <result property="skuListAddId"    column="sku_list_add_id"    />
+        <result property="goodsDataAddId"    column="goods_data_add_id"    />
+        <result property="mainId"    column="main_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="thirdId"    column="third_id"    />
+        <result property="specIdList"    column="spec_id_list"    />
+        <result property="outSkuSn"    column="out_sku_sn"    />
+        <result property="thumbUrl"    column="thumb_url"    />
+        <result property="localThumbUrl"    column="local_thumb_url"    />
+        <result property="length"    column="length"    />
+        <result property="weight"    column="weight"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="multiPrice"    column="multi_price"    />
+        <result property="price"    column="price"    />
+        <result property="limitQuantity"    column="limit_quantity"    />
+        <result property="isOnsale"    column="is_onsale"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectPddSkuListAddVo">
+        select sku_list_add_id, goods_data_add_id, main_id, goods_id, third_id, spec_id_list, out_sku_sn, thumb_url, local_thumb_url, length, weight, quantity, multi_price, price, limit_quantity, is_onsale, status, remark from pdd_sku_list_add
+    </sql>
+	
+    <select id="selectPddSkuListAddList" parameterType="PddSkuListAdd" resultMap="PddSkuListAddResult">
+        <include refid="selectPddSkuListAddVo"/>
+        <where>  
+            <if test="skuListAddId != null "> and sku_list_add_id = #{skuListAddId}</if>
+             <if test="goodsDataAddId != null "> and goods_data_add_id = #{goodsDataAddId}</if>
+             <if test="mainId != null "> and main_id = #{mainId}</if>
+             <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+             <if test="thirdId != null "> and third_id = #{thirdId}</if>
+             <if test="specIdList != null  and specIdList != '' "> and spec_id_list = #{specIdList}</if>
+             <if test="outSkuSn != null  and outSkuSn != '' "> and out_sku_sn = #{outSkuSn}</if>
+             <if test="thumbUrl != null  and thumbUrl != '' "> and thumb_url = #{thumbUrl}</if>
+             <if test="localThumbUrl != null  and localThumbUrl != '' "> and local_thumb_url = #{localThumbUrl}</if>
+             <if test="length != null "> and length = #{length}</if>
+             <if test="weight != null "> and weight = #{weight}</if>
+             <if test="quantity != null "> and quantity = #{quantity}</if>
+             <if test="multiPrice != null "> and multi_price = #{multiPrice}</if>
+             <if test="price != null "> and price = #{price}</if>
+             <if test="limitQuantity != null "> and limit_quantity = #{limitQuantity}</if>
+             <if test="isOnsale != null  and isOnsale != '' "> and is_onsale = #{isOnsale}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectPddSkuListAddById" parameterType="Long" resultMap="PddSkuListAddResult">
+        <include refid="selectPddSkuListAddVo"/>
+        where sku_list_add_id = #{skuListAddId}
+    </select>
+        
+    <insert id="insertPddSkuListAdd" parameterType="PddSkuListAdd" useGeneratedKeys="true" keyProperty="skuListAddId">
+        insert into pdd_sku_list_add
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsDataAddId != null  ">goods_data_add_id,</if>
+			<if test="mainId != null  ">main_id,</if>
+			<if test="goodsId != null  ">goods_id,</if>
+			<if test="thirdId != null  ">third_id,</if>
+			<if test="specIdList != null  and specIdList != ''  ">spec_id_list,</if>
+			<if test="outSkuSn != null  and outSkuSn != ''  ">out_sku_sn,</if>
+			<if test="thumbUrl != null  and thumbUrl != ''  ">thumb_url,</if>
+			<if test="localThumbUrl != null  and localThumbUrl != ''  ">local_thumb_url,</if>
+			<if test="length != null  ">length,</if>
+			<if test="weight != null  ">weight,</if>
+			<if test="quantity != null  ">quantity,</if>
+			<if test="multiPrice != null  ">multi_price,</if>
+			<if test="price != null  ">price,</if>
+			<if test="limitQuantity != null  ">limit_quantity,</if>
+			<if test="isOnsale != null  and isOnsale != ''  ">is_onsale,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goodsDataAddId != null  ">#{goodsDataAddId},</if>
+			<if test="mainId != null  ">#{mainId},</if>
+			<if test="goodsId != null  ">#{goodsId},</if>
+			<if test="thirdId != null  ">#{thirdId},</if>
+			<if test="specIdList != null  and specIdList != ''  ">#{specIdList},</if>
+			<if test="outSkuSn != null  and outSkuSn != ''  ">#{outSkuSn},</if>
+			<if test="thumbUrl != null  and thumbUrl != ''  ">#{thumbUrl},</if>
+			<if test="localThumbUrl != null  and localThumbUrl != ''  ">#{localThumbUrl},</if>
+			<if test="length != null  ">#{length},</if>
+			<if test="weight != null  ">#{weight},</if>
+			<if test="quantity != null  ">#{quantity},</if>
+			<if test="multiPrice != null  ">#{multiPrice},</if>
+			<if test="price != null  ">#{price},</if>
+			<if test="limitQuantity != null  ">#{limitQuantity},</if>
+			<if test="isOnsale != null  and isOnsale != ''  ">#{isOnsale},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePddSkuListAdd" parameterType="PddSkuListAdd">
+        update pdd_sku_list_add
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsDataAddId != null  ">goods_data_add_id = #{goodsDataAddId},</if>
+            <if test="mainId != null  ">main_id = #{mainId},</if>
+            <if test="goodsId != null  ">goods_id = #{goodsId},</if>
+            <if test="thirdId != null  ">third_id = #{thirdId},</if>
+            <if test="specIdList != null  and specIdList != ''  ">spec_id_list = #{specIdList},</if>
+            <if test="outSkuSn != null  and outSkuSn != ''  ">out_sku_sn = #{outSkuSn},</if>
+            <if test="thumbUrl != null  and thumbUrl != ''  ">thumb_url = #{thumbUrl},</if>
+            <if test="localThumbUrl != null  and localThumbUrl != ''  ">local_thumb_url = #{localThumbUrl},</if>
+            <if test="length != null  ">length = #{length},</if>
+            <if test="weight != null  ">weight = #{weight},</if>
+            <if test="quantity != null  ">quantity = #{quantity},</if>
+            <if test="multiPrice != null  ">multi_price = #{multiPrice},</if>
+            <if test="price != null  ">price = #{price},</if>
+            <if test="limitQuantity != null  ">limit_quantity = #{limitQuantity},</if>
+            <if test="isOnsale != null  and isOnsale != ''  ">is_onsale = #{isOnsale},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where sku_list_add_id = #{skuListAddId}
+    </update>
+
+	<delete id="deletePddSkuListAddById" parameterType="Long">
+        delete from pdd_sku_list_add where sku_list_add_id = #{skuListAddId}
+    </delete>
+	
+    <delete id="deletePddSkuListAddByIds" parameterType="String">
+        delete from pdd_sku_list_add where sku_list_add_id in 
+        <foreach item="skuListAddId" collection="array" open="(" separator="," close=")">
+            #{skuListAddId}
+        </foreach>
+    </delete>
+    
+</mapper>

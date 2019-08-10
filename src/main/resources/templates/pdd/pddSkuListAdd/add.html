@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('新增复制商品sku')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-pddSkuListAdd-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">源数据表id：</label>
+				<div class="col-sm-8">
+					<input id="goodsDataAddId" name="goodsDataAddId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主记录id：</label>
+				<div class="col-sm-8">
+					<input id="mainId" name="mainId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品id：</label>
+				<div class="col-sm-8">
+					<input id="goodsId" name="goodsId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">三方id：</label>
+				<div class="col-sm-8">
+					<input id="thirdId" name="thirdId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品规格列表：</label>
+				<div class="col-sm-8">
+					<input id="specIdList" name="specIdList" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品sku外部编码：</label>
+				<div class="col-sm-8">
+					<input id="outSkuSn" name="outSkuSn" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">sku预览图：</label>
+				<div class="col-sm-8">
+					<input id="thumbUrl" name="thumbUrl" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">本地sku预览图：</label>
+				<div class="col-sm-8">
+					<input id="localThumbUrl" name="localThumbUrl" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">sku送装参数：</label>
+				<div class="col-sm-8">
+					<input id="length" name="length" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">重量（g）：</label>
+				<div class="col-sm-8">
+					<input id="weight" name="weight" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品sku库存初始数量：</label>
+				<div class="col-sm-8">
+					<input id="quantity" name="quantity" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品团购价格：</label>
+				<div class="col-sm-8">
+					<input id="multiPrice" name="multiPrice" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品单买价格：</label>
+				<div class="col-sm-8">
+					<input id="price" name="price" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">sku购买限制：</label>
+				<div class="col-sm-8">
+					<input id="limitQuantity" name="limitQuantity" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">sku上架状态：</label>
+				<div class="col-sm-8">
+					<input id="isOnsale" name="isOnsale" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">状态（0正常 1暂停）：</label>
+				<div class="col-sm-8">
+					<input id="status" name="status" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注信息：</label>
+				<div class="col-sm-8">
+					<input id="remark" name="remark" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "pdd/pddSkuListAdd"
+		$("#form-pddSkuListAdd-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-pddSkuListAdd-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

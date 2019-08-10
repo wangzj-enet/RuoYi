@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('原商品数据解析列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								主记录id：<input type="text" name="mainId"/>
+							</li>
+
+							<li>
+								商品id：<input type="text" name="goodsId"/>
+							</li>
+
+							<li>
+								三方id：<input type="text" name="thirdId"/>
+							</li>
+
+							<li>
+								商品标题：<input type="text" name="goodsName"/>
+							</li>
+
+							<li>
+								商品类型：<input type="text" name="goodsType"/>
+							</li>
+
+							<li>
+								商品描述：<input type="text" name="goodsDesc"/>
+							</li>
+
+							<li>
+								叶子类目ID：<input type="text" name="catId"/>
+							</li>
+
+							<li>
+								商品短标题：<input type="text" name="tinyName"/>
+							</li>
+
+							<li>
+								国家ID：<input type="text" name="countryId"/>
+							</li>
+
+							<li>
+								保税仓：<input type="text" name="warehouse"/>
+							</li>
+
+							<li>
+								报关海关：<input type="text" name="customs"/>
+							</li>
+
+							<li>
+								是否上报海关：<input type="text" name="isCustoms"/>
+							</li>
+
+							<li>
+								市场价格：<input type="text" name="marketPrice"/>
+							</li>
+
+							<li>
+								是否预售：<input type="text" name="isPreSale"/>
+							</li>
+
+							<li>
+								预售时间：<input type="text" name="preSaleTime"/>
+							</li>
+
+							<li>
+								承诺发货时间（ 秒）：<input type="text" name="shipmentLimitSecond"/>
+							</li>
+
+							<li>
+								物流运费模板ID：<input type="text" name="costTemplateId"/>
+							</li>
+
+							<li>
+								团购人数：<input type="text" name="customerNum"/>
+							</li>
+
+							<li>
+								限购次数：<input type="text" name="buyLimit"/>
+							</li>
+
+							<li>
+								单次限量：<input type="text" name="orderLimit"/>
+							</li>
+
+							<li>
+								是否7天无理由退换货：<input type="text" name="isRefundable"/>
+							</li>
+
+							<li>
+								是否二手商品：<input type="text" name="secondHand"/>
+							</li>
+
+							<li>
+								是否支持假一赔十：<input type="text" name="isFolt"/>
+							</li>
+
+							<li>
+								水果类目温馨提示：<input type="text" name="warmTips"/>
+							</li>
+
+							<li>
+								商品goods外部编码：<input type="text" name="outGoodsId"/>
+							</li>
+
+							<li>
+								商品活动主图：<input type="text" name="imageUrl"/>
+							</li>
+
+							<li>
+								商品轮播图：<input type="text" name="carouselGallery"/>
+							</li>
+
+							<li>
+								商品详情图：<input type="text" name="detailGallery"/>
+							</li>
+
+							<li>
+								是否支持正品发票：<input type="text" name="invoiceStatus"/>
+							</li>
+
+							<li>
+								是否支持全国联保：<input type="text" name="quanGuoLianBao"/>
+							</li>
+
+							<li>
+								只换不修的天数：<input type="text" name="zhiHuanBuXiu"/>
+							</li>
+
+							<li>
+								送货入户模版id：<input type="text" name="songHuoRuHu"/>
+							</li>
+
+							<li>
+								上门安装模版id：<input type="text" name="shangMenAnZhuang"/>
+							</li>
+
+							<li>
+								送货入户并安装模版id：<input type="text" name="songHuoAnZhuang"/>
+							</li>
+
+							<li>
+								买家自提模版id：<input type="text" name="maiJiaZiTi"/>
+							</li>
+
+							<li>
+								坏果包赔：<input type="text" name="badFruitClaim"/>
+							</li>
+
+							<li>
+								缺重包退：<input type="text" name="lackOfWeightClaim"/>
+							</li>
+
+							<li>
+								原产地id：<input type="text" name="originCountryId"/>
+							</li>
+
+							<li>
+								sku对象列表：<input type="text" name="skuListOriginId"/>
+							</li>
+
+							<li>
+								商品属性列表：<input type="text" name="goodsPropertiesOriginId"/>
+							</li>
+
+							<li>
+								海外原id：<input type="text" name="overseaGoodsOriginId"/>
+							</li>
+
+							<li>
+								商品视频：<input type="text" name="carouselVideoOriginId"/>
+							</li>
+
+							<li>
+								状态：<input type="text" name="status"/>
+							</li>
+
+
+							<li>
+								备注信息：<input type="text" name="remark"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="pdd:pddGoodsDataOrigin:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="pdd:pddGoodsDataOrigin:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="pdd:pddGoodsDataOrigin:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="pdd:pddGoodsDataOrigin:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('pdd:pddGoodsDataOrigin:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('pdd:pddGoodsDataOrigin:remove')}]];
+        var prefix = ctx + "pdd/pddGoodsDataOrigin";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "原商品数据解析",
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'goodsDataOriginId', 
+					title : '',
+					visible: false
+				},
+				{
+					field : 'mainId', 
+					title : '主记录id',
+					sortable: true
+				},
+				{
+					field : 'goodsId', 
+					title : '商品id',
+					sortable: true
+				},
+				{
+					field : 'thirdId', 
+					title : '三方id',
+					sortable: true
+				},
+				{
+					field : 'goodsName', 
+					title : '商品标题',
+					sortable: true
+				},
+				{
+					field : 'goodsType', 
+					title : '商品类型',
+					sortable: true
+				},
+				{
+					field : 'goodsDesc', 
+					title : '商品描述',
+					sortable: true
+				},
+				{
+					field : 'catId', 
+					title : '叶子类目ID',
+					sortable: true
+				},
+				{
+					field : 'tinyName', 
+					title : '商品短标题',
+					sortable: true
+				},
+				{
+					field : 'countryId', 
+					title : '国家ID',
+					sortable: true
+				},
+				{
+					field : 'warehouse', 
+					title : '保税仓',
+					sortable: true
+				},
+				{
+					field : 'customs', 
+					title : '报关海关',
+					sortable: true
+				},
+				{
+					field : 'isCustoms', 
+					title : '是否上报海关',
+					sortable: true
+				},
+				{
+					field : 'marketPrice', 
+					title : '市场价格',
+					sortable: true
+				},
+				{
+					field : 'isPreSale', 
+					title : '是否预售',
+					sortable: true
+				},
+				{
+					field : 'preSaleTime', 
+					title : '预售时间',
+					sortable: true
+				},
+				{
+					field : 'shipmentLimitSecond', 
+					title : '承诺发货时间（ 秒）',
+					sortable: true
+				},
+				{
+					field : 'costTemplateId', 
+					title : '物流运费模板ID',
+					sortable: true
+				},
+				{
+					field : 'customerNum', 
+					title : '团购人数',
+					sortable: true
+				},
+				{
+					field : 'buyLimit', 
+					title : '限购次数',
+					sortable: true
+				},
+				{
+					field : 'orderLimit', 
+					title : '单次限量',
+					sortable: true
+				},
+				{
+					field : 'isRefundable', 
+					title : '是否7天无理由退换货',
+					sortable: true
+				},
+				{
+					field : 'secondHand', 
+					title : '是否二手商品',
+					sortable: true
+				},
+				{
+					field : 'isFolt', 
+					title : '是否支持假一赔十',
+					sortable: true
+				},
+				{
+					field : 'warmTips', 
+					title : '水果类目温馨提示',
+					sortable: true
+				},
+				{
+					field : 'outGoodsId', 
+					title : '商品goods外部编码',
+					sortable: true
+				},
+				{
+					field : 'imageUrl', 
+					title : '商品活动主图',
+					sortable: true
+				},
+				{
+					field : 'carouselGallery', 
+					title : '商品轮播图',
+					sortable: true
+				},
+				{
+					field : 'detailGallery', 
+					title : '商品详情图',
+					sortable: true
+				},
+				{
+					field : 'invoiceStatus', 
+					title : '是否支持正品发票',
+					sortable: true
+				},
+				{
+					field : 'quanGuoLianBao', 
+					title : '是否支持全国联保',
+					sortable: true
+				},
+				{
+					field : 'zhiHuanBuXiu', 
+					title : '只换不修的天数',
+					sortable: true
+				},
+				{
+					field : 'songHuoRuHu', 
+					title : '送货入户模版id',
+					sortable: true
+				},
+				{
+					field : 'shangMenAnZhuang', 
+					title : '上门安装模版id',
+					sortable: true
+				},
+				{
+					field : 'songHuoAnZhuang', 
+					title : '送货入户并安装模版id',
+					sortable: true
+				},
+				{
+					field : 'maiJiaZiTi', 
+					title : '买家自提模版id',
+					sortable: true
+				},
+				{
+					field : 'badFruitClaim', 
+					title : '坏果包赔',
+					sortable: true
+				},
+				{
+					field : 'lackOfWeightClaim', 
+					title : '缺重包退',
+					sortable: true
+				},
+				{
+					field : 'originCountryId', 
+					title : '原产地id',
+					sortable: true
+				},
+				{
+					field : 'skuListOriginId', 
+					title : 'sku对象列表',
+					sortable: true
+				},
+				{
+					field : 'goodsPropertiesOriginId', 
+					title : '商品属性列表',
+					sortable: true
+				},
+				{
+					field : 'overseaGoodsOriginId', 
+					title : '海外原id',
+					sortable: true
+				},
+				{
+					field : 'carouselVideoOriginId', 
+					title : '商品视频',
+					sortable: true
+				},
+				{
+					field : 'status', 
+					title : '状态',
+					sortable: true
+				},
+				{
+					field : 'createBy', 
+					title : '创建者',
+					sortable: true
+				},
+				{
+					field : 'createTime', 
+					title : '创建时间',
+					sortable: true
+				},
+				{
+					field : 'updateBy', 
+					title : '更新者',
+					sortable: true
+				},
+				{
+					field : 'updateTime', 
+					title : '更新时间',
+					sortable: true
+				},
+				{
+					field : 'remark', 
+					title : '备注信息',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.goodsDataOriginId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.goodsDataOriginId + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

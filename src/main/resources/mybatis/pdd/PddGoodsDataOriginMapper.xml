@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.pdd.pddGoodsDataOrigin.mapper.PddGoodsDataOriginMapper">
+    
+    <resultMap type="PddGoodsDataOrigin" id="PddGoodsDataOriginResult">
+        <result property="goodsDataOriginId"    column="goods_data_origin_id"    />
+        <result property="mainId"    column="main_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="thirdId"    column="third_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="goodsType"    column="goods_type"    />
+        <result property="goodsDesc"    column="goods_desc"    />
+        <result property="catId"    column="cat_id"    />
+        <result property="tinyName"    column="tiny_name"    />
+        <result property="countryId"    column="country_id"    />
+        <result property="warehouse"    column="warehouse"    />
+        <result property="customs"    column="customs"    />
+        <result property="isCustoms"    column="is_customs"    />
+        <result property="marketPrice"    column="market_price"    />
+        <result property="isPreSale"    column="is_pre_sale"    />
+        <result property="preSaleTime"    column="pre_sale_time"    />
+        <result property="shipmentLimitSecond"    column="shipment_limit_second"    />
+        <result property="costTemplateId"    column="cost_template_id"    />
+        <result property="customerNum"    column="customer_num"    />
+        <result property="buyLimit"    column="buy_limit"    />
+        <result property="orderLimit"    column="order_limit"    />
+        <result property="isRefundable"    column="is_refundable"    />
+        <result property="secondHand"    column="second_hand"    />
+        <result property="isFolt"    column="is_folt"    />
+        <result property="warmTips"    column="warm_tips"    />
+        <result property="outGoodsId"    column="out_goods_id"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="carouselGallery"    column="carousel_gallery"    />
+        <result property="detailGallery"    column="detail_gallery"    />
+        <result property="invoiceStatus"    column="invoice_status"    />
+        <result property="quanGuoLianBao"    column="quan_guo_lian_bao"    />
+        <result property="zhiHuanBuXiu"    column="zhi_huan_bu_xiu"    />
+        <result property="songHuoRuHu"    column="song_huo_ru_hu"    />
+        <result property="shangMenAnZhuang"    column="shang_men_an_zhuang"    />
+        <result property="songHuoAnZhuang"    column="song_huo_an_zhuang"    />
+        <result property="maiJiaZiTi"    column="mai_jia_zi_ti"    />
+        <result property="badFruitClaim"    column="bad_fruit_claim"    />
+        <result property="lackOfWeightClaim"    column="lack_of_weight_claim"    />
+        <result property="originCountryId"    column="origin_country_id"    />
+        <result property="skuListOriginId"    column="sku_list_origin_id"    />
+        <result property="goodsPropertiesOriginId"    column="goods_properties_origin_id"    />
+        <result property="overseaGoodsOriginId"    column="oversea_goods_origin_id"    />
+        <result property="carouselVideoOriginId"    column="carousel_video_origin_id"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectPddGoodsDataOriginVo">
+        select goods_data_origin_id, main_id, goods_id, third_id, goods_name, goods_type, goods_desc, cat_id, tiny_name, country_id, warehouse, customs, is_customs, market_price, is_pre_sale, pre_sale_time, shipment_limit_second, cost_template_id, customer_num, buy_limit, order_limit, is_refundable, second_hand, is_folt, warm_tips, out_goods_id, image_url, carousel_gallery, detail_gallery, invoice_status, quan_guo_lian_bao, zhi_huan_bu_xiu, song_huo_ru_hu, shang_men_an_zhuang, song_huo_an_zhuang, mai_jia_zi_ti, bad_fruit_claim, lack_of_weight_claim, origin_country_id, sku_list_origin_id, goods_properties_origin_id, oversea_goods_origin_id, carousel_video_origin_id, status, create_by, create_time, update_by, update_time, remark from pdd_goods_data_origin
+    </sql>
+	
+    <select id="selectPddGoodsDataOriginList" parameterType="PddGoodsDataOrigin" resultMap="PddGoodsDataOriginResult">
+        <include refid="selectPddGoodsDataOriginVo"/>
+        <where>  
+            <if test="goodsDataOriginId != null "> and goods_data_origin_id = #{goodsDataOriginId}</if>
+             <if test="mainId != null "> and main_id = #{mainId}</if>
+             <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+             <if test="thirdId != null "> and third_id = #{thirdId}</if>
+             <if test="goodsName != null  and goodsName != '' "> and goods_name = #{goodsName}</if>
+             <if test="goodsType != null "> and goods_type = #{goodsType}</if>
+             <if test="goodsDesc != null  and goodsDesc != '' "> and goods_desc = #{goodsDesc}</if>
+             <if test="catId != null "> and cat_id = #{catId}</if>
+             <if test="tinyName != null  and tinyName != '' "> and tiny_name = #{tinyName}</if>
+             <if test="countryId != null "> and country_id = #{countryId}</if>
+             <if test="warehouse != null  and warehouse != '' "> and warehouse = #{warehouse}</if>
+             <if test="customs != null  and customs != '' "> and customs = #{customs}</if>
+             <if test="isCustoms != null  and isCustoms != '' "> and is_customs = #{isCustoms}</if>
+             <if test="marketPrice != null "> and market_price = #{marketPrice}</if>
+             <if test="isPreSale != null  and isPreSale != '' "> and is_pre_sale = #{isPreSale}</if>
+             <if test="preSaleTime != null "> and pre_sale_time = #{preSaleTime}</if>
+             <if test="shipmentLimitSecond != null "> and shipment_limit_second = #{shipmentLimitSecond}</if>
+             <if test="costTemplateId != null "> and cost_template_id = #{costTemplateId}</if>
+             <if test="customerNum != null "> and customer_num = #{customerNum}</if>
+             <if test="buyLimit != null "> and buy_limit = #{buyLimit}</if>
+             <if test="orderLimit != null "> and order_limit = #{orderLimit}</if>
+             <if test="isRefundable != null  and isRefundable != '' "> and is_refundable = #{isRefundable}</if>
+             <if test="secondHand != null  and secondHand != '' "> and second_hand = #{secondHand}</if>
+             <if test="isFolt != null  and isFolt != '' "> and is_folt = #{isFolt}</if>
+             <if test="warmTips != null  and warmTips != '' "> and warm_tips = #{warmTips}</if>
+             <if test="outGoodsId != null  and outGoodsId != '' "> and out_goods_id = #{outGoodsId}</if>
+             <if test="imageUrl != null  and imageUrl != '' "> and image_url = #{imageUrl}</if>
+             <if test="carouselGallery != null  and carouselGallery != '' "> and carousel_gallery = #{carouselGallery}</if>
+             <if test="detailGallery != null  and detailGallery != '' "> and detail_gallery = #{detailGallery}</if>
+             <if test="invoiceStatus != null "> and invoice_status = #{invoiceStatus}</if>
+             <if test="quanGuoLianBao != null "> and quan_guo_lian_bao = #{quanGuoLianBao}</if>
+             <if test="zhiHuanBuXiu != null "> and zhi_huan_bu_xiu = #{zhiHuanBuXiu}</if>
+             <if test="songHuoRuHu != null  and songHuoRuHu != '' "> and song_huo_ru_hu = #{songHuoRuHu}</if>
+             <if test="shangMenAnZhuang != null  and shangMenAnZhuang != '' "> and shang_men_an_zhuang = #{shangMenAnZhuang}</if>
+             <if test="songHuoAnZhuang != null  and songHuoAnZhuang != '' "> and song_huo_an_zhuang = #{songHuoAnZhuang}</if>
+             <if test="maiJiaZiTi != null  and maiJiaZiTi != '' "> and mai_jia_zi_ti = #{maiJiaZiTi}</if>
+             <if test="badFruitClaim != null "> and bad_fruit_claim = #{badFruitClaim}</if>
+             <if test="lackOfWeightClaim != null "> and lack_of_weight_claim = #{lackOfWeightClaim}</if>
+             <if test="originCountryId != null "> and origin_country_id = #{originCountryId}</if>
+             <if test="skuListOriginId != null "> and sku_list_origin_id = #{skuListOriginId}</if>
+             <if test="goodsPropertiesOriginId != null "> and goods_properties_origin_id = #{goodsPropertiesOriginId}</if>
+             <if test="overseaGoodsOriginId != null "> and oversea_goods_origin_id = #{overseaGoodsOriginId}</if>
+             <if test="carouselVideoOriginId != null "> and carousel_video_origin_id = #{carouselVideoOriginId}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="createBy != null  and createBy != '' "> and create_by = #{createBy}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="updateBy != null  and updateBy != '' "> and update_by = #{updateBy}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectPddGoodsDataOriginById" parameterType="Long" resultMap="PddGoodsDataOriginResult">
+        <include refid="selectPddGoodsDataOriginVo"/>
+        where goods_data_origin_id = #{goodsDataOriginId}
+    </select>
+        
+    <insert id="insertPddGoodsDataOrigin" parameterType="PddGoodsDataOrigin" useGeneratedKeys="true" keyProperty="goodsDataOriginId">
+        insert into pdd_goods_data_origin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mainId != null  ">main_id,</if>
+			<if test="goodsId != null  ">goods_id,</if>
+			<if test="thirdId != null  ">third_id,</if>
+			<if test="goodsName != null  and goodsName != ''  ">goods_name,</if>
+			<if test="goodsType != null  ">goods_type,</if>
+			<if test="goodsDesc != null  and goodsDesc != ''  ">goods_desc,</if>
+			<if test="catId != null  ">cat_id,</if>
+			<if test="tinyName != null  and tinyName != ''  ">tiny_name,</if>
+			<if test="countryId != null  ">country_id,</if>
+			<if test="warehouse != null  and warehouse != ''  ">warehouse,</if>
+			<if test="customs != null  and customs != ''  ">customs,</if>
+			<if test="isCustoms != null  and isCustoms != ''  ">is_customs,</if>
+			<if test="marketPrice != null  ">market_price,</if>
+			<if test="isPreSale != null  and isPreSale != ''  ">is_pre_sale,</if>
+			<if test="preSaleTime != null  ">pre_sale_time,</if>
+			<if test="shipmentLimitSecond != null  ">shipment_limit_second,</if>
+			<if test="costTemplateId != null  ">cost_template_id,</if>
+			<if test="customerNum != null  ">customer_num,</if>
+			<if test="buyLimit != null  ">buy_limit,</if>
+			<if test="orderLimit != null  ">order_limit,</if>
+			<if test="isRefundable != null  and isRefundable != ''  ">is_refundable,</if>
+			<if test="secondHand != null  and secondHand != ''  ">second_hand,</if>
+			<if test="isFolt != null  and isFolt != ''  ">is_folt,</if>
+			<if test="warmTips != null  and warmTips != ''  ">warm_tips,</if>
+			<if test="outGoodsId != null  and outGoodsId != ''  ">out_goods_id,</if>
+			<if test="imageUrl != null  and imageUrl != ''  ">image_url,</if>
+			<if test="carouselGallery != null  and carouselGallery != ''  ">carousel_gallery,</if>
+			<if test="detailGallery != null  and detailGallery != ''  ">detail_gallery,</if>
+			<if test="invoiceStatus != null  ">invoice_status,</if>
+			<if test="quanGuoLianBao != null  ">quan_guo_lian_bao,</if>
+			<if test="zhiHuanBuXiu != null  ">zhi_huan_bu_xiu,</if>
+			<if test="songHuoRuHu != null  and songHuoRuHu != ''  ">song_huo_ru_hu,</if>
+			<if test="shangMenAnZhuang != null  and shangMenAnZhuang != ''  ">shang_men_an_zhuang,</if>
+			<if test="songHuoAnZhuang != null  and songHuoAnZhuang != ''  ">song_huo_an_zhuang,</if>
+			<if test="maiJiaZiTi != null  and maiJiaZiTi != ''  ">mai_jia_zi_ti,</if>
+			<if test="badFruitClaim != null  ">bad_fruit_claim,</if>
+			<if test="lackOfWeightClaim != null  ">lack_of_weight_claim,</if>
+			<if test="originCountryId != null  ">origin_country_id,</if>
+			<if test="skuListOriginId != null  ">sku_list_origin_id,</if>
+			<if test="goodsPropertiesOriginId != null  ">goods_properties_origin_id,</if>
+			<if test="overseaGoodsOriginId != null  ">oversea_goods_origin_id,</if>
+			<if test="carouselVideoOriginId != null  ">carousel_video_origin_id,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="createBy != null  and createBy != ''  ">create_by,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateBy != null  and updateBy != ''  ">update_by,</if>
+			<if test="updateTime != null  ">update_time,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="mainId != null  ">#{mainId},</if>
+			<if test="goodsId != null  ">#{goodsId},</if>
+			<if test="thirdId != null  ">#{thirdId},</if>
+			<if test="goodsName != null  and goodsName != ''  ">#{goodsName},</if>
+			<if test="goodsType != null  ">#{goodsType},</if>
+			<if test="goodsDesc != null  and goodsDesc != ''  ">#{goodsDesc},</if>
+			<if test="catId != null  ">#{catId},</if>
+			<if test="tinyName != null  and tinyName != ''  ">#{tinyName},</if>
+			<if test="countryId != null  ">#{countryId},</if>
+			<if test="warehouse != null  and warehouse != ''  ">#{warehouse},</if>
+			<if test="customs != null  and customs != ''  ">#{customs},</if>
+			<if test="isCustoms != null  and isCustoms != ''  ">#{isCustoms},</if>
+			<if test="marketPrice != null  ">#{marketPrice},</if>
+			<if test="isPreSale != null  and isPreSale != ''  ">#{isPreSale},</if>
+			<if test="preSaleTime != null  ">#{preSaleTime},</if>
+			<if test="shipmentLimitSecond != null  ">#{shipmentLimitSecond},</if>
+			<if test="costTemplateId != null  ">#{costTemplateId},</if>
+			<if test="customerNum != null  ">#{customerNum},</if>
+			<if test="buyLimit != null  ">#{buyLimit},</if>
+			<if test="orderLimit != null  ">#{orderLimit},</if>
+			<if test="isRefundable != null  and isRefundable != ''  ">#{isRefundable},</if>
+			<if test="secondHand != null  and secondHand != ''  ">#{secondHand},</if>
+			<if test="isFolt != null  and isFolt != ''  ">#{isFolt},</if>
+			<if test="warmTips != null  and warmTips != ''  ">#{warmTips},</if>
+			<if test="outGoodsId != null  and outGoodsId != ''  ">#{outGoodsId},</if>
+			<if test="imageUrl != null  and imageUrl != ''  ">#{imageUrl},</if>
+			<if test="carouselGallery != null  and carouselGallery != ''  ">#{carouselGallery},</if>
+			<if test="detailGallery != null  and detailGallery != ''  ">#{detailGallery},</if>
+			<if test="invoiceStatus != null  ">#{invoiceStatus},</if>
+			<if test="quanGuoLianBao != null  ">#{quanGuoLianBao},</if>
+			<if test="zhiHuanBuXiu != null  ">#{zhiHuanBuXiu},</if>
+			<if test="songHuoRuHu != null  and songHuoRuHu != ''  ">#{songHuoRuHu},</if>
+			<if test="shangMenAnZhuang != null  and shangMenAnZhuang != ''  ">#{shangMenAnZhuang},</if>
+			<if test="songHuoAnZhuang != null  and songHuoAnZhuang != ''  ">#{songHuoAnZhuang},</if>
+			<if test="maiJiaZiTi != null  and maiJiaZiTi != ''  ">#{maiJiaZiTi},</if>
+			<if test="badFruitClaim != null  ">#{badFruitClaim},</if>
+			<if test="lackOfWeightClaim != null  ">#{lackOfWeightClaim},</if>
+			<if test="originCountryId != null  ">#{originCountryId},</if>
+			<if test="skuListOriginId != null  ">#{skuListOriginId},</if>
+			<if test="goodsPropertiesOriginId != null  ">#{goodsPropertiesOriginId},</if>
+			<if test="overseaGoodsOriginId != null  ">#{overseaGoodsOriginId},</if>
+			<if test="carouselVideoOriginId != null  ">#{carouselVideoOriginId},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="createBy != null  and createBy != ''  ">#{createBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateBy != null  and updateBy != ''  ">#{updateBy},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePddGoodsDataOrigin" parameterType="PddGoodsDataOrigin">
+        update pdd_goods_data_origin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mainId != null  ">main_id = #{mainId},</if>
+            <if test="goodsId != null  ">goods_id = #{goodsId},</if>
+            <if test="thirdId != null  ">third_id = #{thirdId},</if>
+            <if test="goodsName != null  and goodsName != ''  ">goods_name = #{goodsName},</if>
+            <if test="goodsType != null  ">goods_type = #{goodsType},</if>
+            <if test="goodsDesc != null  and goodsDesc != ''  ">goods_desc = #{goodsDesc},</if>
+            <if test="catId != null  ">cat_id = #{catId},</if>
+            <if test="tinyName != null  and tinyName != ''  ">tiny_name = #{tinyName},</if>
+            <if test="countryId != null  ">country_id = #{countryId},</if>
+            <if test="warehouse != null  and warehouse != ''  ">warehouse = #{warehouse},</if>
+            <if test="customs != null  and customs != ''  ">customs = #{customs},</if>
+            <if test="isCustoms != null  and isCustoms != ''  ">is_customs = #{isCustoms},</if>
+            <if test="marketPrice != null  ">market_price = #{marketPrice},</if>
+            <if test="isPreSale != null  and isPreSale != ''  ">is_pre_sale = #{isPreSale},</if>
+            <if test="preSaleTime != null  ">pre_sale_time = #{preSaleTime},</if>
+            <if test="shipmentLimitSecond != null  ">shipment_limit_second = #{shipmentLimitSecond},</if>
+            <if test="costTemplateId != null  ">cost_template_id = #{costTemplateId},</if>
+            <if test="customerNum != null  ">customer_num = #{customerNum},</if>
+            <if test="buyLimit != null  ">buy_limit = #{buyLimit},</if>
+            <if test="orderLimit != null  ">order_limit = #{orderLimit},</if>
+            <if test="isRefundable != null  and isRefundable != ''  ">is_refundable = #{isRefundable},</if>
+            <if test="secondHand != null  and secondHand != ''  ">second_hand = #{secondHand},</if>
+            <if test="isFolt != null  and isFolt != ''  ">is_folt = #{isFolt},</if>
+            <if test="warmTips != null  and warmTips != ''  ">warm_tips = #{warmTips},</if>
+            <if test="outGoodsId != null  and outGoodsId != ''  ">out_goods_id = #{outGoodsId},</if>
+            <if test="imageUrl != null  and imageUrl != ''  ">image_url = #{imageUrl},</if>
+            <if test="carouselGallery != null  and carouselGallery != ''  ">carousel_gallery = #{carouselGallery},</if>
+            <if test="detailGallery != null  and detailGallery != ''  ">detail_gallery = #{detailGallery},</if>
+            <if test="invoiceStatus != null  ">invoice_status = #{invoiceStatus},</if>
+            <if test="quanGuoLianBao != null  ">quan_guo_lian_bao = #{quanGuoLianBao},</if>
+            <if test="zhiHuanBuXiu != null  ">zhi_huan_bu_xiu = #{zhiHuanBuXiu},</if>
+            <if test="songHuoRuHu != null  and songHuoRuHu != ''  ">song_huo_ru_hu = #{songHuoRuHu},</if>
+            <if test="shangMenAnZhuang != null  and shangMenAnZhuang != ''  ">shang_men_an_zhuang = #{shangMenAnZhuang},</if>
+            <if test="songHuoAnZhuang != null  and songHuoAnZhuang != ''  ">song_huo_an_zhuang = #{songHuoAnZhuang},</if>
+            <if test="maiJiaZiTi != null  and maiJiaZiTi != ''  ">mai_jia_zi_ti = #{maiJiaZiTi},</if>
+            <if test="badFruitClaim != null  ">bad_fruit_claim = #{badFruitClaim},</if>
+            <if test="lackOfWeightClaim != null  ">lack_of_weight_claim = #{lackOfWeightClaim},</if>
+            <if test="originCountryId != null  ">origin_country_id = #{originCountryId},</if>
+            <if test="skuListOriginId != null  ">sku_list_origin_id = #{skuListOriginId},</if>
+            <if test="goodsPropertiesOriginId != null  ">goods_properties_origin_id = #{goodsPropertiesOriginId},</if>
+            <if test="overseaGoodsOriginId != null  ">oversea_goods_origin_id = #{overseaGoodsOriginId},</if>
+            <if test="carouselVideoOriginId != null  ">carousel_video_origin_id = #{carouselVideoOriginId},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''  ">create_by = #{createBy},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''  ">update_by = #{updateBy},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where goods_data_origin_id = #{goodsDataOriginId}
+    </update>
+
+	<delete id="deletePddGoodsDataOriginById" parameterType="Long">
+        delete from pdd_goods_data_origin where goods_data_origin_id = #{goodsDataOriginId}
+    </delete>
+	
+    <delete id="deletePddGoodsDataOriginByIds" parameterType="String">
+        delete from pdd_goods_data_origin where goods_data_origin_id in 
+        <foreach item="goodsDataOriginId" collection="array" open="(" separator="," close=")">
+            #{goodsDataOriginId}
+        </foreach>
+    </delete>
+    
+</mapper>

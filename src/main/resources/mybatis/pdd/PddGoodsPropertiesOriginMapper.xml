@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.mapper.PddGoodsPropertiesOriginMapper">
+    
+    <resultMap type="PddGoodsPropertiesOrigin" id="PddGoodsPropertiesOriginResult">
+        <result property="goodsPropertiesOriginId"    column="goods_properties_origin_id"    />
+        <result property="goodsDataOriginId"    column="goods_data_origin_id"    />
+        <result property="mainId"    column="main_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="thirdId"    column="third_id"    />
+        <result property="parentSpecId"    column="parent_spec_id"    />
+        <result property="specId"    column="spec_id"    />
+        <result property="note"    column="note"    />
+        <result property="imgUrl"    column="img_url"    />
+        <result property="groupId"    column="group_id"    />
+        <result property="templatePid"    column="template_pid"    />
+        <result property="vid"    column="vid"    />
+        <result property="value"    column="value"    />
+        <result property="valueUnit"    column="value_unit"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectPddGoodsPropertiesOriginVo">
+        select goods_properties_origin_id, goods_data_origin_id, main_id, goods_id, third_id, parent_spec_id, spec_id, note, img_url, group_id, template_pid, vid, value, value_unit, remark from pdd_goods_properties_origin
+    </sql>
+	
+    <select id="selectPddGoodsPropertiesOriginList" parameterType="PddGoodsPropertiesOrigin" resultMap="PddGoodsPropertiesOriginResult">
+        <include refid="selectPddGoodsPropertiesOriginVo"/>
+        <where>  
+            <if test="goodsPropertiesOriginId != null "> and goods_properties_origin_id = #{goodsPropertiesOriginId}</if>
+             <if test="goodsDataOriginId != null "> and goods_data_origin_id = #{goodsDataOriginId}</if>
+             <if test="mainId != null "> and main_id = #{mainId}</if>
+             <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+             <if test="thirdId != null "> and third_id = #{thirdId}</if>
+             <if test="parentSpecId != null "> and parent_spec_id = #{parentSpecId}</if>
+             <if test="specId != null "> and spec_id = #{specId}</if>
+             <if test="note != null  and note != '' "> and note = #{note}</if>
+             <if test="imgUrl != null  and imgUrl != '' "> and img_url = #{imgUrl}</if>
+             <if test="groupId != null "> and group_id = #{groupId}</if>
+             <if test="templatePid != null "> and template_pid = #{templatePid}</if>
+             <if test="vid != null "> and vid = #{vid}</if>
+             <if test="value != null  and value != '' "> and value = #{value}</if>
+             <if test="valueUnit != null  and valueUnit != '' "> and value_unit = #{valueUnit}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectPddGoodsPropertiesOriginById" parameterType="Long" resultMap="PddGoodsPropertiesOriginResult">
+        <include refid="selectPddGoodsPropertiesOriginVo"/>
+        where goods_properties_origin_id = #{goodsPropertiesOriginId}
+    </select>
+        
+    <insert id="insertPddGoodsPropertiesOrigin" parameterType="PddGoodsPropertiesOrigin" useGeneratedKeys="true" keyProperty="goodsPropertiesOriginId">
+        insert into pdd_goods_properties_origin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsDataOriginId != null  ">goods_data_origin_id,</if>
+			<if test="mainId != null  ">main_id,</if>
+			<if test="goodsId != null  ">goods_id,</if>
+			<if test="thirdId != null  ">third_id,</if>
+			<if test="parentSpecId != null  ">parent_spec_id,</if>
+			<if test="specId != null  ">spec_id,</if>
+			<if test="note != null  and note != ''  ">note,</if>
+			<if test="imgUrl != null  and imgUrl != ''  ">img_url,</if>
+			<if test="groupId != null  ">group_id,</if>
+			<if test="templatePid != null  ">template_pid,</if>
+			<if test="vid != null  ">vid,</if>
+			<if test="value != null  and value != ''  ">value,</if>
+			<if test="valueUnit != null  and valueUnit != ''  ">value_unit,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goodsDataOriginId != null  ">#{goodsDataOriginId},</if>
+			<if test="mainId != null  ">#{mainId},</if>
+			<if test="goodsId != null  ">#{goodsId},</if>
+			<if test="thirdId != null  ">#{thirdId},</if>
+			<if test="parentSpecId != null  ">#{parentSpecId},</if>
+			<if test="specId != null  ">#{specId},</if>
+			<if test="note != null  and note != ''  ">#{note},</if>
+			<if test="imgUrl != null  and imgUrl != ''  ">#{imgUrl},</if>
+			<if test="groupId != null  ">#{groupId},</if>
+			<if test="templatePid != null  ">#{templatePid},</if>
+			<if test="vid != null  ">#{vid},</if>
+			<if test="value != null  and value != ''  ">#{value},</if>
+			<if test="valueUnit != null  and valueUnit != ''  ">#{valueUnit},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePddGoodsPropertiesOrigin" parameterType="PddGoodsPropertiesOrigin">
+        update pdd_goods_properties_origin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsDataOriginId != null  ">goods_data_origin_id = #{goodsDataOriginId},</if>
+            <if test="mainId != null  ">main_id = #{mainId},</if>
+            <if test="goodsId != null  ">goods_id = #{goodsId},</if>
+            <if test="thirdId != null  ">third_id = #{thirdId},</if>
+            <if test="parentSpecId != null  ">parent_spec_id = #{parentSpecId},</if>
+            <if test="specId != null  ">spec_id = #{specId},</if>
+            <if test="note != null  and note != ''  ">note = #{note},</if>
+            <if test="imgUrl != null  and imgUrl != ''  ">img_url = #{imgUrl},</if>
+            <if test="groupId != null  ">group_id = #{groupId},</if>
+            <if test="templatePid != null  ">template_pid = #{templatePid},</if>
+            <if test="vid != null  ">vid = #{vid},</if>
+            <if test="value != null  and value != ''  ">value = #{value},</if>
+            <if test="valueUnit != null  and valueUnit != ''  ">value_unit = #{valueUnit},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where goods_properties_origin_id = #{goodsPropertiesOriginId}
+    </update>
+
+	<delete id="deletePddGoodsPropertiesOriginById" parameterType="Long">
+        delete from pdd_goods_properties_origin where goods_properties_origin_id = #{goodsPropertiesOriginId}
+    </delete>
+	
+    <delete id="deletePddGoodsPropertiesOriginByIds" parameterType="String">
+        delete from pdd_goods_properties_origin where goods_properties_origin_id in 
+        <foreach item="goodsPropertiesOriginId" collection="array" open="(" separator="," close=")">
+            #{goodsPropertiesOriginId}
+        </foreach>
+    </delete>
+    
+</mapper>
