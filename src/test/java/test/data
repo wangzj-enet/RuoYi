@@ -1,0 +1,257 @@
+CREATE TABLE `pdd_goods_main` (
+`main_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品名称',
+`json_data` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'json数据',
+`status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '状态',
+`create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '创建者',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '更新者',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+`source` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '源头',
+PRIMARY KEY (`main_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMICCOMMENT='主记录表';
+
+
+CREATE TABLE `pdd_goods_main_status` (
+`main_status_id` bigint(20)NOT NULL AUTO_INCREMENT,
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`start_time` datetime DEFAULT NULL COMMENT '开始时间',
+`count` bigint(15) DEFAULT NULL COMMENT '总时长/秒',
+`end_time` datetime DEFAULT NULL COMMENT '结束时间',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+`json_data` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'json数据',
+`main_status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '主表状态',
+`status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '状态',
+`create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '创建者',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '更新者',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`copy_status_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+
+
+CREATE TABLE `pdd_goods_download` (
+`download_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品名称',
+`goods_json` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'json数据',
+`json_md5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '数据md5',
+`status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '状态',
+`create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '创建者',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '更新者',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`copy_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+
+CREATE TABLE `pdd_goods_data_origin` (
+`goods_data_origin_id` bigint(20)NOT NULL AUTO_INCREMENT,
+ `main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+
+`goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品标题',
+`goods_type` bigint(20) DEFAULT NULL COMMENT '商品类型',
+`goods_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品描述',
+`cat_id` bigint(20) DEFAULT NULL COMMENT '叶子类目ID',
+`tiny_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品短标题',
+`country_id` bigint(20) DEFAULT NULL COMMENT '国家ID',
+`warehouse` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '保税仓',
+`customs` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '报关海关',
+`is_customs` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否上报海关',
+`market_price` bigint(20) DEFAULT NULL COMMENT '市场价格',
+`is_pre_sale` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否预售',
+`pre_sale_time` bigint(20) DEFAULT NULL COMMENT '预售时间',
+`shipment_limit_second` bigint(20) DEFAULT NULL COMMENT '承诺发货时间（ 秒）',
+`cost_template_id` bigint(20) DEFAULT NULL COMMENT '物流运费模板ID',
+`customer_num` bigint(20) DEFAULT NULL COMMENT '团购人数',
+`buy_limit` bigint(20) DEFAULT NULL COMMENT '限购次数',
+`order_limit` bigint(20) DEFAULT NULL COMMENT '单次限量',
+`is_refundable` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否7天无理由退换货',
+`second_hand` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否二手商品',
+`is_folt` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否支持假一赔十',
+`warm_tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '水果类目温馨提示',
+`out_goods_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品goods外部编码',
+`image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品活动主图',
+`carousel_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品轮播图',
+`detail_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品详情图',
+`invoice_status` bigint(20) DEFAULT NULL COMMENT '是否支持正品发票',
+`quan_guo_lian_bao` bigint(20) DEFAULT NULL COMMENT '是否支持全国联保',
+`zhi_huan_bu_xiu` bigint(20) DEFAULT NULL COMMENT '只换不修的天数',
+`song_huo_ru_hu` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '送货入户模版id',
+`shang_men_an_zhuang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '上门安装模版id',
+`song_huo_an_zhuang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '送货入户并安装模版id',
+`mai_jia_zi_ti` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '买家自提模版id',
+`bad_fruit_claim` bigint(20) DEFAULT NULL COMMENT '坏果包赔',
+`lack_of_weight_claim` bigint(20) DEFAULT NULL COMMENT '缺重包退',
+`origin_country_id` bigint(20) DEFAULT NULL COMMENT '原产地id',
+`sku_list_origin_id` bigint(20) DEFAULT NULL COMMENT 'sku对象列表',
+`goods_properties_origin_id` bigint(20) DEFAULT NULL COMMENT '商品属性列表',
+`oversea_goods_origin_id` bigint(20) DEFAULT NULL COMMENT '海外原id',
+`carousel_video_origin_id` bigint(20) DEFAULT NULL COMMENT '商品视频',
+`status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '状态',
+`create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '创建者',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '更新者',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`goods_data_origin_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `pdd_sku_list_origin` (
+`sku_list_origin_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`goods_data_origin_id` bigint(20)DEFAULT NULL COMMENT '源数据表id',
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+
+`spec_id_list` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品规格列表',
+`out_sku_sn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品sku外部编码',
+`thumb_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'sku预览图',
+`length` bigint(20) DEFAULT NULL COMMENT 'sku送装参数',
+`weight` bigint(20) DEFAULT NULL COMMENT '重量（g）',
+`quantity` bigint(20) DEFAULT NULL COMMENT '商品sku库存初始数量',
+`multi_price` bigint(20) DEFAULT NULL COMMENT '商品团购价格',
+`price` bigint(20) DEFAULT NULL COMMENT '商品单买价格',
+`limit_quantity` bigint(20) DEFAULT NULL COMMENT 'sku购买限制',
+`is_onsale` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '1' COMMENT 'sku上架状态',
+`status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0' COMMENT '状态',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`sku_list_origin_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `pdd_goods_properties_origin` (
+`goods_properties_origin_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`goods_data_origin_id` bigint(20)DEFAULT NULL COMMENT '源数据表id',
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+`parent_spec_id` bigint(20) DEFAULT NULL COMMENT '父属性id',
+`spec_id` bigint(20) DEFAULT NULL COMMENT '属性id',
+`note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '销售属性备注',
+`img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '图片url',
+`group_id` bigint(20) DEFAULT NULL COMMENT '销售属性组id',
+`template_pid` bigint(20) DEFAULT NULL COMMENT '模板属性`id`',
+`vid` bigint(20) DEFAULT NULL COMMENT '属性值`id`',
+`value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '属性值',
+`value_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '属性单位',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`goods_properties_origin_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+
+
+CREATE TABLE `pdd_goods_data_add` (
+`goods_data_add_id` bigint(20)NOT NULL AUTO_INCREMENT,
+ `main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+
+`goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品标题',
+`goods_type` bigint(20) DEFAULT NULL COMMENT '商品类型',
+`goods_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品描述',
+`cat_id` bigint(20) DEFAULT NULL COMMENT '叶子类目ID',
+`tiny_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品短标题',
+`country_id` bigint(20) DEFAULT NULL COMMENT '国家ID',
+`warehouse` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '保税仓',
+`customs` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '报关海关',
+`is_customs` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否需要上报海关',
+`market_price` bigint(20) DEFAULT NULL COMMENT '市场价格',
+`is_pre_sale` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否预售',
+`pre_sale_time` bigint(20) DEFAULT NULL COMMENT '预售时间',
+`shipment_limit_second` bigint(20) DEFAULT NULL COMMENT '承诺发货时间（ 秒',
+`cost_template_id` bigint(20) DEFAULT NULL COMMENT '物流运费模板ID',
+`customer_num` bigint(20) DEFAULT NULL COMMENT '团购人数',
+`buy_limit` bigint(20) DEFAULT NULL COMMENT '限购次数',
+`order_limit` bigint(20) DEFAULT NULL COMMENT '单次限量',
+`is_refundable` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否7天无理由退换货',
+`second_hand` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否二手商品',
+`is_folt` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否支持假一赔十',
+`warm_tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '水果类目温馨提示',
+`out_goods_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品goods外部编码',
+`image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品活动主图',
+`local_image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品活动主图',
+`carousel_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品轮播图',
+`local_carousel_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品轮播图',
+`detail_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品详情图',
+`local_detail_gallery` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品详情图',
+`invoice_status` bigint(20) DEFAULT NULL COMMENT '是否支持正品发票',
+`quan_guo_lian_bao` bigint(20) DEFAULT NULL COMMENT '是否支持全国联保',
+`zhi_huan_bu_xiu` bigint(20) DEFAULT NULL COMMENT '只换不修的天数',
+`song_huo_ru_hu` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '送货入户模版id',
+`shang_men_an_zhuang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '上门安装模版id',
+`song_huo_an_zhuang` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '送货入户并安装模版id',
+`mai_jia_zi_ti` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '买家自提模版id',
+`bad_fruit_claim` bigint(20) DEFAULT NULL COMMENT '坏果包赔',
+`lack_of_weight_claim` bigint(20) DEFAULT NULL COMMENT '缺重包退',
+`origin_country_id` bigint(20) DEFAULT NULL COMMENT '原产地id',
+`sku_list_add_id` bigint(20) DEFAULT NULL COMMENT 'sku对象列表',
+`goods_properties_add_id` bigint(20) DEFAULT NULL COMMENT '商品属性列表',
+`oversea_goods_origin_id` bigint(20) DEFAULT NULL COMMENT '海外原id',
+`carousel_video_origin_id` bigint(20) DEFAULT NULL COMMENT '商品视频',
+`status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '00' COMMENT '状态（0正常 1暂停）',
+`create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '创建者',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '更新者',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`goods_data_add_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `pdd_sku_list_add` (
+`sku_list_add_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`goods_data_add_id` bigint(20)DEFAULT NULL COMMENT '源数据表id',
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+
+`spec_id_list` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品规格列表',
+`out_sku_sn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品sku外部编码',
+`thumb_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'sku预览图',
+`local_thumb_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '本地sku预览图',
+`length` bigint(20) DEFAULT NULL COMMENT 'sku送装参数',
+`weight` bigint(20) DEFAULT NULL COMMENT '重量（g）',
+`quantity` bigint(20) DEFAULT NULL COMMENT '商品sku库存初始数量',
+`multi_price` bigint(20) DEFAULT NULL COMMENT '商品团购价格',
+`price` bigint(20) DEFAULT NULL COMMENT '商品单买价格',
+`limit_quantity` bigint(20) DEFAULT NULL COMMENT 'sku购买限制',
+`is_onsale` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '1' COMMENT 'sku上架状态',
+`status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0' COMMENT '状态（0正常 1暂停）',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`sku_list_add_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `pdd_goods_properties_add` (
+`goods_properties_add_id` bigint(20)NOT NULL AUTO_INCREMENT,
+`goods_data_add_id` bigint(20)DEFAULT NULL COMMENT '源数据表id',
+`main_id` bigint(20) DEFAULT NULL COMMENT '主记录id',
+`goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
+`third_id` bigint(20) DEFAULT NULL COMMENT '三方id',
+`parent_spec_id` bigint(20) DEFAULT NULL COMMENT '父属性id，非销售属性不用传',
+`spec_id` bigint(20) DEFAULT NULL COMMENT '属性id，非销售属性不用传',
+`note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '销售属性备注',
+`img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '销售属性图片url',
+`local_img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '本地图片url',
+`group_id` bigint(20) DEFAULT NULL COMMENT '销售属性组id',
+`template_pid` bigint(20) DEFAULT NULL COMMENT '模板属性`id`',
+`vid` bigint(20) DEFAULT NULL COMMENT '属性值`id`',
+`value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '属性值',
+`value_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '属性单位',
+`remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '备注信息',
+PRIMARY KEY (`goods_properties_add_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;

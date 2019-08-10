@@ -768,6 +768,7 @@
             },
             // 详细信息
             detail: function(id, width, height) {
+        		console.log('1')
             	var _url = $.operate.detailUrl(id);
             	var options = {
        				title: $.table._option.modalName + "详细",
