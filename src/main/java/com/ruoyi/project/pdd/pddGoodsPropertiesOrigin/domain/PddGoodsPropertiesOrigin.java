@@ -8,7 +8,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * 原始商品属性表 pdd_goods_properties_origin
  * 
  * @author ruoyi
- * @date 2019-08-10
+ * @date 2019-08-11
  */
 public class PddGoodsPropertiesOrigin extends BaseEntity
 {
@@ -42,6 +42,8 @@ public class PddGoodsPropertiesOrigin extends BaseEntity
 	private String value;
 	/** 属性单位 */
 	private String valueUnit;
+	/** 状态（0正常 1暂停） */
+	private String status;
 
 	public void setGoodsPropertiesOriginId(Long goodsPropertiesOriginId) 
 	{
@@ -169,6 +171,15 @@ public class PddGoodsPropertiesOrigin extends BaseEntity
 	{
 		return valueUnit;
 	}
+	public void setStatus(String status) 
+	{
+		this.status = status;
+	}
+
+	public String getStatus() 
+	{
+		return status;
+	}
 
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -186,6 +197,7 @@ public class PddGoodsPropertiesOrigin extends BaseEntity
             .append("vid", getVid())
             .append("value", getValue())
             .append("valueUnit", getValueUnit())
+            .append("status", getStatus())
             .append("remark", getRemark())
             .toString();
     }

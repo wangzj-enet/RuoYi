@@ -12,7 +12,7 @@ import com.ruoyi.common.utils.text.Convert;
  * 商品属性 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-10
+ * @date 2019-08-11
  */
 @Service
 public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddService 

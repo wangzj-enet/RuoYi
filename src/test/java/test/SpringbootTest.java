@@ -16,8 +16,13 @@ public class SpringbootTest {
 	private PddTask pddTask;
 
 	@Test
-	public void test(){
+	public void test_analysis(){
 		pddTask.analysis();
+	}
+
+	@Test
+	public void test_copy(){
+		pddTask.copy();
 	}
 
 }

@@ -29,10 +29,10 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 @RequestMapping("/${moduleName}/${classname}")
 public class ${className}Controller extends BaseController
 {
-    private String prefix = "${moduleName}/${classname}";
+	protected String prefix = "${moduleName}/${classname}";
 	
 	@Autowired
-	private I${className}Service ${classname}Service;
+	protected I${className}Service ${classname}Service;
 	
 	@RequiresPermissions("${moduleName}:${classname}:view")
 	@GetMapping()

@@ -1,19 +1,23 @@
 package com.ruoyi.project.pdd.task;
 
-import clojure.lang.Obj;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.project.pdd.pddExtent.service.IPddExtentService;
+import com.ruoyi.project.pdd.pddGoodsDataAdd.domain.PddGoodsDataAdd;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.domain.PddGoodsDataOrigin;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.service.IPddGoodsDataOriginService;
 import com.ruoyi.project.pdd.pddGoodsDownload.domain.PddGoodsDownload;
 import com.ruoyi.project.pdd.pddGoodsDownload.service.IPddGoodsDownloadService;
 import com.ruoyi.project.pdd.pddGoodsMain.domain.PddGoodsMain;
 import com.ruoyi.project.pdd.pddGoodsMain.service.IPddGoodsMainService;
-import com.ruoyi.project.pdd.pddGoodsMainStatus.service.IPddGoodsMainStatusService;
+import com.ruoyi.project.pdd.pddGoodsPropertiesAdd.domain.PddGoodsPropertiesAdd;
 import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.domain.PddGoodsPropertiesOrigin;
 import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.service.IPddGoodsPropertiesOriginService;
+import com.ruoyi.project.pdd.pddSkuListAdd.domain.PddSkuListAdd;
 import com.ruoyi.project.pdd.pddSkuListOrigin.domain.PddSkuListOrigin;
 import com.ruoyi.project.pdd.pddSkuListOrigin.service.IPddSkuListOriginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,16 +40,17 @@ public class PddTask {
     private IPddGoodsMainService pddGoodsMainService;
 
     @Autowired
-    private IPddGoodsMainStatusService pddGoodsMainStatusService;
-    @Autowired
     private IPddGoodsDownloadService pddGoodsDownloadService;
     @Autowired
+    private IPddExtentService pddExtentService;
+    @Autowired
     private IPddGoodsDataOriginService pddGoodsDataOriginService;
-
     @Autowired
     private IPddGoodsPropertiesOriginService pddGoodsPropertiesOriginService;
     @Autowired
     private IPddSkuListOriginService pddSkuListOriginService;
+
+
 
     public void ryMultipleParams(String s, Boolean b, Long l, Double d, Integer i)
     {
@@ -142,7 +146,7 @@ public class PddTask {
         PddGoodsDataOrigin pddGoodsDataOrigin = JsonToBeanPddGoodsDataOrigin(obj);
         List<PddSkuListOrigin> pddSkuListOriginList = JsonToBeanPddSkuListOriginList(obj);
         List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList = JsonToBeanPddGoodsPropertiesOriginList(obj);
-        pddGoodsDataOriginService.insertPddGoodsOrigin(pddGoodsDataOrigin, pddSkuListOriginList, pddGoodsPropertiesOriginList,pddGoodsDownload);
+        pddExtentService.insertPddGoodsOrigin(pddGoodsDataOrigin, pddSkuListOriginList, pddGoodsPropertiesOriginList,pddGoodsDownload);
     }
 
     private PddGoodsDataOrigin JsonToBeanPddGoodsDataOrigin(JSONObject obj) {
@@ -384,11 +388,108 @@ public class PddTask {
     public void copy(String params)
     {
         System.out.println("执行复制有参方法：" + params);
+        //根据main查找数据，根据状态判断，关联到解析主表，解析主表到copy主表，sku表，属性表，添加状态表，修改主表状态,修改原始数据状态
+        PddGoodsMain pddGoodsMain = pddGoodsMainService.selectPddGoodsMainById(Long.valueOf(params));
+        if("02".equals(pddGoodsMain.getStatus())){
+            copyFromGoodsMain(pddGoodsMain);
+        }
     }
+
+
+
 
     public void copy()
     {
         System.out.println("执行复制无参方法");
+        //根据状态查找主表，关联到解析主表，解析主表到copy主表，sku表，属性表，添加状态表，修改主表状态
+        PddGoodsMain pddGoodsMain = new PddGoodsMain();
+        pddGoodsMain.setStatus("02");
+        List<PddGoodsMain> pddGoodsMainList = pddGoodsMainService.selectPddGoodsMainList(pddGoodsMain);
+        for (PddGoodsMain pddGoodsMain2:pddGoodsMainList) {
+            copyFromGoodsMain(pddGoodsMain2);
+        }
+    }
+
+    /**
+     * 根据pddGoodsMain 数据进行复制
+     * @param pddGoodsMain
+     */
+    private void copyFromGoodsMain(PddGoodsMain pddGoodsMain) {
+        PddGoodsDataOrigin pddGoodsDataOrigin = new PddGoodsDataOrigin();
+        pddGoodsDataOrigin.setMainId(pddGoodsMain.getMainId());
+        pddGoodsDataOrigin.setStatus("00");
+        List<PddGoodsDataOrigin> pddGoodsDataOriginList = pddGoodsDataOriginService.selectPddGoodsDataOriginList(pddGoodsDataOrigin);
+        if(pddGoodsDataOriginList.size() == 1){
+            pddGoodsDataOrigin = pddGoodsDataOriginList.get(0);
+            Long mainId = pddGoodsDataOrigin.getMainId();
+            Long goodsDataOriginId = pddGoodsDataOrigin.getGoodsDataOriginId();
+
+            PddGoodsDataAdd pddGoodsDataAdd = originToAddForData(pddGoodsDataOrigin);
+            List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = originToAddForProperties(mainId, goodsDataOriginId);
+            List<PddSkuListAdd> pddSkuListAddList = originToAddForSkuList(mainId, goodsDataOriginId);
+            //插入动作
+            pddExtentService.insertPddGoodsAdd(pddGoodsDataAdd,pddSkuListAddList,pddGoodsPropertiesAddList);
+
+        }
+    }
+
+    /**
+     * 根据Origin生成add for PddGoodsDataAdd
+     * @param pddGoodsDataOrigin
+     * @return
+     */
+    private PddGoodsDataAdd originToAddForData(PddGoodsDataOrigin pddGoodsDataOrigin) {
+        PddGoodsDataAdd pddGoodsDataAdd = new PddGoodsDataAdd();
+        BeanUtil.copyProperties(pddGoodsDataOrigin,pddGoodsDataAdd);
+        //传递修改id
+        pddGoodsDataAdd.setGoodsDataAddId(pddGoodsDataOrigin.getGoodsDataOriginId());
+        return pddGoodsDataAdd;
+    }
+
+    /**
+     * 根据Origin生成add for Properties
+     * @param mainId
+     * @param goodsDataOriginId
+     * @return
+     */
+    private List<PddGoodsPropertiesAdd> originToAddForProperties(Long mainId, Long goodsDataOriginId) {
+        List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = new ArrayList<>();
+        PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin = new PddGoodsPropertiesOrigin();
+        pddGoodsPropertiesOrigin.setMainId(mainId);
+        pddGoodsPropertiesOrigin.setGoodsDataOriginId(goodsDataOriginId);
+        pddGoodsPropertiesOrigin.setStatus("00");
+        List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList = pddGoodsPropertiesOriginService.selectPddGoodsPropertiesOriginList(pddGoodsPropertiesOrigin);
+        for (PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin2:pddGoodsPropertiesOriginList) {
+            PddGoodsPropertiesAdd pddGoodsPropertiesAdd = new PddGoodsPropertiesAdd();
+            BeanUtil.copyProperties(pddGoodsPropertiesOrigin2,pddGoodsPropertiesAdd);
+            //传递修改id
+            pddGoodsPropertiesAdd.setGoodsPropertiesAddId(pddGoodsPropertiesOrigin2.getGoodsPropertiesOriginId());
+            pddGoodsPropertiesAddList.add(pddGoodsPropertiesAdd);
+        }
+        return pddGoodsPropertiesAddList;
+    }
+
+    /**
+     * 根据Origin生成add for skuList
+     * @param mainId
+     * @param goodsDataOriginId
+     * @return
+     */
+    private List<PddSkuListAdd> originToAddForSkuList(Long mainId, Long goodsDataOriginId) {
+        List<PddSkuListAdd> pddSkuListAddList = new ArrayList<>();
+        PddSkuListOrigin pddSkuListOrigin = new PddSkuListOrigin();
+        pddSkuListOrigin.setMainId(mainId);
+        pddSkuListOrigin.setGoodsDataOriginId(goodsDataOriginId);
+        pddSkuListOrigin.setStatus("00");
+        List<PddSkuListOrigin> pddSkuListOriginList = pddSkuListOriginService.selectPddSkuListOriginList(pddSkuListOrigin);
+        for (PddSkuListOrigin pddSkuListOrigin2:pddSkuListOriginList) {
+            PddSkuListAdd pddSkuListAdd = new PddSkuListAdd();
+            BeanUtil.copyProperties(pddSkuListOrigin2,pddSkuListAdd);
+            //传递修改id
+            pddSkuListAdd.setSkuListAddId(pddSkuListOrigin2.getSkuListOriginId());
+            pddSkuListAddList.add(pddSkuListAdd);
+        }
+        return pddSkuListAddList;
     }
     public void local(String params)
     {

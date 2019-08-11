@@ -23,7 +23,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * 商品属性信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-10
+ * @date 2019-08-11
  */
 @Controller
 @RequestMapping("/pdd/pddGoodsPropertiesAdd")

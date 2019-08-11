@@ -27,14 +27,14 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * @author ruoyi
  * @date 2019-08-02
  */
-@Controller
+
 @RequestMapping("/pdd/pddGoodsDownload")
 public class PddGoodsDownloadController extends BaseController
 {
-    private String prefix = "pdd/pddGoodsDownload";
+    protected String prefix = "pdd/pddGoodsDownload";
 	
 	@Autowired
-	private IPddGoodsDownloadService pddGoodsDownloadService;
+	protected IPddGoodsDownloadService pddGoodsDownloadService;
 	
 	@RequiresPermissions("pdd:pddGoodsDownload:view")
 	@GetMapping()
@@ -127,12 +127,5 @@ public class PddGoodsDownloadController extends BaseController
 	}
 
 
-	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable("id") Long downloadId, ModelMap mmap)
-	{
-		PddGoodsDownload pddGoodsDownload = pddGoodsDownloadService.selectPddGoodsDownloadById(downloadId);
-		mmap.put("pddGoodsDownload", pddGoodsDownload);
-		return prefix + "/detail";
-	}
 	
 }

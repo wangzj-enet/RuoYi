@@ -7,7 +7,7 @@ import java.util.List;
  * 商品属性 数据层
  * 
  * @author ruoyi
- * @date 2019-08-10
+ * @date 2019-08-11
  */
 public interface PddGoodsPropertiesAddMapper 
 {

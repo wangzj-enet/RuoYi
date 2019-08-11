@@ -19,6 +19,7 @@ import com.ruoyi.project.pdd.pddGoodsDataOrigin.mapper.PddGoodsDataOriginMapper;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.domain.PddGoodsDataOrigin;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.service.IPddGoodsDataOriginService;
 import com.ruoyi.common.utils.text.Convert;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 原始商品数据 服务层实现
@@ -89,6 +90,7 @@ public class PddGoodsDataOriginServiceImpl implements IPddGoodsDataOriginService
 	 * @return
 	 */
 	@Override
+	@Transactional
 	public int insertPddGoodsOrigin(PddGoodsDataOrigin pddGoodsDataOrigin, List<PddSkuListOrigin> pddSkuListOriginList, List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList, PddGoodsDownload pddGoodsDownload)
 	{
 		PddGoodsMainStatus pddGoodsMainStatus = new PddGoodsMainStatus();
@@ -108,8 +110,7 @@ public class PddGoodsDataOriginServiceImpl implements IPddGoodsDataOriginService
 		for (PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin:pddGoodsPropertiesOriginList ) {
 			pddGoodsPropertiesOrigin.setMainId(pddGoodsDataOrigin.getMainId());
 			pddGoodsPropertiesOrigin.setGoodsId(pddGoodsDataOrigin.getGoodsId());
-			pddGoodsDataOrigin.setGoodsDataOriginId(pddGoodsDataOrigin.getGoodsDataOriginId());
-			pddGoodsDataOrigin.setStatus("00");
+			pddGoodsPropertiesOrigin.setGoodsDataOriginId(pddGoodsDataOrigin.getGoodsDataOriginId());
 			pddGoodsPropertiesOriginMapper.insertPddGoodsPropertiesOrigin(pddGoodsPropertiesOrigin);
 		}
 		pddGoodsDownload.setStatus("02");

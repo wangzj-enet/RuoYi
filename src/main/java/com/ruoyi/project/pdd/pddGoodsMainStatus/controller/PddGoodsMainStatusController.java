@@ -25,14 +25,13 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * @author ruoyi
  * @date 2019-08-02
  */
-@Controller
 @RequestMapping("/pdd/pddGoodsMainStatus")
 public class PddGoodsMainStatusController extends BaseController
 {
-    private String prefix = "pdd/pddGoodsMainStatus";
+    protected String prefix = "pdd/pddGoodsMainStatus";
 	
 	@Autowired
-	private IPddGoodsMainStatusService pddGoodsMainStatusService;
+	protected IPddGoodsMainStatusService pddGoodsMainStatusService;
 	
 	@RequiresPermissions("pdd:pddGoodsMainStatus:view")
 	@GetMapping()
@@ -124,11 +123,4 @@ public class PddGoodsMainStatusController extends BaseController
 		return toAjax(pddGoodsMainStatusService.deletePddGoodsMainStatusByIds(ids));
 	}
 
-	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable("id") Long mainStatusId, ModelMap mmap)
-	{
-		PddGoodsMainStatus pddGoodsMainStatus = pddGoodsMainStatusService.selectPddGoodsMainStatusById(mainStatusId);
-		mmap.put("pddGoodsMainStatus", pddGoodsMainStatus);
-		return prefix + "/detail";
-	}
 }

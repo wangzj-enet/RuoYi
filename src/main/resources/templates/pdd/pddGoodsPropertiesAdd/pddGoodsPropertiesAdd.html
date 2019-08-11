@@ -67,6 +67,10 @@
 							</li>
 
 							<li>
+								状态（0正常 1暂停）：<input type="text" name="status"/>
+							</li>
+
+							<li>
 								备注信息：<input type="text" name="remark"/>
 							</li>
 
@@ -189,6 +193,11 @@
 				{
 					field : 'valueUnit', 
 					title : '属性单位',
+					sortable: true
+				},
+				{
+					field : 'status', 
+					title : '状态（0正常 1暂停）',
 					sortable: true
 				},
 				{
