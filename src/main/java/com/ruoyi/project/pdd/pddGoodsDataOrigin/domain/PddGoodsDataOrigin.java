@@ -5,10 +5,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 原商品数据解析表 pdd_goods_data_origin
+ * 原始商品数据表 pdd_goods_data_origin
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 public class PddGoodsDataOrigin extends BaseEntity
 {
@@ -30,6 +30,24 @@ public class PddGoodsDataOrigin extends BaseEntity
 	private String goodsDesc;
 	/** 叶子类目ID */
 	private Long catId;
+	/** 叶子类目ID1 */
+	private Long catId1;
+	/** 叶子类目ID2 */
+	private Long catId2;
+	/** 叶子类目ID3 */
+	private Long catId3;
+	/** 叶子类目ID4 */
+	private Long catId4;
+	/** 叶子类目名称 */
+	private String catName;
+	/** 叶子类目名称1 */
+	private String catName1;
+	/** 叶子类目名称2 */
+	private String catName2;
+	/** 叶子类目名称3 */
+	private String catName3;
+	/** 叶子类目名称4 */
+	private String catName4;
 	/** 商品短标题 */
 	private String tinyName;
 	/** 国家ID */
@@ -100,8 +118,28 @@ public class PddGoodsDataOrigin extends BaseEntity
 	private Long overseaGoodsOriginId;
 	/** 商品视频 */
 	private Long carouselVideoOriginId;
+	/** 商品视频 */
+	private String carouselVideoOrigin;
+	/** 服务集合 */
+	private String mallService;
+	/** 承诺发货时间 */
+	private String shipmentLimitServer;
+	/** 物流运费模板 */
+	private String costTemplateServer;
+	/** 是否7天无理由退换货 */
+	private String refundableServer;
 	/** 状态 */
 	private String status;
+	/** 备注1 */
+	private String remark1;
+	/** 备注2 */
+	private String remark2;
+	/** 备注3 */
+	private String remark3;
+	/** 备注4 */
+	private String remark4;
+	/** 备注5 */
+	private String remark5;
 
 	public void setGoodsDataOriginId(Long goodsDataOriginId) 
 	{
@@ -174,6 +212,87 @@ public class PddGoodsDataOrigin extends BaseEntity
 	public Long getCatId() 
 	{
 		return catId;
+	}
+	public void setCatId1(Long catId1) 
+	{
+		this.catId1 = catId1;
+	}
+
+	public Long getCatId1() 
+	{
+		return catId1;
+	}
+	public void setCatId2(Long catId2) 
+	{
+		this.catId2 = catId2;
+	}
+
+	public Long getCatId2() 
+	{
+		return catId2;
+	}
+	public void setCatId3(Long catId3) 
+	{
+		this.catId3 = catId3;
+	}
+
+	public Long getCatId3() 
+	{
+		return catId3;
+	}
+	public void setCatId4(Long catId4) 
+	{
+		this.catId4 = catId4;
+	}
+
+	public Long getCatId4() 
+	{
+		return catId4;
+	}
+	public void setCatName(String catName) 
+	{
+		this.catName = catName;
+	}
+
+	public String getCatName() 
+	{
+		return catName;
+	}
+	public void setCatName1(String catName1) 
+	{
+		this.catName1 = catName1;
+	}
+
+	public String getCatName1() 
+	{
+		return catName1;
+	}
+	public void setCatName2(String catName2) 
+	{
+		this.catName2 = catName2;
+	}
+
+	public String getCatName2() 
+	{
+		return catName2;
+	}
+	public void setCatName3(String catName3) 
+	{
+		this.catName3 = catName3;
+	}
+
+	public String getCatName3() 
+	{
+		return catName3;
+	}
+	public void setCatName4(String catName4) 
+	{
+		this.catName4 = catName4;
+	}
+
+	public String getCatName4() 
+	{
+		return catName4;
 	}
 	public void setTinyName(String tinyName) 
 	{
@@ -490,6 +609,51 @@ public class PddGoodsDataOrigin extends BaseEntity
 	{
 		return carouselVideoOriginId;
 	}
+	public void setCarouselVideoOrigin(String carouselVideoOrigin) 
+	{
+		this.carouselVideoOrigin = carouselVideoOrigin;
+	}
+
+	public String getCarouselVideoOrigin() 
+	{
+		return carouselVideoOrigin;
+	}
+	public void setMallService(String mallService) 
+	{
+		this.mallService = mallService;
+	}
+
+	public String getMallService() 
+	{
+		return mallService;
+	}
+	public void setShipmentLimitServer(String shipmentLimitServer) 
+	{
+		this.shipmentLimitServer = shipmentLimitServer;
+	}
+
+	public String getShipmentLimitServer() 
+	{
+		return shipmentLimitServer;
+	}
+	public void setCostTemplateServer(String costTemplateServer) 
+	{
+		this.costTemplateServer = costTemplateServer;
+	}
+
+	public String getCostTemplateServer() 
+	{
+		return costTemplateServer;
+	}
+	public void setRefundableServer(String refundableServer) 
+	{
+		this.refundableServer = refundableServer;
+	}
+
+	public String getRefundableServer() 
+	{
+		return refundableServer;
+	}
 	public void setStatus(String status) 
 	{
 		this.status = status;
@@ -498,6 +662,51 @@ public class PddGoodsDataOrigin extends BaseEntity
 	public String getStatus() 
 	{
 		return status;
+	}
+	public void setRemark1(String remark1) 
+	{
+		this.remark1 = remark1;
+	}
+
+	public String getRemark1() 
+	{
+		return remark1;
+	}
+	public void setRemark2(String remark2) 
+	{
+		this.remark2 = remark2;
+	}
+
+	public String getRemark2() 
+	{
+		return remark2;
+	}
+	public void setRemark3(String remark3) 
+	{
+		this.remark3 = remark3;
+	}
+
+	public String getRemark3() 
+	{
+		return remark3;
+	}
+	public void setRemark4(String remark4) 
+	{
+		this.remark4 = remark4;
+	}
+
+	public String getRemark4() 
+	{
+		return remark4;
+	}
+	public void setRemark5(String remark5) 
+	{
+		this.remark5 = remark5;
+	}
+
+	public String getRemark5() 
+	{
+		return remark5;
 	}
 
     public String toString() {
@@ -510,6 +719,15 @@ public class PddGoodsDataOrigin extends BaseEntity
             .append("goodsType", getGoodsType())
             .append("goodsDesc", getGoodsDesc())
             .append("catId", getCatId())
+            .append("catId1", getCatId1())
+            .append("catId2", getCatId2())
+            .append("catId3", getCatId3())
+            .append("catId4", getCatId4())
+            .append("catName", getCatName())
+            .append("catName1", getCatName1())
+            .append("catName2", getCatName2())
+            .append("catName3", getCatName3())
+            .append("catName4", getCatName4())
             .append("tinyName", getTinyName())
             .append("countryId", getCountryId())
             .append("warehouse", getWarehouse())
@@ -545,12 +763,22 @@ public class PddGoodsDataOrigin extends BaseEntity
             .append("goodsPropertiesOriginId", getGoodsPropertiesOriginId())
             .append("overseaGoodsOriginId", getOverseaGoodsOriginId())
             .append("carouselVideoOriginId", getCarouselVideoOriginId())
+            .append("carouselVideoOrigin", getCarouselVideoOrigin())
+            .append("mallService", getMallService())
+            .append("shipmentLimitServer", getShipmentLimitServer())
+            .append("costTemplateServer", getCostTemplateServer())
+            .append("refundableServer", getRefundableServer())
             .append("status", getStatus())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
+            .append("remark1", getRemark1())
+            .append("remark2", getRemark2())
+            .append("remark3", getRemark3())
+            .append("remark4", getRemark4())
+            .append("remark5", getRemark5())
             .toString();
     }
 }

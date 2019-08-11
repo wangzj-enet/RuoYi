@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<th:block th:include="include :: header('原商品sku列表')" />
+	<th:block th:include="include :: header('原始商品SKU列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -67,11 +67,47 @@
 							</li>
 
 							<li>
+								规格：<input type="text" name="specKey"/>
+							</li>
+
+							<li>
+								规格id：<input type="text" name="specKeyId"/>
+							</li>
+
+							<li>
+								规格值：<input type="text" name="specValue"/>
+							</li>
+
+							<li>
+								规格值id：<input type="text" name="specValueId"/>
+							</li>
+
+							<li>
 								状态：<input type="text" name="status"/>
 							</li>
 
 							<li>
 								备注信息：<input type="text" name="remark"/>
+							</li>
+
+							<li>
+								备注1：<input type="text" name="remark1"/>
+							</li>
+
+							<li>
+								备注2：<input type="text" name="remark2"/>
+							</li>
+
+							<li>
+								备注3：<input type="text" name="remark3"/>
+							</li>
+
+							<li>
+								备注4：<input type="text" name="remark4"/>
+							</li>
+
+							<li>
+								备注5：<input type="text" name="remark5"/>
 							</li>
 
 							<li>
@@ -115,7 +151,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
-                modalName: "原商品sku",
+                modalName: "原始商品SKU",
 		        showExport: true,
                 columns: [{
 		            checkbox: true
@@ -196,6 +232,26 @@
 					sortable: true
 				},
 				{
+					field : 'specKey', 
+					title : '规格',
+					sortable: true
+				},
+				{
+					field : 'specKeyId', 
+					title : '规格id',
+					sortable: true
+				},
+				{
+					field : 'specValue', 
+					title : '规格值',
+					sortable: true
+				},
+				{
+					field : 'specValueId', 
+					title : '规格值id',
+					sortable: true
+				},
+				{
 					field : 'status', 
 					title : '状态',
 					sortable: true
@@ -203,6 +259,31 @@
 				{
 					field : 'remark', 
 					title : '备注信息',
+					sortable: true
+				},
+				{
+					field : 'remark1', 
+					title : '备注1',
+					sortable: true
+				},
+				{
+					field : 'remark2', 
+					title : '备注2',
+					sortable: true
+				},
+				{
+					field : 'remark3', 
+					title : '备注3',
+					sortable: true
+				},
+				{
+					field : 'remark4', 
+					title : '备注4',
+					sortable: true
+				},
+				{
+					field : 'remark5', 
+					title : '备注5',
 					sortable: true
 				},
 		        {

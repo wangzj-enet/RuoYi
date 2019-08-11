@@ -20,12 +20,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="price"    column="price"    />
         <result property="limitQuantity"    column="limit_quantity"    />
         <result property="isOnsale"    column="is_onsale"    />
+        <result property="specKey"    column="spec_key"    />
+        <result property="specKeyId"    column="spec_key_id"    />
+        <result property="specValue"    column="spec_value"    />
+        <result property="specValueId"    column="spec_value_id"    />
         <result property="status"    column="status"    />
         <result property="remark"    column="remark"    />
+        <result property="remark1"    column="remark1"    />
+        <result property="remark2"    column="remark2"    />
+        <result property="remark3"    column="remark3"    />
+        <result property="remark4"    column="remark4"    />
+        <result property="remark5"    column="remark5"    />
     </resultMap>
 	
 	<sql id="selectPddSkuListOriginVo">
-        select sku_list_origin_id, goods_data_origin_id, main_id, goods_id, third_id, spec_id_list, out_sku_sn, thumb_url, length, weight, quantity, multi_price, price, limit_quantity, is_onsale, status, remark from pdd_sku_list_origin
+        select sku_list_origin_id, goods_data_origin_id, main_id, goods_id, third_id, spec_id_list, out_sku_sn, thumb_url, length, weight, quantity, multi_price, price, limit_quantity, is_onsale, spec_key, spec_key_id, spec_value, spec_value_id, status, remark, remark1, remark2, remark3, remark4, remark5 from pdd_sku_list_origin
     </sql>
 	
     <select id="selectPddSkuListOriginList" parameterType="PddSkuListOrigin" resultMap="PddSkuListOriginResult">
@@ -46,8 +55,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="price != null "> and price = #{price}</if>
              <if test="limitQuantity != null "> and limit_quantity = #{limitQuantity}</if>
              <if test="isOnsale != null  and isOnsale != '' "> and is_onsale = #{isOnsale}</if>
+             <if test="specKey != null  and specKey != '' "> and spec_key = #{specKey}</if>
+             <if test="specKeyId != null  and specKeyId != '' "> and spec_key_id = #{specKeyId}</if>
+             <if test="specValue != null  and specValue != '' "> and spec_value = #{specValue}</if>
+             <if test="specValueId != null  and specValueId != '' "> and spec_value_id = #{specValueId}</if>
              <if test="status != null  and status != '' "> and status = #{status}</if>
              <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+             <if test="remark1 != null  and remark1 != '' "> and remark1 = #{remark1}</if>
+             <if test="remark2 != null  and remark2 != '' "> and remark2 = #{remark2}</if>
+             <if test="remark3 != null  and remark3 != '' "> and remark3 = #{remark3}</if>
+             <if test="remark4 != null  and remark4 != '' "> and remark4 = #{remark4}</if>
+             <if test="remark5 != null  and remark5 != '' "> and remark5 = #{remark5}</if>
          </where>
     </select>
     
@@ -73,8 +91,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="price != null  ">price,</if>
 			<if test="limitQuantity != null  ">limit_quantity,</if>
 			<if test="isOnsale != null  and isOnsale != ''  ">is_onsale,</if>
+			<if test="specKey != null  and specKey != ''  ">spec_key,</if>
+			<if test="specKeyId != null  and specKeyId != ''  ">spec_key_id,</if>
+			<if test="specValue != null  and specValue != ''  ">spec_value,</if>
+			<if test="specValueId != null  and specValueId != ''  ">spec_value_id,</if>
 			<if test="status != null  and status != ''  ">status,</if>
 			<if test="remark != null  and remark != ''  ">remark,</if>
+			<if test="remark1 != null  and remark1 != ''  ">remark1,</if>
+			<if test="remark2 != null  and remark2 != ''  ">remark2,</if>
+			<if test="remark3 != null  and remark3 != ''  ">remark3,</if>
+			<if test="remark4 != null  and remark4 != ''  ">remark4,</if>
+			<if test="remark5 != null  and remark5 != ''  ">remark5,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="goodsDataOriginId != null  ">#{goodsDataOriginId},</if>
@@ -91,8 +118,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="price != null  ">#{price},</if>
 			<if test="limitQuantity != null  ">#{limitQuantity},</if>
 			<if test="isOnsale != null  and isOnsale != ''  ">#{isOnsale},</if>
+			<if test="specKey != null  and specKey != ''  ">#{specKey},</if>
+			<if test="specKeyId != null  and specKeyId != ''  ">#{specKeyId},</if>
+			<if test="specValue != null  and specValue != ''  ">#{specValue},</if>
+			<if test="specValueId != null  and specValueId != ''  ">#{specValueId},</if>
 			<if test="status != null  and status != ''  ">#{status},</if>
 			<if test="remark != null  and remark != ''  ">#{remark},</if>
+			<if test="remark1 != null  and remark1 != ''  ">#{remark1},</if>
+			<if test="remark2 != null  and remark2 != ''  ">#{remark2},</if>
+			<if test="remark3 != null  and remark3 != ''  ">#{remark3},</if>
+			<if test="remark4 != null  and remark4 != ''  ">#{remark4},</if>
+			<if test="remark5 != null  and remark5 != ''  ">#{remark5},</if>
          </trim>
     </insert>
 	 
@@ -113,8 +149,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="price != null  ">price = #{price},</if>
             <if test="limitQuantity != null  ">limit_quantity = #{limitQuantity},</if>
             <if test="isOnsale != null  and isOnsale != ''  ">is_onsale = #{isOnsale},</if>
+            <if test="specKey != null  and specKey != ''  ">spec_key = #{specKey},</if>
+            <if test="specKeyId != null  and specKeyId != ''  ">spec_key_id = #{specKeyId},</if>
+            <if test="specValue != null  and specValue != ''  ">spec_value = #{specValue},</if>
+            <if test="specValueId != null  and specValueId != ''  ">spec_value_id = #{specValueId},</if>
             <if test="status != null  and status != ''  ">status = #{status},</if>
             <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+            <if test="remark1 != null  and remark1 != ''  ">remark1 = #{remark1},</if>
+            <if test="remark2 != null  and remark2 != ''  ">remark2 = #{remark2},</if>
+            <if test="remark3 != null  and remark3 != ''  ">remark3 = #{remark3},</if>
+            <if test="remark4 != null  and remark4 != ''  ">remark4 = #{remark4},</if>
+            <if test="remark5 != null  and remark5 != ''  ">remark5 = #{remark5},</if>
         </trim>
         where sku_list_origin_id = #{skuListOriginId}
     </update>

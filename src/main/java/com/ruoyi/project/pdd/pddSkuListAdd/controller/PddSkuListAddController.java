@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 复制商品sku信息操作处理
+ * 商品SKU信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddSkuListAdd")
@@ -42,7 +42,7 @@ public class PddSkuListAddController extends BaseController
 	}
 	
 	/**
-	 * 查询复制商品sku列表
+	 * 查询商品SKU列表
 	 */
 	@RequiresPermissions("pdd:pddSkuListAdd:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddSkuListAddController extends BaseController
 	
 	
 	/**
-	 * 导出复制商品sku列表
+	 * 导出商品SKU列表
 	 */
 	@RequiresPermissions("pdd:pddSkuListAdd:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddSkuListAddController extends BaseController
     }
 	
 	/**
-	 * 新增复制商品sku
+	 * 新增商品SKU
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddSkuListAddController extends BaseController
 	}
 	
 	/**
-	 * 新增保存复制商品sku
+	 * 新增保存商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListAdd:add")
-	@Log(title = "复制商品sku", businessType = BusinessType.INSERT)
+	@Log(title = "商品SKU", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddSkuListAdd pddSkuListAdd)
@@ -90,7 +90,7 @@ public class PddSkuListAddController extends BaseController
 	}
 
 	/**
-	 * 修改复制商品sku
+	 * 修改商品SKU
 	 */
 	@GetMapping("/edit/{skuListAddId}")
 	public String edit(@PathVariable("skuListAddId") Long skuListAddId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddSkuListAddController extends BaseController
 	}
 	
 	/**
-	 * 修改保存复制商品sku
+	 * 修改保存商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListAdd:edit")
-	@Log(title = "复制商品sku", businessType = BusinessType.UPDATE)
+	@Log(title = "商品SKU", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddSkuListAdd pddSkuListAdd)
@@ -113,10 +113,10 @@ public class PddSkuListAddController extends BaseController
 	}
 	
 	/**
-	 * 删除复制商品sku
+	 * 删除商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListAdd:remove")
-	@Log(title = "复制商品sku", businessType = BusinessType.DELETE)
+	@Log(title = "商品SKU", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

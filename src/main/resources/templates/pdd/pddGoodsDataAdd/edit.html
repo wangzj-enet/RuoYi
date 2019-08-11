@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('修改复制商品数据')" />
+	<th:block th:include="include :: header('修改商品数据')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -47,6 +47,60 @@
 				<label class="col-sm-3 control-label">叶子类目ID：</label>
 				<div class="col-sm-8">
 					<input id="catId" name="catId" th:field="*{catId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID1：</label>
+				<div class="col-sm-8">
+					<input id="catId1" name="catId1" th:field="*{catId1}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID2：</label>
+				<div class="col-sm-8">
+					<input id="catId2" name="catId2" th:field="*{catId2}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID3：</label>
+				<div class="col-sm-8">
+					<input id="catId3" name="catId3" th:field="*{catId3}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID4：</label>
+				<div class="col-sm-8">
+					<input id="catId4" name="catId4" th:field="*{catId4}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称：</label>
+				<div class="col-sm-8">
+					<input id="catName" name="catName" th:field="*{catName}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称1：</label>
+				<div class="col-sm-8">
+					<input id="catName1" name="catName1" th:field="*{catName1}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称2：</label>
+				<div class="col-sm-8">
+					<input id="catName2" name="catName2" th:field="*{catName2}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称3：</label>
+				<div class="col-sm-8">
+					<input id="catName3" name="catName3" th:field="*{catName3}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称4：</label>
+				<div class="col-sm-8">
+					<input id="catName4" name="catName4" th:field="*{catName4}" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -278,16 +332,99 @@
 				</div>
 			</div>
 			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品视频：</label>
+				<div class="col-sm-8">
+					<input id="carouselVideoOrigin" name="carouselVideoOrigin" th:field="*{carouselVideoOrigin}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">服务集合：</label>
+				<div class="col-sm-8">
+					<input id="mallService" name="mallService" th:field="*{mallService}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">承诺发货时间：</label>
+				<div class="col-sm-8">
+					<input id="shipmentLimitServer" name="shipmentLimitServer" th:field="*{shipmentLimitServer}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">物流运费模板：</label>
+				<div class="col-sm-8">
+					<input id="costTemplateServer" name="costTemplateServer" th:field="*{costTemplateServer}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否7天无理由退换货：</label>
+				<div class="col-sm-8">
+					<input id="refundableServer" name="refundableServer" th:field="*{refundableServer}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
 				<label class="col-sm-3 control-label">状态（0正常 1暂停）：</label>
 				<div class="col-sm-8">
 					<input id="status" name="status" th:field="*{status}" class="form-control" type="text">
 				</div>
 			</div>
-
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建者：</label>
+				<div class="col-sm-8">
+					<input id="createBy" name="createBy" th:field="*{createBy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" th:field="*{createTime}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新者：</label>
+				<div class="col-sm-8">
+					<input id="updateBy" name="updateBy" th:field="*{updateBy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新时间：</label>
+				<div class="col-sm-8">
+					<input id="updateTime" name="updateTime" th:field="*{updateTime}" class="form-control" type="text">
+				</div>
+			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">备注信息：</label>
 				<div class="col-sm-8">
 					<input id="remark" name="remark" th:field="*{remark}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注1：</label>
+				<div class="col-sm-8">
+					<input id="remark1" name="remark1" th:field="*{remark1}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注2：</label>
+				<div class="col-sm-8">
+					<input id="remark2" name="remark2" th:field="*{remark2}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注3：</label>
+				<div class="col-sm-8">
+					<input id="remark3" name="remark3" th:field="*{remark3}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注4：</label>
+				<div class="col-sm-8">
+					<input id="remark4" name="remark4" th:field="*{remark4}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注5：</label>
+				<div class="col-sm-8">
+					<input id="remark5" name="remark5" th:field="*{remark5}" class="form-control" type="text">
 				</div>
 			</div>
 		</form>

@@ -5,10 +5,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 原商品属性表 pdd_goods_properties_origin
+ * 原始商品属性表 pdd_goods_properties_origin
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 public class PddGoodsPropertiesOrigin extends BaseEntity
 {

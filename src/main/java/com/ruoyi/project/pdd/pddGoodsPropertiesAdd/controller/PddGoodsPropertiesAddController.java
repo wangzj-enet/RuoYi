@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 复制商品属性信息操作处理
+ * 商品属性信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddGoodsPropertiesAdd")
@@ -42,7 +42,7 @@ public class PddGoodsPropertiesAddController extends BaseController
 	}
 	
 	/**
-	 * 查询复制商品属性列表
+	 * 查询商品属性列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesAdd:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddGoodsPropertiesAddController extends BaseController
 	
 	
 	/**
-	 * 导出复制商品属性列表
+	 * 导出商品属性列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesAdd:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddGoodsPropertiesAddController extends BaseController
     }
 	
 	/**
-	 * 新增复制商品属性
+	 * 新增商品属性
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddGoodsPropertiesAddController extends BaseController
 	}
 	
 	/**
-	 * 新增保存复制商品属性
+	 * 新增保存商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesAdd:add")
-	@Log(title = "复制商品属性", businessType = BusinessType.INSERT)
+	@Log(title = "商品属性", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddGoodsPropertiesAdd pddGoodsPropertiesAdd)
@@ -90,7 +90,7 @@ public class PddGoodsPropertiesAddController extends BaseController
 	}
 
 	/**
-	 * 修改复制商品属性
+	 * 修改商品属性
 	 */
 	@GetMapping("/edit/{goodsPropertiesAddId}")
 	public String edit(@PathVariable("goodsPropertiesAddId") Long goodsPropertiesAddId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddGoodsPropertiesAddController extends BaseController
 	}
 	
 	/**
-	 * 修改保存复制商品属性
+	 * 修改保存商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesAdd:edit")
-	@Log(title = "复制商品属性", businessType = BusinessType.UPDATE)
+	@Log(title = "商品属性", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddGoodsPropertiesAdd pddGoodsPropertiesAdd)
@@ -113,10 +113,10 @@ public class PddGoodsPropertiesAddController extends BaseController
 	}
 	
 	/**
-	 * 删除复制商品属性
+	 * 删除商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesAdd:remove")
-	@Log(title = "复制商品属性", businessType = BusinessType.DELETE)
+	@Log(title = "商品属性", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

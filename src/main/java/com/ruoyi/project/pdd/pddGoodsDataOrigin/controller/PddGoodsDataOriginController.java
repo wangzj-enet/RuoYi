@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 原商品数据解析信息操作处理
+ * 原始商品数据信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddGoodsDataOrigin")
@@ -42,7 +42,7 @@ public class PddGoodsDataOriginController extends BaseController
 	}
 	
 	/**
-	 * 查询原商品数据解析列表
+	 * 查询原始商品数据列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataOrigin:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddGoodsDataOriginController extends BaseController
 	
 	
 	/**
-	 * 导出原商品数据解析列表
+	 * 导出原始商品数据列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataOrigin:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddGoodsDataOriginController extends BaseController
     }
 	
 	/**
-	 * 新增原商品数据解析
+	 * 新增原始商品数据
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddGoodsDataOriginController extends BaseController
 	}
 	
 	/**
-	 * 新增保存原商品数据解析
+	 * 新增保存原始商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataOrigin:add")
-	@Log(title = "原商品数据解析", businessType = BusinessType.INSERT)
+	@Log(title = "原始商品数据", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddGoodsDataOrigin pddGoodsDataOrigin)
@@ -90,7 +90,7 @@ public class PddGoodsDataOriginController extends BaseController
 	}
 
 	/**
-	 * 修改原商品数据解析
+	 * 修改原始商品数据
 	 */
 	@GetMapping("/edit/{goodsDataOriginId}")
 	public String edit(@PathVariable("goodsDataOriginId") Long goodsDataOriginId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddGoodsDataOriginController extends BaseController
 	}
 	
 	/**
-	 * 修改保存原商品数据解析
+	 * 修改保存原始商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataOrigin:edit")
-	@Log(title = "原商品数据解析", businessType = BusinessType.UPDATE)
+	@Log(title = "原始商品数据", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddGoodsDataOrigin pddGoodsDataOrigin)
@@ -113,10 +113,10 @@ public class PddGoodsDataOriginController extends BaseController
 	}
 	
 	/**
-	 * 删除原商品数据解析
+	 * 删除原始商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataOrigin:remove")
-	@Log(title = "原商品数据解析", businessType = BusinessType.DELETE)
+	@Log(title = "原始商品数据", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

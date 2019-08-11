@@ -9,10 +9,10 @@ import com.ruoyi.project.pdd.pddGoodsDataAdd.service.IPddGoodsDataAddService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 复制商品数据 服务层实现
+ * 商品数据 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Service
 public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService 
@@ -21,10 +21,10 @@ public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService
 	private PddGoodsDataAddMapper pddGoodsDataAddMapper;
 
 	/**
-     * 查询复制商品数据信息
+     * 查询商品数据信息
      * 
-     * @param goodsDataAddId 复制商品数据ID
-     * @return 复制商品数据信息
+     * @param goodsDataAddId 商品数据ID
+     * @return 商品数据信息
      */
     @Override
 	public PddGoodsDataAdd selectPddGoodsDataAddById(Long goodsDataAddId)
@@ -33,10 +33,10 @@ public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService
 	}
 	
 	/**
-     * 查询复制商品数据列表
+     * 查询商品数据列表
      * 
-     * @param pddGoodsDataAdd 复制商品数据信息
-     * @return 复制商品数据集合
+     * @param pddGoodsDataAdd 商品数据信息
+     * @return 商品数据集合
      */
 	@Override
 	public List<PddGoodsDataAdd> selectPddGoodsDataAddList(PddGoodsDataAdd pddGoodsDataAdd)
@@ -45,9 +45,9 @@ public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService
 	}
 	
     /**
-     * 新增复制商品数据
+     * 新增商品数据
      * 
-     * @param pddGoodsDataAdd 复制商品数据信息
+     * @param pddGoodsDataAdd 商品数据信息
      * @return 结果
      */
 	@Override
@@ -57,9 +57,9 @@ public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService
 	}
 	
 	/**
-     * 修改复制商品数据
+     * 修改商品数据
      * 
-     * @param pddGoodsDataAdd 复制商品数据信息
+     * @param pddGoodsDataAdd 商品数据信息
      * @return 结果
      */
 	@Override
@@ -69,7 +69,7 @@ public class PddGoodsDataAddServiceImpl implements IPddGoodsDataAddService
 	}
 
 	/**
-     * 删除复制商品数据对象
+     * 删除商品数据对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

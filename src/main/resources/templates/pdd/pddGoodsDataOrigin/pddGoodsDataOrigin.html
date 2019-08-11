@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<th:block th:include="include :: header('原商品数据解析列表')" />
+	<th:block th:include="include :: header('原始商品数据列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -36,6 +36,42 @@
 
 							<li>
 								叶子类目ID：<input type="text" name="catId"/>
+							</li>
+
+							<li>
+								叶子类目ID1：<input type="text" name="catId1"/>
+							</li>
+
+							<li>
+								叶子类目ID2：<input type="text" name="catId2"/>
+							</li>
+
+							<li>
+								叶子类目ID3：<input type="text" name="catId3"/>
+							</li>
+
+							<li>
+								叶子类目ID4：<input type="text" name="catId4"/>
+							</li>
+
+							<li>
+								叶子类目名称：<input type="text" name="catName"/>
+							</li>
+
+							<li>
+								叶子类目名称1：<input type="text" name="catName1"/>
+							</li>
+
+							<li>
+								叶子类目名称2：<input type="text" name="catName2"/>
+							</li>
+
+							<li>
+								叶子类目名称3：<input type="text" name="catName3"/>
+							</li>
+
+							<li>
+								叶子类目名称4：<input type="text" name="catName4"/>
 							</li>
 
 							<li>
@@ -179,12 +215,67 @@
 							</li>
 
 							<li>
+								商品视频：<input type="text" name="carouselVideoOrigin"/>
+							</li>
+
+							<li>
+								服务集合：<input type="text" name="mallService"/>
+							</li>
+
+							<li>
+								承诺发货时间：<input type="text" name="shipmentLimitServer"/>
+							</li>
+
+							<li>
+								物流运费模板：<input type="text" name="costTemplateServer"/>
+							</li>
+
+							<li>
+								是否7天无理由退换货：<input type="text" name="refundableServer"/>
+							</li>
+
+							<li>
 								状态：<input type="text" name="status"/>
 							</li>
 
+							<li>
+								创建者：<input type="text" name="createBy"/>
+							</li>
+
+							<li>
+								创建时间：<input type="text" name="createTime"/>
+							</li>
+
+							<li>
+								更新者：<input type="text" name="updateBy"/>
+							</li>
+
+							<li>
+								更新时间：<input type="text" name="updateTime"/>
+							</li>
 
 							<li>
 								备注信息：<input type="text" name="remark"/>
+							</li>
+
+							<li>
+								备注1：<input type="text" name="remark1"/>
+							</li>
+
+							<li>
+								备注2：<input type="text" name="remark2"/>
+							</li>
+
+							<li>
+								备注3：<input type="text" name="remark3"/>
+							</li>
+
+							<li>
+								备注4：<input type="text" name="remark4"/>
+							</li>
+
+							<li>
+								备注5：<input type="text" name="remark5"/>
 							</li>
 
 							<li>
@@ -228,7 +319,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
-                modalName: "原商品数据解析",
+                modalName: "原始商品数据",
 		        showExport: true,
                 columns: [{
 		            checkbox: true
@@ -271,6 +362,51 @@
 				{
 					field : 'catId', 
 					title : '叶子类目ID',
+					sortable: true
+				},
+				{
+					field : 'catId1', 
+					title : '叶子类目ID1',
+					sortable: true
+				},
+				{
+					field : 'catId2', 
+					title : '叶子类目ID2',
+					sortable: true
+				},
+				{
+					field : 'catId3', 
+					title : '叶子类目ID3',
+					sortable: true
+				},
+				{
+					field : 'catId4', 
+					title : '叶子类目ID4',
+					sortable: true
+				},
+				{
+					field : 'catName', 
+					title : '叶子类目名称',
+					sortable: true
+				},
+				{
+					field : 'catName1', 
+					title : '叶子类目名称1',
+					sortable: true
+				},
+				{
+					field : 'catName2', 
+					title : '叶子类目名称2',
+					sortable: true
+				},
+				{
+					field : 'catName3', 
+					title : '叶子类目名称3',
+					sortable: true
+				},
+				{
+					field : 'catName4', 
+					title : '叶子类目名称4',
 					sortable: true
 				},
 				{
@@ -449,6 +585,31 @@
 					sortable: true
 				},
 				{
+					field : 'carouselVideoOrigin', 
+					title : '商品视频',
+					sortable: true
+				},
+				{
+					field : 'mallService', 
+					title : '服务集合',
+					sortable: true
+				},
+				{
+					field : 'shipmentLimitServer', 
+					title : '承诺发货时间',
+					sortable: true
+				},
+				{
+					field : 'costTemplateServer', 
+					title : '物流运费模板',
+					sortable: true
+				},
+				{
+					field : 'refundableServer', 
+					title : '是否7天无理由退换货',
+					sortable: true
+				},
+				{
 					field : 'status', 
 					title : '状态',
 					sortable: true
@@ -476,6 +637,31 @@
 				{
 					field : 'remark', 
 					title : '备注信息',
+					sortable: true
+				},
+				{
+					field : 'remark1', 
+					title : '备注1',
+					sortable: true
+				},
+				{
+					field : 'remark2', 
+					title : '备注2',
+					sortable: true
+				},
+				{
+					field : 'remark3', 
+					title : '备注3',
+					sortable: true
+				},
+				{
+					field : 'remark4', 
+					title : '备注4',
+					sortable: true
+				},
+				{
+					field : 'remark5', 
+					title : '备注5',
 					sortable: true
 				},
 		        {

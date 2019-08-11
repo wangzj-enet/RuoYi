@@ -3,12 +3,13 @@ package com.ruoyi.project.pdd.pddSkuListOrigin.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
+import java.math.BigDecimal;
 
 /**
- * 原商品sku表 pdd_sku_list_origin
+ * 原始商品SKU表 pdd_sku_list_origin
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 public class PddSkuListOrigin extends BaseEntity
 {
@@ -37,15 +38,33 @@ public class PddSkuListOrigin extends BaseEntity
 	/** 商品sku库存初始数量 */
 	private Long quantity;
 	/** 商品团购价格 */
-	private Long multiPrice;
+	private BigDecimal multiPrice;
 	/** 商品单买价格 */
-	private Long price;
+	private BigDecimal price;
 	/** sku购买限制 */
 	private Long limitQuantity;
 	/** sku上架状态 */
 	private String isOnsale;
+	/** 规格 */
+	private String specKey;
+	/** 规格id */
+	private String specKeyId;
+	/** 规格值 */
+	private String specValue;
+	/** 规格值id */
+	private String specValueId;
 	/** 状态 */
 	private String status;
+	/** 备注1 */
+	private String remark1;
+	/** 备注2 */
+	private String remark2;
+	/** 备注3 */
+	private String remark3;
+	/** 备注4 */
+	private String remark4;
+	/** 备注5 */
+	private String remark5;
 
 	public void setSkuListOriginId(Long skuListOriginId) 
 	{
@@ -146,21 +165,21 @@ public class PddSkuListOrigin extends BaseEntity
 	{
 		return quantity;
 	}
-	public void setMultiPrice(Long multiPrice) 
+	public void setMultiPrice(BigDecimal multiPrice) 
 	{
 		this.multiPrice = multiPrice;
 	}
 
-	public Long getMultiPrice() 
+	public BigDecimal getMultiPrice() 
 	{
 		return multiPrice;
 	}
-	public void setPrice(Long price) 
+	public void setPrice(BigDecimal price) 
 	{
 		this.price = price;
 	}
 
-	public Long getPrice() 
+	public BigDecimal getPrice() 
 	{
 		return price;
 	}
@@ -182,6 +201,42 @@ public class PddSkuListOrigin extends BaseEntity
 	{
 		return isOnsale;
 	}
+	public void setSpecKey(String specKey) 
+	{
+		this.specKey = specKey;
+	}
+
+	public String getSpecKey() 
+	{
+		return specKey;
+	}
+	public void setSpecKeyId(String specKeyId) 
+	{
+		this.specKeyId = specKeyId;
+	}
+
+	public String getSpecKeyId() 
+	{
+		return specKeyId;
+	}
+	public void setSpecValue(String specValue) 
+	{
+		this.specValue = specValue;
+	}
+
+	public String getSpecValue() 
+	{
+		return specValue;
+	}
+	public void setSpecValueId(String specValueId) 
+	{
+		this.specValueId = specValueId;
+	}
+
+	public String getSpecValueId() 
+	{
+		return specValueId;
+	}
 	public void setStatus(String status) 
 	{
 		this.status = status;
@@ -190,6 +245,51 @@ public class PddSkuListOrigin extends BaseEntity
 	public String getStatus() 
 	{
 		return status;
+	}
+	public void setRemark1(String remark1) 
+	{
+		this.remark1 = remark1;
+	}
+
+	public String getRemark1() 
+	{
+		return remark1;
+	}
+	public void setRemark2(String remark2) 
+	{
+		this.remark2 = remark2;
+	}
+
+	public String getRemark2() 
+	{
+		return remark2;
+	}
+	public void setRemark3(String remark3) 
+	{
+		this.remark3 = remark3;
+	}
+
+	public String getRemark3() 
+	{
+		return remark3;
+	}
+	public void setRemark4(String remark4) 
+	{
+		this.remark4 = remark4;
+	}
+
+	public String getRemark4() 
+	{
+		return remark4;
+	}
+	public void setRemark5(String remark5) 
+	{
+		this.remark5 = remark5;
+	}
+
+	public String getRemark5() 
+	{
+		return remark5;
 	}
 
     public String toString() {
@@ -209,8 +309,17 @@ public class PddSkuListOrigin extends BaseEntity
             .append("price", getPrice())
             .append("limitQuantity", getLimitQuantity())
             .append("isOnsale", getIsOnsale())
+            .append("specKey", getSpecKey())
+            .append("specKeyId", getSpecKeyId())
+            .append("specValue", getSpecValue())
+            .append("specValueId", getSpecValueId())
             .append("status", getStatus())
             .append("remark", getRemark())
+            .append("remark1", getRemark1())
+            .append("remark2", getRemark2())
+            .append("remark3", getRemark3())
+            .append("remark4", getRemark4())
+            .append("remark5", getRemark5())
             .toString();
     }
 }

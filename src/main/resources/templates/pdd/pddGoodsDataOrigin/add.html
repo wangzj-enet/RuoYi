@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('新增原商品数据解析')" />
+	<th:block th:include="include :: header('新增原始商品数据')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -46,6 +46,60 @@
 				<label class="col-sm-3 control-label">叶子类目ID：</label>
 				<div class="col-sm-8">
 					<input id="catId" name="catId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID1：</label>
+				<div class="col-sm-8">
+					<input id="catId1" name="catId1" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID2：</label>
+				<div class="col-sm-8">
+					<input id="catId2" name="catId2" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID3：</label>
+				<div class="col-sm-8">
+					<input id="catId3" name="catId3" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目ID4：</label>
+				<div class="col-sm-8">
+					<input id="catId4" name="catId4" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称：</label>
+				<div class="col-sm-8">
+					<input id="catName" name="catName" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称1：</label>
+				<div class="col-sm-8">
+					<input id="catName1" name="catName1" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称2：</label>
+				<div class="col-sm-8">
+					<input id="catName2" name="catName2" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称3：</label>
+				<div class="col-sm-8">
+					<input id="catName3" name="catName3" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">叶子类目名称4：</label>
+				<div class="col-sm-8">
+					<input id="catName4" name="catName4" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -259,16 +313,99 @@
 				</div>
 			</div>
 			<div class="form-group">	
+				<label class="col-sm-3 control-label">商品视频：</label>
+				<div class="col-sm-8">
+					<input id="carouselVideoOrigin" name="carouselVideoOrigin" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">服务集合：</label>
+				<div class="col-sm-8">
+					<input id="mallService" name="mallService" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">承诺发货时间：</label>
+				<div class="col-sm-8">
+					<input id="shipmentLimitServer" name="shipmentLimitServer" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">物流运费模板：</label>
+				<div class="col-sm-8">
+					<input id="costTemplateServer" name="costTemplateServer" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否7天无理由退换货：</label>
+				<div class="col-sm-8">
+					<input id="refundableServer" name="refundableServer" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
 				<label class="col-sm-3 control-label">状态：</label>
 				<div class="col-sm-8">
 					<input id="status" name="status" class="form-control" type="text">
 				</div>
 			</div>
-
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建者：</label>
+				<div class="col-sm-8">
+					<input id="createBy" name="createBy" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新者：</label>
+				<div class="col-sm-8">
+					<input id="updateBy" name="updateBy" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新时间：</label>
+				<div class="col-sm-8">
+					<input id="updateTime" name="updateTime" class="form-control" type="text">
+				</div>
+			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">备注信息：</label>
 				<div class="col-sm-8">
 					<input id="remark" name="remark" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注1：</label>
+				<div class="col-sm-8">
+					<input id="remark1" name="remark1" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注2：</label>
+				<div class="col-sm-8">
+					<input id="remark2" name="remark2" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注3：</label>
+				<div class="col-sm-8">
+					<input id="remark3" name="remark3" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注4：</label>
+				<div class="col-sm-8">
+					<input id="remark4" name="remark4" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注5：</label>
+				<div class="col-sm-8">
+					<input id="remark5" name="remark5" class="form-control" type="text">
 				</div>
 			</div>
 		</form>

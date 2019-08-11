@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 原商品属性信息操作处理
+ * 原始商品属性信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddGoodsPropertiesOrigin")
@@ -42,7 +42,7 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	}
 	
 	/**
-	 * 查询原商品属性列表
+	 * 查询原始商品属性列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesOrigin:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	
 	
 	/**
-	 * 导出原商品属性列表
+	 * 导出原始商品属性列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesOrigin:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddGoodsPropertiesOriginController extends BaseController
     }
 	
 	/**
-	 * 新增原商品属性
+	 * 新增原始商品属性
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	}
 	
 	/**
-	 * 新增保存原商品属性
+	 * 新增保存原始商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesOrigin:add")
-	@Log(title = "原商品属性", businessType = BusinessType.INSERT)
+	@Log(title = "原始商品属性", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin)
@@ -90,7 +90,7 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	}
 
 	/**
-	 * 修改原商品属性
+	 * 修改原始商品属性
 	 */
 	@GetMapping("/edit/{goodsPropertiesOriginId}")
 	public String edit(@PathVariable("goodsPropertiesOriginId") Long goodsPropertiesOriginId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	}
 	
 	/**
-	 * 修改保存原商品属性
+	 * 修改保存原始商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesOrigin:edit")
-	@Log(title = "原商品属性", businessType = BusinessType.UPDATE)
+	@Log(title = "原始商品属性", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin)
@@ -113,10 +113,10 @@ public class PddGoodsPropertiesOriginController extends BaseController
 	}
 	
 	/**
-	 * 删除原商品属性
+	 * 删除原始商品属性
 	 */
 	@RequiresPermissions("pdd:pddGoodsPropertiesOrigin:remove")
-	@Log(title = "原商品属性", businessType = BusinessType.DELETE)
+	@Log(title = "原始商品属性", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

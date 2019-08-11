@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 原商品sku信息操作处理
+ * 原始商品SKU信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddSkuListOrigin")
@@ -42,7 +42,7 @@ public class PddSkuListOriginController extends BaseController
 	}
 	
 	/**
-	 * 查询原商品sku列表
+	 * 查询原始商品SKU列表
 	 */
 	@RequiresPermissions("pdd:pddSkuListOrigin:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddSkuListOriginController extends BaseController
 	
 	
 	/**
-	 * 导出原商品sku列表
+	 * 导出原始商品SKU列表
 	 */
 	@RequiresPermissions("pdd:pddSkuListOrigin:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddSkuListOriginController extends BaseController
     }
 	
 	/**
-	 * 新增原商品sku
+	 * 新增原始商品SKU
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddSkuListOriginController extends BaseController
 	}
 	
 	/**
-	 * 新增保存原商品sku
+	 * 新增保存原始商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListOrigin:add")
-	@Log(title = "原商品sku", businessType = BusinessType.INSERT)
+	@Log(title = "原始商品SKU", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddSkuListOrigin pddSkuListOrigin)
@@ -90,7 +90,7 @@ public class PddSkuListOriginController extends BaseController
 	}
 
 	/**
-	 * 修改原商品sku
+	 * 修改原始商品SKU
 	 */
 	@GetMapping("/edit/{skuListOriginId}")
 	public String edit(@PathVariable("skuListOriginId") Long skuListOriginId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddSkuListOriginController extends BaseController
 	}
 	
 	/**
-	 * 修改保存原商品sku
+	 * 修改保存原始商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListOrigin:edit")
-	@Log(title = "原商品sku", businessType = BusinessType.UPDATE)
+	@Log(title = "原始商品SKU", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddSkuListOrigin pddSkuListOrigin)
@@ -113,10 +113,10 @@ public class PddSkuListOriginController extends BaseController
 	}
 	
 	/**
-	 * 删除原商品sku
+	 * 删除原始商品SKU
 	 */
 	@RequiresPermissions("pdd:pddSkuListOrigin:remove")
-	@Log(title = "原商品sku", businessType = BusinessType.DELETE)
+	@Log(title = "原始商品SKU", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

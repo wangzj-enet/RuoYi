@@ -4,55 +4,55 @@ import com.ruoyi.project.pdd.pddGoodsDataOrigin.domain.PddGoodsDataOrigin;
 import java.util.List;	
 
 /**
- * 原商品数据解析 数据层
+ * 原始商品数据 数据层
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 public interface PddGoodsDataOriginMapper 
 {
 	/**
-     * 查询原商品数据解析信息
+     * 查询原始商品数据信息
      * 
-     * @param goodsDataOriginId 原商品数据解析ID
-     * @return 原商品数据解析信息
+     * @param goodsDataOriginId 原始商品数据ID
+     * @return 原始商品数据信息
      */
 	public PddGoodsDataOrigin selectPddGoodsDataOriginById(Long goodsDataOriginId);
 	
 	/**
-     * 查询原商品数据解析列表
+     * 查询原始商品数据列表
      * 
-     * @param pddGoodsDataOrigin 原商品数据解析信息
-     * @return 原商品数据解析集合
+     * @param pddGoodsDataOrigin 原始商品数据信息
+     * @return 原始商品数据集合
      */
 	public List<PddGoodsDataOrigin> selectPddGoodsDataOriginList(PddGoodsDataOrigin pddGoodsDataOrigin);
 	
 	/**
-     * 新增原商品数据解析
+     * 新增原始商品数据
      * 
-     * @param pddGoodsDataOrigin 原商品数据解析信息
+     * @param pddGoodsDataOrigin 原始商品数据信息
      * @return 结果
      */
 	public int insertPddGoodsDataOrigin(PddGoodsDataOrigin pddGoodsDataOrigin);
 	
 	/**
-     * 修改原商品数据解析
+     * 修改原始商品数据
      * 
-     * @param pddGoodsDataOrigin 原商品数据解析信息
+     * @param pddGoodsDataOrigin 原始商品数据信息
      * @return 结果
      */
 	public int updatePddGoodsDataOrigin(PddGoodsDataOrigin pddGoodsDataOrigin);
 	
 	/**
-     * 删除原商品数据解析
+     * 删除原始商品数据
      * 
-     * @param goodsDataOriginId 原商品数据解析ID
+     * @param goodsDataOriginId 原始商品数据ID
      * @return 结果
      */
 	public int deletePddGoodsDataOriginById(Long goodsDataOriginId);
 	
 	/**
-     * 批量删除原商品数据解析
+     * 批量删除原始商品数据
      * 
      * @param goodsDataOriginIds 需要删除的数据ID
      * @return 结果

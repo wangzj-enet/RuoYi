@@ -9,10 +9,10 @@ import com.ruoyi.project.pdd.pddGoodsPropertiesAdd.service.IPddGoodsPropertiesAd
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 复制商品属性 服务层实现
+ * 商品属性 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Service
 public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddService 
@@ -21,10 +21,10 @@ public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddS
 	private PddGoodsPropertiesAddMapper pddGoodsPropertiesAddMapper;
 
 	/**
-     * 查询复制商品属性信息
+     * 查询商品属性信息
      * 
-     * @param goodsPropertiesAddId 复制商品属性ID
-     * @return 复制商品属性信息
+     * @param goodsPropertiesAddId 商品属性ID
+     * @return 商品属性信息
      */
     @Override
 	public PddGoodsPropertiesAdd selectPddGoodsPropertiesAddById(Long goodsPropertiesAddId)
@@ -33,10 +33,10 @@ public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddS
 	}
 	
 	/**
-     * 查询复制商品属性列表
+     * 查询商品属性列表
      * 
-     * @param pddGoodsPropertiesAdd 复制商品属性信息
-     * @return 复制商品属性集合
+     * @param pddGoodsPropertiesAdd 商品属性信息
+     * @return 商品属性集合
      */
 	@Override
 	public List<PddGoodsPropertiesAdd> selectPddGoodsPropertiesAddList(PddGoodsPropertiesAdd pddGoodsPropertiesAdd)
@@ -45,9 +45,9 @@ public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddS
 	}
 	
     /**
-     * 新增复制商品属性
+     * 新增商品属性
      * 
-     * @param pddGoodsPropertiesAdd 复制商品属性信息
+     * @param pddGoodsPropertiesAdd 商品属性信息
      * @return 结果
      */
 	@Override
@@ -57,9 +57,9 @@ public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddS
 	}
 	
 	/**
-     * 修改复制商品属性
+     * 修改商品属性
      * 
-     * @param pddGoodsPropertiesAdd 复制商品属性信息
+     * @param pddGoodsPropertiesAdd 商品属性信息
      * @return 结果
      */
 	@Override
@@ -69,7 +69,7 @@ public class PddGoodsPropertiesAddServiceImpl implements IPddGoodsPropertiesAddS
 	}
 
 	/**
-     * 删除复制商品属性对象
+     * 删除商品属性对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

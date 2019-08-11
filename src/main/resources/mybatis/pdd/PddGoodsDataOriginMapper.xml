@@ -13,6 +13,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="goodsType"    column="goods_type"    />
         <result property="goodsDesc"    column="goods_desc"    />
         <result property="catId"    column="cat_id"    />
+        <result property="catId1"    column="cat_id1"    />
+        <result property="catId2"    column="cat_id2"    />
+        <result property="catId3"    column="cat_id3"    />
+        <result property="catId4"    column="cat_id4"    />
+        <result property="catName"    column="cat_name"    />
+        <result property="catName1"    column="cat_name1"    />
+        <result property="catName2"    column="cat_name2"    />
+        <result property="catName3"    column="cat_name3"    />
+        <result property="catName4"    column="cat_name4"    />
         <result property="tinyName"    column="tiny_name"    />
         <result property="countryId"    column="country_id"    />
         <result property="warehouse"    column="warehouse"    />
@@ -48,16 +57,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="goodsPropertiesOriginId"    column="goods_properties_origin_id"    />
         <result property="overseaGoodsOriginId"    column="oversea_goods_origin_id"    />
         <result property="carouselVideoOriginId"    column="carousel_video_origin_id"    />
+        <result property="carouselVideoOrigin"    column="carousel_video_origin"    />
+        <result property="mallService"    column="mall_service"    />
+        <result property="shipmentLimitServer"    column="shipment_limit_server"    />
+        <result property="costTemplateServer"    column="cost_template_server"    />
+        <result property="refundableServer"    column="refundable_server"    />
         <result property="status"    column="status"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="remark1"    column="remark1"    />
+        <result property="remark2"    column="remark2"    />
+        <result property="remark3"    column="remark3"    />
+        <result property="remark4"    column="remark4"    />
+        <result property="remark5"    column="remark5"    />
     </resultMap>
 	
 	<sql id="selectPddGoodsDataOriginVo">
-        select goods_data_origin_id, main_id, goods_id, third_id, goods_name, goods_type, goods_desc, cat_id, tiny_name, country_id, warehouse, customs, is_customs, market_price, is_pre_sale, pre_sale_time, shipment_limit_second, cost_template_id, customer_num, buy_limit, order_limit, is_refundable, second_hand, is_folt, warm_tips, out_goods_id, image_url, carousel_gallery, detail_gallery, invoice_status, quan_guo_lian_bao, zhi_huan_bu_xiu, song_huo_ru_hu, shang_men_an_zhuang, song_huo_an_zhuang, mai_jia_zi_ti, bad_fruit_claim, lack_of_weight_claim, origin_country_id, sku_list_origin_id, goods_properties_origin_id, oversea_goods_origin_id, carousel_video_origin_id, status, create_by, create_time, update_by, update_time, remark from pdd_goods_data_origin
+        select goods_data_origin_id, main_id, goods_id, third_id, goods_name, goods_type, goods_desc, cat_id, cat_id1, cat_id2, cat_id3, cat_id4, cat_name, cat_name1, cat_name2, cat_name3, cat_name4, tiny_name, country_id, warehouse, customs, is_customs, market_price, is_pre_sale, pre_sale_time, shipment_limit_second, cost_template_id, customer_num, buy_limit, order_limit, is_refundable, second_hand, is_folt, warm_tips, out_goods_id, image_url, carousel_gallery, detail_gallery, invoice_status, quan_guo_lian_bao, zhi_huan_bu_xiu, song_huo_ru_hu, shang_men_an_zhuang, song_huo_an_zhuang, mai_jia_zi_ti, bad_fruit_claim, lack_of_weight_claim, origin_country_id, sku_list_origin_id, goods_properties_origin_id, oversea_goods_origin_id, carousel_video_origin_id, carousel_video_origin, mall_service, shipment_limit_server, cost_template_server, refundable_server, status, create_by, create_time, update_by, update_time, remark, remark1, remark2, remark3, remark4, remark5 from pdd_goods_data_origin
     </sql>
 	
     <select id="selectPddGoodsDataOriginList" parameterType="PddGoodsDataOrigin" resultMap="PddGoodsDataOriginResult">
@@ -71,6 +90,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="goodsType != null "> and goods_type = #{goodsType}</if>
              <if test="goodsDesc != null  and goodsDesc != '' "> and goods_desc = #{goodsDesc}</if>
              <if test="catId != null "> and cat_id = #{catId}</if>
+             <if test="catId1 != null "> and cat_id1 = #{catId1}</if>
+             <if test="catId2 != null "> and cat_id2 = #{catId2}</if>
+             <if test="catId3 != null "> and cat_id3 = #{catId3}</if>
+             <if test="catId4 != null "> and cat_id4 = #{catId4}</if>
+             <if test="catName != null  and catName != '' "> and cat_name = #{catName}</if>
+             <if test="catName1 != null  and catName1 != '' "> and cat_name1 = #{catName1}</if>
+             <if test="catName2 != null  and catName2 != '' "> and cat_name2 = #{catName2}</if>
+             <if test="catName3 != null  and catName3 != '' "> and cat_name3 = #{catName3}</if>
+             <if test="catName4 != null  and catName4 != '' "> and cat_name4 = #{catName4}</if>
              <if test="tinyName != null  and tinyName != '' "> and tiny_name = #{tinyName}</if>
              <if test="countryId != null "> and country_id = #{countryId}</if>
              <if test="warehouse != null  and warehouse != '' "> and warehouse = #{warehouse}</if>
@@ -106,12 +134,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="goodsPropertiesOriginId != null "> and goods_properties_origin_id = #{goodsPropertiesOriginId}</if>
              <if test="overseaGoodsOriginId != null "> and oversea_goods_origin_id = #{overseaGoodsOriginId}</if>
              <if test="carouselVideoOriginId != null "> and carousel_video_origin_id = #{carouselVideoOriginId}</if>
+             <if test="carouselVideoOrigin != null  and carouselVideoOrigin != '' "> and carousel_video_origin = #{carouselVideoOrigin}</if>
+             <if test="mallService != null  and mallService != '' "> and mall_service = #{mallService}</if>
+             <if test="shipmentLimitServer != null  and shipmentLimitServer != '' "> and shipment_limit_server = #{shipmentLimitServer}</if>
+             <if test="costTemplateServer != null  and costTemplateServer != '' "> and cost_template_server = #{costTemplateServer}</if>
+             <if test="refundableServer != null  and refundableServer != '' "> and refundable_server = #{refundableServer}</if>
              <if test="status != null  and status != '' "> and status = #{status}</if>
              <if test="createBy != null  and createBy != '' "> and create_by = #{createBy}</if>
              <if test="createTime != null "> and create_time = #{createTime}</if>
              <if test="updateBy != null  and updateBy != '' "> and update_by = #{updateBy}</if>
              <if test="updateTime != null "> and update_time = #{updateTime}</if>
              <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+             <if test="remark1 != null  and remark1 != '' "> and remark1 = #{remark1}</if>
+             <if test="remark2 != null  and remark2 != '' "> and remark2 = #{remark2}</if>
+             <if test="remark3 != null  and remark3 != '' "> and remark3 = #{remark3}</if>
+             <if test="remark4 != null  and remark4 != '' "> and remark4 = #{remark4}</if>
+             <if test="remark5 != null  and remark5 != '' "> and remark5 = #{remark5}</if>
          </where>
     </select>
     
@@ -130,6 +168,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="goodsType != null  ">goods_type,</if>
 			<if test="goodsDesc != null  and goodsDesc != ''  ">goods_desc,</if>
 			<if test="catId != null  ">cat_id,</if>
+			<if test="catId1 != null  ">cat_id1,</if>
+			<if test="catId2 != null  ">cat_id2,</if>
+			<if test="catId3 != null  ">cat_id3,</if>
+			<if test="catId4 != null  ">cat_id4,</if>
+			<if test="catName != null  and catName != ''  ">cat_name,</if>
+			<if test="catName1 != null  and catName1 != ''  ">cat_name1,</if>
+			<if test="catName2 != null  and catName2 != ''  ">cat_name2,</if>
+			<if test="catName3 != null  and catName3 != ''  ">cat_name3,</if>
+			<if test="catName4 != null  and catName4 != ''  ">cat_name4,</if>
 			<if test="tinyName != null  and tinyName != ''  ">tiny_name,</if>
 			<if test="countryId != null  ">country_id,</if>
 			<if test="warehouse != null  and warehouse != ''  ">warehouse,</if>
@@ -165,12 +212,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="goodsPropertiesOriginId != null  ">goods_properties_origin_id,</if>
 			<if test="overseaGoodsOriginId != null  ">oversea_goods_origin_id,</if>
 			<if test="carouselVideoOriginId != null  ">carousel_video_origin_id,</if>
+			<if test="carouselVideoOrigin != null  and carouselVideoOrigin != ''  ">carousel_video_origin,</if>
+			<if test="mallService != null  and mallService != ''  ">mall_service,</if>
+			<if test="shipmentLimitServer != null  and shipmentLimitServer != ''  ">shipment_limit_server,</if>
+			<if test="costTemplateServer != null  and costTemplateServer != ''  ">cost_template_server,</if>
+			<if test="refundableServer != null  and refundableServer != ''  ">refundable_server,</if>
 			<if test="status != null  and status != ''  ">status,</if>
 			<if test="createBy != null  and createBy != ''  ">create_by,</if>
 			<if test="createTime != null  ">create_time,</if>
 			<if test="updateBy != null  and updateBy != ''  ">update_by,</if>
 			<if test="updateTime != null  ">update_time,</if>
 			<if test="remark != null  and remark != ''  ">remark,</if>
+			<if test="remark1 != null  and remark1 != ''  ">remark1,</if>
+			<if test="remark2 != null  and remark2 != ''  ">remark2,</if>
+			<if test="remark3 != null  and remark3 != ''  ">remark3,</if>
+			<if test="remark4 != null  and remark4 != ''  ">remark4,</if>
+			<if test="remark5 != null  and remark5 != ''  ">remark5,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="mainId != null  ">#{mainId},</if>
@@ -180,6 +237,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="goodsType != null  ">#{goodsType},</if>
 			<if test="goodsDesc != null  and goodsDesc != ''  ">#{goodsDesc},</if>
 			<if test="catId != null  ">#{catId},</if>
+			<if test="catId1 != null  ">#{catId1},</if>
+			<if test="catId2 != null  ">#{catId2},</if>
+			<if test="catId3 != null  ">#{catId3},</if>
+			<if test="catId4 != null  ">#{catId4},</if>
+			<if test="catName != null  and catName != ''  ">#{catName},</if>
+			<if test="catName1 != null  and catName1 != ''  ">#{catName1},</if>
+			<if test="catName2 != null  and catName2 != ''  ">#{catName2},</if>
+			<if test="catName3 != null  and catName3 != ''  ">#{catName3},</if>
+			<if test="catName4 != null  and catName4 != ''  ">#{catName4},</if>
 			<if test="tinyName != null  and tinyName != ''  ">#{tinyName},</if>
 			<if test="countryId != null  ">#{countryId},</if>
 			<if test="warehouse != null  and warehouse != ''  ">#{warehouse},</if>
@@ -215,12 +281,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="goodsPropertiesOriginId != null  ">#{goodsPropertiesOriginId},</if>
 			<if test="overseaGoodsOriginId != null  ">#{overseaGoodsOriginId},</if>
 			<if test="carouselVideoOriginId != null  ">#{carouselVideoOriginId},</if>
+			<if test="carouselVideoOrigin != null  and carouselVideoOrigin != ''  ">#{carouselVideoOrigin},</if>
+			<if test="mallService != null  and mallService != ''  ">#{mallService},</if>
+			<if test="shipmentLimitServer != null  and shipmentLimitServer != ''  ">#{shipmentLimitServer},</if>
+			<if test="costTemplateServer != null  and costTemplateServer != ''  ">#{costTemplateServer},</if>
+			<if test="refundableServer != null  and refundableServer != ''  ">#{refundableServer},</if>
 			<if test="status != null  and status != ''  ">#{status},</if>
 			<if test="createBy != null  and createBy != ''  ">#{createBy},</if>
 			<if test="createTime != null  ">#{createTime},</if>
 			<if test="updateBy != null  and updateBy != ''  ">#{updateBy},</if>
 			<if test="updateTime != null  ">#{updateTime},</if>
 			<if test="remark != null  and remark != ''  ">#{remark},</if>
+			<if test="remark1 != null  and remark1 != ''  ">#{remark1},</if>
+			<if test="remark2 != null  and remark2 != ''  ">#{remark2},</if>
+			<if test="remark3 != null  and remark3 != ''  ">#{remark3},</if>
+			<if test="remark4 != null  and remark4 != ''  ">#{remark4},</if>
+			<if test="remark5 != null  and remark5 != ''  ">#{remark5},</if>
          </trim>
     </insert>
 	 
@@ -234,6 +310,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="goodsType != null  ">goods_type = #{goodsType},</if>
             <if test="goodsDesc != null  and goodsDesc != ''  ">goods_desc = #{goodsDesc},</if>
             <if test="catId != null  ">cat_id = #{catId},</if>
+            <if test="catId1 != null  ">cat_id1 = #{catId1},</if>
+            <if test="catId2 != null  ">cat_id2 = #{catId2},</if>
+            <if test="catId3 != null  ">cat_id3 = #{catId3},</if>
+            <if test="catId4 != null  ">cat_id4 = #{catId4},</if>
+            <if test="catName != null  and catName != ''  ">cat_name = #{catName},</if>
+            <if test="catName1 != null  and catName1 != ''  ">cat_name1 = #{catName1},</if>
+            <if test="catName2 != null  and catName2 != ''  ">cat_name2 = #{catName2},</if>
+            <if test="catName3 != null  and catName3 != ''  ">cat_name3 = #{catName3},</if>
+            <if test="catName4 != null  and catName4 != ''  ">cat_name4 = #{catName4},</if>
             <if test="tinyName != null  and tinyName != ''  ">tiny_name = #{tinyName},</if>
             <if test="countryId != null  ">country_id = #{countryId},</if>
             <if test="warehouse != null  and warehouse != ''  ">warehouse = #{warehouse},</if>
@@ -269,12 +354,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="goodsPropertiesOriginId != null  ">goods_properties_origin_id = #{goodsPropertiesOriginId},</if>
             <if test="overseaGoodsOriginId != null  ">oversea_goods_origin_id = #{overseaGoodsOriginId},</if>
             <if test="carouselVideoOriginId != null  ">carousel_video_origin_id = #{carouselVideoOriginId},</if>
+            <if test="carouselVideoOrigin != null  and carouselVideoOrigin != ''  ">carousel_video_origin = #{carouselVideoOrigin},</if>
+            <if test="mallService != null  and mallService != ''  ">mall_service = #{mallService},</if>
+            <if test="shipmentLimitServer != null  and shipmentLimitServer != ''  ">shipment_limit_server = #{shipmentLimitServer},</if>
+            <if test="costTemplateServer != null  and costTemplateServer != ''  ">cost_template_server = #{costTemplateServer},</if>
+            <if test="refundableServer != null  and refundableServer != ''  ">refundable_server = #{refundableServer},</if>
             <if test="status != null  and status != ''  ">status = #{status},</if>
             <if test="createBy != null  and createBy != ''  ">create_by = #{createBy},</if>
             <if test="createTime != null  ">create_time = #{createTime},</if>
             <if test="updateBy != null  and updateBy != ''  ">update_by = #{updateBy},</if>
             <if test="updateTime != null  ">update_time = #{updateTime},</if>
             <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+            <if test="remark1 != null  and remark1 != ''  ">remark1 = #{remark1},</if>
+            <if test="remark2 != null  and remark2 != ''  ">remark2 = #{remark2},</if>
+            <if test="remark3 != null  and remark3 != ''  ">remark3 = #{remark3},</if>
+            <if test="remark4 != null  and remark4 != ''  ">remark4 = #{remark4},</if>
+            <if test="remark5 != null  and remark5 != ''  ">remark5 = #{remark5},</if>
         </trim>
         where goods_data_origin_id = #{goodsDataOriginId}
     </update>

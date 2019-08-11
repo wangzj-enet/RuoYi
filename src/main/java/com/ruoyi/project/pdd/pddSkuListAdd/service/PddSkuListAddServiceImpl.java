@@ -9,10 +9,10 @@ import com.ruoyi.project.pdd.pddSkuListAdd.service.IPddSkuListAddService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 复制商品sku 服务层实现
+ * 商品SKU 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Service
 public class PddSkuListAddServiceImpl implements IPddSkuListAddService 
@@ -21,10 +21,10 @@ public class PddSkuListAddServiceImpl implements IPddSkuListAddService
 	private PddSkuListAddMapper pddSkuListAddMapper;
 
 	/**
-     * 查询复制商品sku信息
+     * 查询商品SKU信息
      * 
-     * @param skuListAddId 复制商品skuID
-     * @return 复制商品sku信息
+     * @param skuListAddId 商品SKUID
+     * @return 商品SKU信息
      */
     @Override
 	public PddSkuListAdd selectPddSkuListAddById(Long skuListAddId)
@@ -33,10 +33,10 @@ public class PddSkuListAddServiceImpl implements IPddSkuListAddService
 	}
 	
 	/**
-     * 查询复制商品sku列表
+     * 查询商品SKU列表
      * 
-     * @param pddSkuListAdd 复制商品sku信息
-     * @return 复制商品sku集合
+     * @param pddSkuListAdd 商品SKU信息
+     * @return 商品SKU集合
      */
 	@Override
 	public List<PddSkuListAdd> selectPddSkuListAddList(PddSkuListAdd pddSkuListAdd)
@@ -45,9 +45,9 @@ public class PddSkuListAddServiceImpl implements IPddSkuListAddService
 	}
 	
     /**
-     * 新增复制商品sku
+     * 新增商品SKU
      * 
-     * @param pddSkuListAdd 复制商品sku信息
+     * @param pddSkuListAdd 商品SKU信息
      * @return 结果
      */
 	@Override
@@ -57,9 +57,9 @@ public class PddSkuListAddServiceImpl implements IPddSkuListAddService
 	}
 	
 	/**
-     * 修改复制商品sku
+     * 修改商品SKU
      * 
-     * @param pddSkuListAdd 复制商品sku信息
+     * @param pddSkuListAdd 商品SKU信息
      * @return 结果
      */
 	@Override
@@ -69,7 +69,7 @@ public class PddSkuListAddServiceImpl implements IPddSkuListAddService
 	}
 
 	/**
-     * 删除复制商品sku对象
+     * 删除商品SKU对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

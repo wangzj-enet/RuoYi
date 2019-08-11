@@ -9,10 +9,10 @@ import com.ruoyi.project.pdd.pddSkuListOrigin.service.IPddSkuListOriginService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 原商品sku 服务层实现
+ * 原始商品SKU 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Service
 public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService 
@@ -21,10 +21,10 @@ public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService
 	private PddSkuListOriginMapper pddSkuListOriginMapper;
 
 	/**
-     * 查询原商品sku信息
+     * 查询原始商品SKU信息
      * 
-     * @param skuListOriginId 原商品skuID
-     * @return 原商品sku信息
+     * @param skuListOriginId 原始商品SKUID
+     * @return 原始商品SKU信息
      */
     @Override
 	public PddSkuListOrigin selectPddSkuListOriginById(Long skuListOriginId)
@@ -33,10 +33,10 @@ public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService
 	}
 	
 	/**
-     * 查询原商品sku列表
+     * 查询原始商品SKU列表
      * 
-     * @param pddSkuListOrigin 原商品sku信息
-     * @return 原商品sku集合
+     * @param pddSkuListOrigin 原始商品SKU信息
+     * @return 原始商品SKU集合
      */
 	@Override
 	public List<PddSkuListOrigin> selectPddSkuListOriginList(PddSkuListOrigin pddSkuListOrigin)
@@ -45,9 +45,9 @@ public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService
 	}
 	
     /**
-     * 新增原商品sku
+     * 新增原始商品SKU
      * 
-     * @param pddSkuListOrigin 原商品sku信息
+     * @param pddSkuListOrigin 原始商品SKU信息
      * @return 结果
      */
 	@Override
@@ -57,9 +57,9 @@ public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService
 	}
 	
 	/**
-     * 修改原商品sku
+     * 修改原始商品SKU
      * 
-     * @param pddSkuListOrigin 原商品sku信息
+     * @param pddSkuListOrigin 原始商品SKU信息
      * @return 结果
      */
 	@Override
@@ -69,7 +69,7 @@ public class PddSkuListOriginServiceImpl implements IPddSkuListOriginService
 	}
 
 	/**
-     * 删除原商品sku对象
+     * 删除原始商品SKU对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

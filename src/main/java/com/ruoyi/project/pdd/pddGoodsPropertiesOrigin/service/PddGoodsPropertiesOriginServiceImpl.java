@@ -9,10 +9,10 @@ import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.service.IPddGoodsPropertie
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 原商品属性 服务层实现
+ * 原始商品属性 服务层实现
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Service
 public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesOriginService 
@@ -21,10 +21,10 @@ public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesO
 	private PddGoodsPropertiesOriginMapper pddGoodsPropertiesOriginMapper;
 
 	/**
-     * 查询原商品属性信息
+     * 查询原始商品属性信息
      * 
-     * @param goodsPropertiesOriginId 原商品属性ID
-     * @return 原商品属性信息
+     * @param goodsPropertiesOriginId 原始商品属性ID
+     * @return 原始商品属性信息
      */
     @Override
 	public PddGoodsPropertiesOrigin selectPddGoodsPropertiesOriginById(Long goodsPropertiesOriginId)
@@ -33,10 +33,10 @@ public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesO
 	}
 	
 	/**
-     * 查询原商品属性列表
+     * 查询原始商品属性列表
      * 
-     * @param pddGoodsPropertiesOrigin 原商品属性信息
-     * @return 原商品属性集合
+     * @param pddGoodsPropertiesOrigin 原始商品属性信息
+     * @return 原始商品属性集合
      */
 	@Override
 	public List<PddGoodsPropertiesOrigin> selectPddGoodsPropertiesOriginList(PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin)
@@ -45,9 +45,9 @@ public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesO
 	}
 	
     /**
-     * 新增原商品属性
+     * 新增原始商品属性
      * 
-     * @param pddGoodsPropertiesOrigin 原商品属性信息
+     * @param pddGoodsPropertiesOrigin 原始商品属性信息
      * @return 结果
      */
 	@Override
@@ -57,9 +57,9 @@ public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesO
 	}
 	
 	/**
-     * 修改原商品属性
+     * 修改原始商品属性
      * 
-     * @param pddGoodsPropertiesOrigin 原商品属性信息
+     * @param pddGoodsPropertiesOrigin 原始商品属性信息
      * @return 结果
      */
 	@Override
@@ -69,7 +69,7 @@ public class PddGoodsPropertiesOriginServiceImpl implements IPddGoodsPropertiesO
 	}
 
 	/**
-     * 删除原商品属性对象
+     * 删除原始商品属性对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

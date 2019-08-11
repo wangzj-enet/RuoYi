@@ -20,10 +20,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
- * 复制商品数据信息操作处理
+ * 商品数据信息操作处理
  * 
  * @author ruoyi
- * @date 2019-08-02
+ * @date 2019-08-10
  */
 @Controller
 @RequestMapping("/pdd/pddGoodsDataAdd")
@@ -42,7 +42,7 @@ public class PddGoodsDataAddController extends BaseController
 	}
 	
 	/**
-	 * 查询复制商品数据列表
+	 * 查询商品数据列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataAdd:list")
 	@PostMapping("/list")
@@ -56,7 +56,7 @@ public class PddGoodsDataAddController extends BaseController
 	
 	
 	/**
-	 * 导出复制商品数据列表
+	 * 导出商品数据列表
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataAdd:export")
     @PostMapping("/export")
@@ -69,7 +69,7 @@ public class PddGoodsDataAddController extends BaseController
     }
 	
 	/**
-	 * 新增复制商品数据
+	 * 新增商品数据
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -78,10 +78,10 @@ public class PddGoodsDataAddController extends BaseController
 	}
 	
 	/**
-	 * 新增保存复制商品数据
+	 * 新增保存商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataAdd:add")
-	@Log(title = "复制商品数据", businessType = BusinessType.INSERT)
+	@Log(title = "商品数据", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(PddGoodsDataAdd pddGoodsDataAdd)
@@ -90,7 +90,7 @@ public class PddGoodsDataAddController extends BaseController
 	}
 
 	/**
-	 * 修改复制商品数据
+	 * 修改商品数据
 	 */
 	@GetMapping("/edit/{goodsDataAddId}")
 	public String edit(@PathVariable("goodsDataAddId") Long goodsDataAddId, ModelMap mmap)
@@ -101,10 +101,10 @@ public class PddGoodsDataAddController extends BaseController
 	}
 	
 	/**
-	 * 修改保存复制商品数据
+	 * 修改保存商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataAdd:edit")
-	@Log(title = "复制商品数据", businessType = BusinessType.UPDATE)
+	@Log(title = "商品数据", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(PddGoodsDataAdd pddGoodsDataAdd)
@@ -113,10 +113,10 @@ public class PddGoodsDataAddController extends BaseController
 	}
 	
 	/**
-	 * 删除复制商品数据
+	 * 删除商品数据
 	 */
 	@RequiresPermissions("pdd:pddGoodsDataAdd:remove")
-	@Log(title = "复制商品数据", businessType = BusinessType.DELETE)
+	@Log(title = "商品数据", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

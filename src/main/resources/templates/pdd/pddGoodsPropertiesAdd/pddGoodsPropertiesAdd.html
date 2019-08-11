@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<th:block th:include="include :: header('复制商品属性列表')" />
+	<th:block th:include="include :: header('商品属性列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -111,7 +111,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
-                modalName: "复制商品属性",
+                modalName: "商品属性",
 		        showExport: true,
                 columns: [{
 		            checkbox: true
