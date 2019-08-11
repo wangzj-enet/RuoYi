@@ -93,6 +93,7 @@ public class PddExtentServiceImpl implements IPddExtentService {
 			pddGoodsPropertiesOrigin.setMainId(mainId);
 			pddGoodsPropertiesOrigin.setGoodsId(goodsId);
 			pddGoodsPropertiesOrigin.setGoodsDataOriginId(pddGoodsDataOrigin.getGoodsDataOriginId());
+			pddGoodsPropertiesOrigin.setStatus("00");
 			pddGoodsPropertiesOriginMapper.insertPddGoodsPropertiesOrigin(pddGoodsPropertiesOrigin);
 		}
 
