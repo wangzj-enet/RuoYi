@@ -9,13 +9,13 @@ import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.project.ip.handler.IpHandler;
 import com.ruoyi.project.ip.util.R;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 
-
+@Api("真实IP归属地")
 @Controller
 @RequestMapping("/ip2region")
 public class Ip2regionController
