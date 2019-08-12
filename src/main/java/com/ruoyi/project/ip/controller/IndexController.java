@@ -9,13 +9,15 @@ import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.project.ip.handler.IpHandler;
 import com.ruoyi.project.ip.util.R;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
 
-@RestController
+@Controller
+@RequestMapping("/ip2region")
 public class IndexController
 {
     private static final Map<String, String> map;
@@ -27,7 +29,7 @@ public class IndexController
         map.put("qqwry", "qqwryHandler");
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/getIp")
     public R region(HttpServletRequest request, String ip,
             @RequestParam(name = "type", defaultValue = "db") String type)
     {
