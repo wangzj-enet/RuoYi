@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/ip2region")
-public class IndexController
+public class Ip2regionController
 {
     private static final Map<String, String> map;
     static
