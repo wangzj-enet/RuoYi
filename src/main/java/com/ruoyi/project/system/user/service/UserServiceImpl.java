@@ -140,7 +140,8 @@ public class UserServiceImpl implements IUserService
     @Override
     public User selectUserById(Long userId)
     {
-        return userMapper.selectUserById(userId);
+        User user = userMapper.selectUserById(userId);
+        return user;
     }
 
     /**

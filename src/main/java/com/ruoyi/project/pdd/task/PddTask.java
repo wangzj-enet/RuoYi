@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.project.pdd.pddExtent.service.IPddExtentService;
 import com.ruoyi.project.pdd.pddGoodsDataAdd.domain.PddGoodsDataAdd;
+import com.ruoyi.project.pdd.pddGoodsDataAdd.service.IPddGoodsDataAddService;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.domain.PddGoodsDataOrigin;
 import com.ruoyi.project.pdd.pddGoodsDataOrigin.service.IPddGoodsDataOriginService;
 import com.ruoyi.project.pdd.pddGoodsDownload.domain.PddGoodsDownload;
@@ -15,9 +16,11 @@ import com.ruoyi.project.pdd.pddGoodsDownload.service.IPddGoodsDownloadService;
 import com.ruoyi.project.pdd.pddGoodsMain.domain.PddGoodsMain;
 import com.ruoyi.project.pdd.pddGoodsMain.service.IPddGoodsMainService;
 import com.ruoyi.project.pdd.pddGoodsPropertiesAdd.domain.PddGoodsPropertiesAdd;
+import com.ruoyi.project.pdd.pddGoodsPropertiesAdd.service.IPddGoodsPropertiesAddService;
 import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.domain.PddGoodsPropertiesOrigin;
 import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.service.IPddGoodsPropertiesOriginService;
 import com.ruoyi.project.pdd.pddSkuListAdd.domain.PddSkuListAdd;
+import com.ruoyi.project.pdd.pddSkuListAdd.service.IPddSkuListAddService;
 import com.ruoyi.project.pdd.pddSkuListOrigin.domain.PddSkuListOrigin;
 import com.ruoyi.project.pdd.pddSkuListOrigin.service.IPddSkuListOriginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,12 @@ public class PddTask {
     @Autowired
     private IPddSkuListOriginService pddSkuListOriginService;
 
+    @Autowired
+    private IPddGoodsDataAddService pddGoodsDataAddService;
+    @Autowired
+    private IPddGoodsPropertiesAddService pddGoodsPropertiesAddService;
+    @Autowired
+    private IPddSkuListAddService pddSkuListAddService;
 
 
     public void ryMultipleParams(String s, Boolean b, Long l, Double d, Integer i)
@@ -494,6 +503,33 @@ public class PddTask {
     public void local(String params)
     {
         System.out.println("执行本地化有参方法：" + params);
+        //查询主记录，判断主记录状态是否可用，查询copy主表，sku表，properties表，生成本地化url，保存
+        PddGoodsMain pddGoodsMain = pddGoodsMainService.selectPddGoodsMainById(Long.valueOf(params));
+        if("03".equals(pddGoodsMain.getStatus())){
+            PddGoodsDataAdd pddGoodsDataAdd = new PddGoodsDataAdd();
+            pddGoodsDataAdd.setStatus("00");
+            pddGoodsDataAdd.setMainId(pddGoodsMain.getMainId());
+            List<PddGoodsDataAdd> pddGoodsDataAddList = pddGoodsDataAddService.selectPddGoodsDataAddList(pddGoodsDataAdd);
+            if(pddGoodsDataAddList.size() == 1){
+                pddGoodsDataAdd = pddGoodsDataAddList.get(0);
+
+
+                PddGoodsPropertiesAdd pddGoodsPropertiesAdd = new PddGoodsPropertiesAdd();
+                pddGoodsPropertiesAdd.setStatus("00");
+                pddGoodsPropertiesAdd.setMainId(pddGoodsDataAdd.getMainId());
+                pddGoodsPropertiesAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
+                List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = pddGoodsPropertiesAddService.selectPddGoodsPropertiesAddList(pddGoodsPropertiesAdd);
+
+
+                PddSkuListAdd pddSkuListAdd = new PddSkuListAdd();
+                pddSkuListAdd.setStatus("00");
+                pddSkuListAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
+                pddSkuListAdd.setMainId(pddGoodsDataAdd.getMainId());
+                List<PddSkuListAdd> pddSkuListAddList = pddSkuListAddService.selectPddSkuListAddList(pddSkuListAdd);
+            }
+
+        }
+
     }
 
     public void local()

@@ -104,7 +104,10 @@
 				{
 					field : 'goodsName', 
 					title : '商品名称',
-					sortable: true
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.tooltip(value,8);
+					}
 				},
 				{
 					field : 'goodsJson', 

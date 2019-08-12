@@ -128,7 +128,15 @@ public class FileUploadUtils
         return fileName;
     }
 
-    private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
+    public static String dealName(String fileName) {
+        int dot = fileName.lastIndexOf('.');
+        if ((dot > -1) && (dot < (fileName.length() - 1))) {
+            return fileName.substring(dot + 1);
+        }
+        return "";
+    }
+
+    public static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
     {
         File desc = new File(uploadDir + File.separator + fileName);
 
@@ -142,6 +150,8 @@ public class FileUploadUtils
         }
         return desc;
     }
+
+
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {

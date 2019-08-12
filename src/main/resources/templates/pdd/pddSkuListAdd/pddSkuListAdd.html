@@ -6,7 +6,7 @@
 <body class="gray-bg">
      <div class="container-div">
 		<div class="row">
-			<div class="col-sm-12 search-collapse">
+			<div class="col-sm-12 search-collapse" style="display: none;">
 				<form id="formId">
 					<div class="select-list">
 						<ul>
@@ -198,12 +198,18 @@
 				{
 					field : 'thumbUrl', 
 					title : 'sku预览图',
-					sortable: true
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.tooltip(value,20);
+					}
 				},
 				{
 					field : 'localThumbUrl', 
 					title : '本地sku预览图',
-					sortable: true
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.tooltip(value,20);
+					}
 				},
 				{
 					field : 'length', 
