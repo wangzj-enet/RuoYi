@@ -12,6 +12,12 @@ ruoyi:
     profile: D:/ruoyi/uploadPath
     # 获取ip地址开关
     addressEnabled: true
+region:
+    dbpath: ip2region/ip2region.db
+    qqpath: ip2region/qqwry.dat
+    #1 btree 2 binary 3 memory;
+    algorithm: 1
+
 # 数据源配置
 spring:
     datasource:
