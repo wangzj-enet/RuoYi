@@ -18,6 +18,7 @@ region:
   #1 btree 2 binary 3 memory;
   algorithm: 1
 # 开发环境配置
+
 http:
   port: 8082
 server:
