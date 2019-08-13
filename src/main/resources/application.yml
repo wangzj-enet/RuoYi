@@ -18,11 +18,9 @@ region:
   #1 btree 2 binary 3 memory;
   algorithm: 1
 # 开发环境配置
-http:
-  port: 8080
 server:
   # 服务器的HTTP端口，默认为80
-  port: 443
+  port: 80
   servlet:
     # 应用的访问路径
     context-path: /
@@ -35,11 +33,10 @@ server:
     min-spare-threads: 30
 
   ssl:
-    enabled: true
+    enabled: false
     key-store: classpath:2646160_pvvi.cn.pfx
     key-store-password: IC4l71uu
     key-store-type: PKCS12
-    key-alias: cert-2491978
 
 # 日志配置
 logging:
