@@ -47,7 +47,7 @@ public class RuoYiApplication
         //同时启用http（80）、https（443）两个端口
         connector.setScheme("http");
         connector.setSecure(false);
-        connector.setPort(80);
+        connector.setPort(8080);
         connector.setRedirectPort(443);
         return connector;
     }
