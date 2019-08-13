@@ -20,7 +20,7 @@ region:
 # 开发环境配置
 
 http:
-  port: 8082
+  port: 80
 server:
   # 服务器的HTTP端口，默认为80
   port: 443

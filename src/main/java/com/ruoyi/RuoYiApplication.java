@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -35,30 +36,18 @@ public class RuoYiApplication
     }
 
     @Bean
-    public TomcatServletWebServerFactory servletContainer() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint constraint = new SecurityConstraint();
-                constraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                constraint.addCollection(collection);
-                context.addConstraint(constraint);
-            }
-        };
-        tomcat.addAdditionalTomcatConnectors(httpConnector());
+    public ServletWebServerFactory servletContainer() {
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addAdditionalTomcatConnectors(createHTTPConnector());
         return tomcat;
     }
 
-    @Bean
-    public Connector httpConnector() {
+    private Connector createHTTPConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        //同时启用http（80）、https（443）两个端口
         connector.setScheme("http");
-        //Connector监听的http的端口号
-        connector.setPort(8082);
         connector.setSecure(false);
-        //监听到http的端口号后转向到的https的端口号
+        connector.setPort(80);
         connector.setRedirectPort(443);
         return connector;
     }
