@@ -39,6 +39,8 @@ server:
     key-store: classpath:2646160_pvvi.cn.pfx
     key-store-password: IC4l71uu
     key-store-type: PKCS12
+    enabled: true
+
 # 日志配置
 logging:
   level:
