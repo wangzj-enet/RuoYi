@@ -200,7 +200,13 @@
 					title : 'sku预览图',
 					align: 'center',
 					formatter: function(value, row, index) {
-						return $.table.tooltip(value,20);
+						if($.common.isEmpty(value)){
+							return $.table.tooltip(value,20);
+						}else {
+							return $.table.imageView(value);
+						}
+
+						//return $.table.tooltip(value,20);
 					}
 				},
 				{
@@ -208,7 +214,13 @@
 					title : '本地sku预览图',
 					align: 'center',
 					formatter: function(value, row, index) {
-						return $.table.tooltip(value,20);
+						if($.common.isEmpty(value)){
+							return $.table.tooltip(value,20);
+						}else {
+							return $.table.imageView(value);
+						}
+
+						//return $.table.tooltip(value,20);
 					}
 				},
 				{

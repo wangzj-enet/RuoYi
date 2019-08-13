@@ -42,7 +42,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/file")
 public class FilesController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(FilesController.class);
-    private static String Save_Url = FileUploadUtils.getDefaultBaseDir();
     private String prefix = "file";
     @Autowired
     private IFilesService filesService;

@@ -39,5 +39,14 @@ public interface IPddExtentService
 	 */
 	public int insertPddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList);
 
-	
+	/**
+	 * copy 修改
+	 * @param pddGoodsDataAdd
+	 * @param pddSkuListAddList
+	 * @param pddGoodsPropertiesAddList
+	 * @return
+	 */
+	public int updatePddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList);
+
+
 }

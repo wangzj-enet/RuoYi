@@ -643,7 +643,14 @@
 					title : '商品视频',
 					align: 'center',
 					formatter: function(value, row, index) {
-						return $.table.tooltip(value,10);
+						if($.common.isEmpty(value)){
+							return $.table.tooltip(value,20);
+						}else {
+							value = value.split("|")[0];
+							return $.table.videoView(value);
+						}
+
+						//return $.table.tooltip(value,20);
 					}
 				},
 				{

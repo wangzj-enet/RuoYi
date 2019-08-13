@@ -124,7 +124,7 @@ public class PddExtentServiceImpl implements IPddExtentService {
 		pddGoodsMainStatus.setMainStatus(status);
 		pddGoodsMainStatus.setMainId(pddGoodsMain.getMainId());
 		pddGoodsMainStatus.setGoodsId(pddGoodsMain.getGoodsId());
-
+		pddGoodsMainStatus.setJsonData(jsonData);
 		pddGoodsMainStatus.setEndTime(new DateTime());
 		pddGoodsMainStatus.setRemark(remark);
 		pddGoodsMainStatusMapper.insertPddGoodsMainStatus(pddGoodsMainStatus);
@@ -159,6 +159,36 @@ public class PddExtentServiceImpl implements IPddExtentService {
 		return i;
 	}
 
+
+
+	/**
+	 * copy原始商品数据 数据复制 更新数据
+	 * @param pddGoodsDataAdd
+	 * @param pddSkuListAddList
+	 * @param pddGoodsPropertiesAddList
+	 * @return
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int updatePddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList)
+	{
+
+		//修改原来对象状态-主表，原数据主表，原数据sku，原数据属性，新数据处理-新数据主表，新数据sku，新数据属性，添加对象状态
+		String status = "04";
+		String remark = "数据本地化";
+		Long mainId = pddGoodsDataAdd.getMainId();
+		String jsonData = "";
+		DateTime startTime = new DateTime();
+
+		int i = updateGoodsAdd(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
+
+		jsonData = getJSONStr(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
+		//更新主表状态，添加状态表数据
+		updataGoodsStatus(mainId, status, startTime,jsonData, remark);
+
+		return i;
+	}
+
 	/**
 	 * 生成json 字符串
 	 * @param pddGoodsDataAdd
@@ -177,6 +207,20 @@ public class PddExtentServiceImpl implements IPddExtentService {
 		return jsonData;
 	}
 
+	private int updateGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
+
+		int i = pddGoodsDataAddMapper.updatePddGoodsDataAdd(pddGoodsDataAdd);
+
+		for (PddSkuListAdd pddSkuListAdd:pddSkuListAddList) {
+			pddSkuListAddMapper.updatePddSkuListAdd(pddSkuListAdd);
+		}
+
+		for (PddGoodsPropertiesAdd pddGoodsPropertiesAdd:pddGoodsPropertiesAddList) {
+			pddGoodsPropertiesAddMapper.updatePddGoodsPropertiesAdd(pddGoodsPropertiesAdd);
+		}
+		return  i;
+
+	}
 
 	private int insertGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
 		pddGoodsDataAdd.setStatus("00");

@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.files.service;
 
 import com.ruoyi.project.system.files.domain.Files;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -34,6 +36,20 @@ public interface IFilesService
      * @return 结果
      */
 	public int insertFiles(Files files);
+	/**
+	 * 新增文件上传类型为 图片0或者视频1
+	 *
+	 * @param files 文件上传信息
+	 * @return 结果
+	 */
+	public String insertFilesAndUpload(MultipartFile file, String type) throws Exception;
+	/**
+	 * 新增文件上传类型为 图片0
+	 *
+	 * @param files 文件上传信息
+	 * @return 结果
+	 */
+	public String insertFilesAndUpload(MultipartFile file) throws Exception;
 	
 	/**
      * 修改文件上传
@@ -42,6 +58,7 @@ public interface IFilesService
      * @return 结果
      */
 	public int updateFiles(Files files, Boolean isFile);
+
 		
 	/**
      * 删除文件上传信息

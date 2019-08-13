@@ -1,5 +1,12 @@
 package com.ruoyi.common.utils.file;
 
+import com.ruoyi.common.utils.StringUtils;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -137,5 +144,37 @@ public class FileUtils
             filename = URLEncoder.encode(filename, "utf-8");
         }
         return filename;
+    }
+
+    /**
+     * File 转 MultipartFile
+     * @param file
+     * @param reName
+     * @return
+     */
+    public static MultipartFile toMultipartFile(File file, String reName) {
+        MultipartFile multipartFile = null;
+        FileItemFactory factory = new DiskFileItemFactory(16, null);
+        if(StringUtils.isEmpty(reName)){
+            reName = file.getName().split("\\.")[0];
+        }
+        FileItem item = factory.createItem(reName, "text/plain", true, file.getName());
+        int bytesRead = 0;
+        byte[] buffer = new byte[8192];
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            OutputStream os = item.getOutputStream();
+            multipartFile = new CommonsMultipartFile(item);
+            while ((bytesRead = fis.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return multipartFile;
+
     }
 }

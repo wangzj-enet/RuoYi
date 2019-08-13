@@ -2,10 +2,13 @@ package com.ruoyi.project.pdd.task;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.file.FileUtils;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.project.pdd.pddExtent.service.IPddExtentService;
 import com.ruoyi.project.pdd.pddGoodsDataAdd.domain.PddGoodsDataAdd;
 import com.ruoyi.project.pdd.pddGoodsDataAdd.service.IPddGoodsDataAddService;
@@ -23,10 +26,16 @@ import com.ruoyi.project.pdd.pddSkuListAdd.domain.PddSkuListAdd;
 import com.ruoyi.project.pdd.pddSkuListAdd.service.IPddSkuListAddService;
 import com.ruoyi.project.pdd.pddSkuListOrigin.domain.PddSkuListOrigin;
 import com.ruoyi.project.pdd.pddSkuListOrigin.service.IPddSkuListOriginService;
+import com.ruoyi.project.system.files.service.IFilesService;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +68,9 @@ public class PddTask {
     private IPddGoodsPropertiesAddService pddGoodsPropertiesAddService;
     @Autowired
     private IPddSkuListAddService pddSkuListAddService;
+
+    @Autowired
+    private IFilesService filesService;
 
 
     public void ryMultipleParams(String s, Boolean b, Long l, Double d, Integer i)
@@ -506,36 +518,147 @@ public class PddTask {
         //查询主记录，判断主记录状态是否可用，查询copy主表，sku表，properties表，生成本地化url，保存
         PddGoodsMain pddGoodsMain = pddGoodsMainService.selectPddGoodsMainById(Long.valueOf(params));
         if("03".equals(pddGoodsMain.getStatus())){
-            PddGoodsDataAdd pddGoodsDataAdd = new PddGoodsDataAdd();
-            pddGoodsDataAdd.setStatus("00");
-            pddGoodsDataAdd.setMainId(pddGoodsMain.getMainId());
-            List<PddGoodsDataAdd> pddGoodsDataAddList = pddGoodsDataAddService.selectPddGoodsDataAddList(pddGoodsDataAdd);
-            if(pddGoodsDataAddList.size() == 1){
-                pddGoodsDataAdd = pddGoodsDataAddList.get(0);
-
-
-                PddGoodsPropertiesAdd pddGoodsPropertiesAdd = new PddGoodsPropertiesAdd();
-                pddGoodsPropertiesAdd.setStatus("00");
-                pddGoodsPropertiesAdd.setMainId(pddGoodsDataAdd.getMainId());
-                pddGoodsPropertiesAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
-                List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = pddGoodsPropertiesAddService.selectPddGoodsPropertiesAddList(pddGoodsPropertiesAdd);
-
-
-                PddSkuListAdd pddSkuListAdd = new PddSkuListAdd();
-                pddSkuListAdd.setStatus("00");
-                pddSkuListAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
-                pddSkuListAdd.setMainId(pddGoodsDataAdd.getMainId());
-                List<PddSkuListAdd> pddSkuListAddList = pddSkuListAddService.selectPddSkuListAddList(pddSkuListAdd);
-            }
+            localFromPddGoodsMain(pddGoodsMain);
 
         }
 
     }
 
+    /**
+     * 根据pddGoodsMain 进行本地化
+     * @param pddGoodsMain
+     */
+    private void localFromPddGoodsMain(PddGoodsMain pddGoodsMain) {
+        PddGoodsDataAdd pddGoodsDataAdd = new PddGoodsDataAdd();
+        pddGoodsDataAdd.setStatus("00");
+        pddGoodsDataAdd.setMainId(pddGoodsMain.getMainId());
+        List<PddGoodsDataAdd> pddGoodsDataAddList = pddGoodsDataAddService.selectPddGoodsDataAddList(pddGoodsDataAdd);
+        if(pddGoodsDataAddList.size() == 1){
+            pddGoodsDataAdd = pddGoodsDataAddList.get(0);
+
+            Long mainId = pddGoodsDataAdd.getMainId();
+            Long goodsDataAddId = pddGoodsDataAdd.getGoodsDataAddId();
+
+            pddGoodsDataAdd = toLocalPddGoodsAdd(pddGoodsDataAdd);
+            List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = toLocalPddGoodsPropertiesAdds(mainId, goodsDataAddId);
+            List<PddSkuListAdd> pddSkuListAddList = toLocalPddSkuListAdd(mainId, goodsDataAddId);
+
+            pddExtentService.updatePddGoodsAdd(pddGoodsDataAdd,pddSkuListAddList,pddGoodsPropertiesAddList);
+
+        }
+    }
+
     public void local()
     {
         System.out.println("执行本地化无参方法");
+        PddGoodsMain pddGoodsMain = new PddGoodsMain();
+        pddGoodsMain.setStatus("03");
+        List<PddGoodsMain> pddGoodsMainList = pddGoodsMainService.selectPddGoodsMainList(pddGoodsMain);
+        for (PddGoodsMain pddGoodsMain2:pddGoodsMainList) {
+            localFromPddGoodsMain(pddGoodsMain2);
+        }
+
     }
+
+    /**
+     * pddGoodsDataAdd本地化
+     * @param pddGoodsDataAdd
+     * @return
+     */
+    private PddGoodsDataAdd toLocalPddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd) {
+        pddGoodsDataAdd.setLocalImageUrl(imgFromUrlToLocal(pddGoodsDataAdd.getImageUrl(),"商品活动主图"));
+        String localCarouselGallery = urlsToLocalsPath(pddGoodsDataAdd.getCarouselGallery().split("\\|"), "CarouselGallery");
+        pddGoodsDataAdd.setLocalCarouselGallery(localCarouselGallery);
+
+        String localDetailGallery = urlsToLocalsPath(pddGoodsDataAdd.getDetailGallery().split("\\|"), "DetailGallery");
+        pddGoodsDataAdd.setLocalDetailGallery(localDetailGallery);
+        return pddGoodsDataAdd;
+    }
+
+    /**
+     * PddGoodsPropertiesAdds 本地化
+     * @param mainId
+     * @param goodsDataAddId
+     * @return
+     */
+    private List<PddGoodsPropertiesAdd> toLocalPddGoodsPropertiesAdds(Long mainId, Long goodsDataAddId) {
+        PddGoodsPropertiesAdd pddGoodsPropertiesAdd = new PddGoodsPropertiesAdd();
+        pddGoodsPropertiesAdd.setStatus("00");
+        pddGoodsPropertiesAdd.setMainId(mainId);
+        pddGoodsPropertiesAdd.setGoodsDataAddId(goodsDataAddId);
+        List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList = pddGoodsPropertiesAddService.selectPddGoodsPropertiesAddList(pddGoodsPropertiesAdd);
+        for (PddGoodsPropertiesAdd pddGoodsPropertiesAdd2:pddGoodsPropertiesAddList) {
+            pddGoodsPropertiesAdd2.setLocalImgUrl(imgFromUrlToLocal(pddGoodsPropertiesAdd2.getImgUrl(),pddGoodsPropertiesAdd2.getValue()));
+        }
+        return pddGoodsPropertiesAddList;
+    }
+
+    /**
+     * PddSkuListAdd本地化
+     * @param mainId
+     * @param goodsDataAddId
+     * @return
+     */
+    private List<PddSkuListAdd> toLocalPddSkuListAdd(Long mainId, Long goodsDataAddId) {
+        PddSkuListAdd pddSkuListAdd = new PddSkuListAdd();
+        pddSkuListAdd.setStatus("00");
+        pddSkuListAdd.setGoodsDataAddId(goodsDataAddId);
+        pddSkuListAdd.setMainId(mainId);
+        List<PddSkuListAdd> pddSkuListAddList = pddSkuListAddService.selectPddSkuListAddList(pddSkuListAdd);
+        for (PddSkuListAdd pddSkuListAdd2:pddSkuListAddList) {
+            pddSkuListAdd2.setLocalThumbUrl(imgFromUrlToLocal(pddSkuListAdd2.getThumbUrl(),pddSkuListAdd2.getSpecValue()));
+        }
+        return pddSkuListAddList;
+    }
+
+    /**
+     * 批量处理url转换
+     * @param urlArray
+     * @param parentName
+     * @return
+     */
+    private String urlsToLocalsPath(String[] urlArray, String parentName) {
+        StringBuffer imgSu = new StringBuffer();
+        if(urlArray == null){
+            return "";
+        }
+        int i = 0;
+        for (String url :urlArray) {
+            i += 1;
+            String localPath = imgFromUrlToLocal(url,parentName+"_"+i);
+            if(StringUtils.isNotEmpty(localPath)){
+                imgSu.append(localPath);
+                imgSu.append("|");
+            }
+        }
+        return imgSu.toString();
+    }
+
+    /**
+     * 把网上url图片转换成本地图片
+     * @param url
+     * @return
+     * @throws Exception
+     */
+    public String imgFromUrlToLocal(String url,String reName){
+
+        try {
+            if(StringUtils.isEmpty(url)){ return "";}
+            url = url.split("\\?")[0];
+            url = url.replace("//","http://");
+            URL urll = new URL(url);
+            File file = new File(RuoYiConfig.getUploadPath()+File.separator+"temp"+File.separator+urll.getFile());
+            HttpUtil.downloadFile(url,file);
+            MultipartFile multipartFile = FileUtils.toMultipartFile(file,reName);
+            System.out.println(multipartFile.getName());
+            return filesService.insertFilesAndUpload(multipartFile);
+        }catch (Exception e){
+            System.out.println(e.getStackTrace());
+        }
+        return "";
+    }
+
+
 
     public void rule(String params)
     {

@@ -244,6 +244,23 @@
 					return $.common.nullToStr(value);
 				}
 			},
+			// 视频预览
+			videoView: function (value, height, width, target) {
+				if ($.common.isEmpty(width)) {
+					width = 'auto';
+				}
+				if ($.common.isEmpty(height)) {
+					height = 'auto';
+				}
+				// blank or self
+				var _target = $.common.isEmpty(target) ? 'self' : target;
+				if ($.common.isNotEmpty(value)) {
+
+					return $.common.sprintf("<video controls='controls' data-height='%s' data-width='%s' data-target='%s'> <source  type='video/mp4' src='%s'/></video>", width, height, _target, value);
+				} else {
+					return $.common.nullToStr(value);
+				}
+			},
             // 搜索-默认第一个form
             search: function(formId, data) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;

@@ -17,6 +17,7 @@ import com.ruoyi.project.system.files.domain.Files;
 import com.ruoyi.project.system.files.service.IFilesService;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -64,6 +65,41 @@ public class FilesServiceImpl implements IFilesService {
         files.setCreateBy(ShiroUtils.getLoginName());
         files.setCreateByName(ShiroUtils.getSysUser().getUserName());
         return filesMapper.insertFiles(files);
+    }
+
+
+
+    /**
+     * 新增文件上传
+     *
+     * @param files 文件上传信息
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String insertFilesAndUpload(MultipartFile file,String type) throws Exception{
+        Files files = new Files();
+        files.setFileName(file.getName());
+        files.setType(type);
+        String uploadFilePath  = FileUploadUtils.upload(RuoYiConfig.getUploadPath(), file);
+        files.setSuffix(FileUploadUtils.dealName(file.getOriginalFilename()));
+        files.setUrl(uploadFilePath);
+        filesMapper.insertFiles(files);
+        return uploadFilePath;
+    }
+
+
+
+    /**
+     * 新增文件上传 默认类型为图片 0
+     *
+     * @param files 文件上传信息
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String insertFilesAndUpload(MultipartFile file) throws Exception{
+        return insertFilesAndUpload(file,"0");
     }
 
     /**
