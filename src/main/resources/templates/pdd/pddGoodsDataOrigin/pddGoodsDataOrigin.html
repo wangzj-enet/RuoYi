@@ -11,7 +11,7 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								主记录id：<input type="text" name="mainId"/>
+								主记录id：<input type="text" name="mainId" th:value="${mainId}"/>
 							</li>
 
 							<li>
@@ -319,7 +319,8 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
-                modalName: "原始商品数据",
+                modalName: "原商品数据",
+				queryParams: queryParams,
 		        showExport: true,
                 columns: [{
 		            checkbox: true
@@ -582,12 +583,18 @@
 				{
 					field : 'skuListOriginId', 
 					title : 'sku对象列表',
-					sortable: true
+					sortable: true,
+					formatter: function(value, row, index) {
+						return '<a href="javascript:void(0)" onclick="skuListOriginId(\'' + row.goodsDataOriginId + '\')">' + 'SKU列表' + '</a>';
+					}
 				},
 				{
 					field : 'goodsPropertiesOriginId', 
 					title : '商品属性列表',
-					sortable: true
+					sortable: true,
+					formatter: function(value, row, index) {
+						return '<a href="javascript:void(0)" onclick="goodsPropertiesOriginId(\'' + row.goodsDataOriginId + '\')">' + '属性列表' + '</a>';
+					}
 				},
 				{
 					field : 'overseaGoodsOriginId', 
@@ -705,6 +712,24 @@
             };
             $.table.init(options);
         });
+
+		/*skuListOriginId-详细*/
+		function skuListOriginId(goodsDataOriginId) {
+			var url = prefix + '/skuListOriginId/' + goodsDataOriginId;
+			$.modal.openTab("原商品SKU数据", url);
+		}
+
+		/*goodsPropertiesOriginId-详细*/
+		function goodsPropertiesOriginId(goodsDataOriginId) {
+			var url = prefix + '/goodsPropertiesOriginId/' + goodsDataOriginId;
+			$.modal.openTab("原始商品属性数据", url);
+		}
+
+		function queryParams(params) {
+			var search = $.table.queryParams(params);
+			search.mainId = $("input[name=mainId]").val();
+			return search;
+		}
     </script>
 </body>
 </html>

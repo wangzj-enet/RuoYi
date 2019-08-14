@@ -22,6 +22,8 @@ import com.ruoyi.project.pdd.pddSkuListAdd.domain.PddSkuListAdd;
 import com.ruoyi.project.pdd.pddSkuListAdd.mapper.PddSkuListAddMapper;
 import com.ruoyi.project.pdd.pddSkuListOrigin.domain.PddSkuListOrigin;
 import com.ruoyi.project.pdd.pddSkuListOrigin.mapper.PddSkuListOriginMapper;
+import com.ruoyi.project.pdd.util.PddMainStatusEnum;
+import com.ruoyi.project.pdd.util.PddStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,14 +72,12 @@ public class PddExtentServiceImpl implements IPddExtentService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int insertPddGoodsOrigin(PddGoodsDataOrigin pddGoodsDataOrigin, List<PddSkuListOrigin> pddSkuListOriginList, List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList, PddGoodsDownload pddGoodsDownload) {
-		String status = "02";
-		String remark = "数据解析";
-		Long mainId = pddGoodsDataOrigin.getMainId();
-		Long goodsId = pddGoodsDataOrigin.getGoodsId();
+		Long mainId = pddGoodsDownload.getMainId();
+		Long goodsId = pddGoodsDownload.getGoodsId();
 		String jsonData = "";
 		DateTime startTime = new DateTime();
 
-		pddGoodsDataOrigin.setStatus("00");
+		pddGoodsDataOrigin.setStatus(PddStatusEnum.INIT.getCode());
 		pddGoodsDataOrigin.setMainId(mainId);
 		pddGoodsDataOrigin.setGoodsId(goodsId);
 		int i = pddGoodsDataOriginMapper.insertPddGoodsDataOrigin(pddGoodsDataOrigin);
@@ -85,7 +85,7 @@ public class PddExtentServiceImpl implements IPddExtentService {
 			pddSkuListOrigin.setMainId(mainId);
 			pddSkuListOrigin.setGoodsId(goodsId);
 			pddSkuListOrigin.setGoodsDataOriginId(pddGoodsDataOrigin.getGoodsDataOriginId());
-			pddSkuListOrigin.setStatus("00");
+			pddSkuListOrigin.setStatus(PddStatusEnum.INIT.getCode());
 			pddSkuListOriginMapper.insertPddSkuListOrigin(pddSkuListOrigin);
 		}
 
@@ -93,18 +93,28 @@ public class PddExtentServiceImpl implements IPddExtentService {
 			pddGoodsPropertiesOrigin.setMainId(mainId);
 			pddGoodsPropertiesOrigin.setGoodsId(goodsId);
 			pddGoodsPropertiesOrigin.setGoodsDataOriginId(pddGoodsDataOrigin.getGoodsDataOriginId());
-			pddGoodsPropertiesOrigin.setStatus("00");
+			pddGoodsPropertiesOrigin.setStatus(PddStatusEnum.INIT.getCode());
 			pddGoodsPropertiesOriginMapper.insertPddGoodsPropertiesOrigin(pddGoodsPropertiesOrigin);
 		}
 
-
-		pddGoodsDownload.setStatus("02");
-		pddGoodsDownloadMapper.updatePddGoodsDownload(pddGoodsDownload);
-
 		//更新主表状态，添加状态表数据
-		updataGoodsStatus(mainId, status, startTime,jsonData, remark);
+		updataGoodsStatusByEnum(mainId, PddMainStatusEnum.ANALYSIS, startTime,jsonData);
 		return i;
 	}
+
+	/**
+	 * 更新主表状态，添加状态表数据
+	 * @param mainId
+	 * @param pddMainStatusEnum
+	 * @param startTime
+	 * @param jsonData
+	 */
+	private void updataGoodsStatusByEnum(Long mainId, PddMainStatusEnum pddMainStatusEnum, DateTime startTime,String jsonData){
+		String status = pddMainStatusEnum.getCode();
+		String remark = pddMainStatusEnum.getDesc();
+		updataGoodsStatus(mainId,status,startTime,jsonData, remark);
+	}
+
 
 	/**
 	 *  更新主表状态，添加状态表数据
@@ -120,7 +130,7 @@ public class PddExtentServiceImpl implements IPddExtentService {
 
 		PddGoodsMainStatus pddGoodsMainStatus = new PddGoodsMainStatus();
 		pddGoodsMainStatus.setStartTime(startTime);
-		pddGoodsMainStatus.setStatus("00");
+		pddGoodsMainStatus.setStatus(PddStatusEnum.INIT.getCode());
 		pddGoodsMainStatus.setMainStatus(status);
 		pddGoodsMainStatus.setMainId(pddGoodsMain.getMainId());
 		pddGoodsMainStatus.setGoodsId(pddGoodsMain.getGoodsId());
@@ -143,26 +153,21 @@ public class PddExtentServiceImpl implements IPddExtentService {
 	{
 
 		//修改原来对象状态-主表，原数据主表，原数据sku，原数据属性，新数据处理-新数据主表，新数据sku，新数据属性，添加对象状态
-		String status = "03";
-		String remark = "数据复制";
 		Long mainId = pddGoodsDataAdd.getMainId();
-		String jsonData = "";
 		DateTime startTime = new DateTime();
 
 		updateGoodsOrigin(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
 		int i = insertGoodsAdd(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
 
-		jsonData = getJSONStr(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
+		String jsonData = getJSONStr(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
 		//更新主表状态，添加状态表数据
-		updataGoodsStatus(mainId, status, startTime,jsonData, remark);
-
+		updataGoodsStatusByEnum(mainId, PddMainStatusEnum.COPY, startTime,jsonData);
 		return i;
 	}
 
 
-
 	/**
-	 * copy原始商品数据 数据复制 更新数据
+	 * 更新数据
 	 * @param pddGoodsDataAdd
 	 * @param pddSkuListAddList
 	 * @param pddGoodsPropertiesAddList
@@ -170,22 +175,18 @@ public class PddExtentServiceImpl implements IPddExtentService {
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int updatePddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList)
+	public int updatePddGoodsAdds(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList,PddStatusEnum pddStatusEnum,PddMainStatusEnum pddMainStatusEnum)
 	{
 
 		//修改原来对象状态-主表，原数据主表，原数据sku，原数据属性，新数据处理-新数据主表，新数据sku，新数据属性，添加对象状态
-		String status = "04";
-		String remark = "数据本地化";
 		Long mainId = pddGoodsDataAdd.getMainId();
-		String jsonData = "";
 		DateTime startTime = new DateTime();
 
-		int i = updateGoodsAdd(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
+		int i = updateGoodsAdd(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList,pddStatusEnum);
 
-		jsonData = getJSONStr(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
+		String jsonData = getJSONStr(pddGoodsDataAdd, pddSkuListAddList, pddGoodsPropertiesAddList);
 		//更新主表状态，添加状态表数据
-		updataGoodsStatus(mainId, status, startTime,jsonData, remark);
-
+		updataGoodsStatusByEnum(mainId, pddMainStatusEnum, startTime,jsonData);
 		return i;
 	}
 
@@ -197,45 +198,64 @@ public class PddExtentServiceImpl implements IPddExtentService {
 	 * @return
 	 */
 	private String getJSONStr(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
-		String jsonData;
 		PddGoodsDataAddExtent pddGoodsDataAddExtent = new PddGoodsDataAddExtent();
 		pddGoodsDataAddExtent.setPddGoodsDataAdd(pddGoodsDataAdd);
 		pddGoodsDataAddExtent.setPddGoodsPropertiesAddList(pddGoodsPropertiesAddList);
 		pddGoodsDataAddExtent.setPddSkuListAddlist(pddSkuListAddList);
 		JSON json = JSONUtil.parse(pddGoodsDataAddExtent);
-		jsonData = json.toString();
+		String jsonData = json.toString();
 		return jsonData;
 	}
 
-	private int updateGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
+	/**
+	 * 做更新动作
+	 * @param pddGoodsDataAdd
+	 * @param pddSkuListAddList
+	 * @param pddGoodsPropertiesAddList
+	 * @return
+	 */
+	private int updateGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList,PddStatusEnum pddStatusEnum) {
 
+		pddGoodsDataAdd.setStatus(pddStatusEnum.getCode());
+		pddGoodsDataAdd.setRemark(pddStatusEnum.getDesc());
 		int i = pddGoodsDataAddMapper.updatePddGoodsDataAdd(pddGoodsDataAdd);
 
 		for (PddSkuListAdd pddSkuListAdd:pddSkuListAddList) {
+			pddSkuListAdd.setStatus(pddStatusEnum.getCode());
+			pddSkuListAdd.setRemark(pddStatusEnum.getDesc());
 			pddSkuListAddMapper.updatePddSkuListAdd(pddSkuListAdd);
 		}
 
 		for (PddGoodsPropertiesAdd pddGoodsPropertiesAdd:pddGoodsPropertiesAddList) {
+			pddGoodsPropertiesAdd.setStatus(pddStatusEnum.getCode());
+			pddGoodsPropertiesAdd.setRemark(pddStatusEnum.getDesc());
 			pddGoodsPropertiesAddMapper.updatePddGoodsPropertiesAdd(pddGoodsPropertiesAdd);
 		}
 		return  i;
 
 	}
 
+	/**
+	 * 做首次插入业务
+	 * @param pddGoodsDataAdd
+	 * @param pddSkuListAddList
+	 * @param pddGoodsPropertiesAddList
+	 * @return
+	 */
 	private int insertGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
-		pddGoodsDataAdd.setStatus("00");
+		pddGoodsDataAdd.setStatus(PddStatusEnum.INIT.getCode());
 		pddGoodsDataAdd.setGoodsDataAddId(null);
 		int i = pddGoodsDataAddMapper.insertPddGoodsDataAdd(pddGoodsDataAdd);
 
 		for (PddSkuListAdd pddSkuListAdd:pddSkuListAddList) {
 			pddSkuListAdd.setSkuListAddId(null);
-			pddSkuListAdd.setStatus("00");
+			pddSkuListAdd.setStatus(PddStatusEnum.INIT.getCode());
 			pddSkuListAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
 			pddSkuListAddMapper.insertPddSkuListAdd(pddSkuListAdd);
 		}
 
 		for (PddGoodsPropertiesAdd pddGoodsPropertiesAdd:pddGoodsPropertiesAddList) {
-			pddGoodsPropertiesAdd.setStatus("00");
+			pddGoodsPropertiesAdd.setStatus(PddStatusEnum.INIT.getCode());
 			pddGoodsPropertiesAdd.setGoodsPropertiesAddId(null);
 			pddGoodsPropertiesAdd.setGoodsDataAddId(pddGoodsDataAdd.getGoodsDataAddId());
 			pddGoodsPropertiesAddMapper.insertPddGoodsPropertiesAdd(pddGoodsPropertiesAdd);
@@ -252,22 +272,50 @@ public class PddExtentServiceImpl implements IPddExtentService {
 	 */
 	private void updateGoodsOrigin(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList) {
 		PddGoodsDataOrigin pddGoodsDataOrigin = pddGoodsDataOriginMapper.selectPddGoodsDataOriginById(pddGoodsDataAdd.getGoodsDataAddId());
-		pddGoodsDataOrigin.setStatus("02");
+		pddGoodsDataOrigin.setStatus(PddStatusEnum.END.getCode());
 		pddGoodsDataOriginMapper.updatePddGoodsDataOrigin(pddGoodsDataOrigin);
 		pddGoodsDataAdd.setGoodsDataAddId(null);
 
 		for (PddSkuListAdd pddSkuListAdd:pddSkuListAddList) {
 			PddSkuListOrigin pddSkuListOrigin = pddSkuListOriginMapper.selectPddSkuListOriginById(pddSkuListAdd.getSkuListAddId());
-			pddSkuListOrigin.setStatus("02");
+			pddSkuListOrigin.setStatus(PddStatusEnum.END.getCode());
 			pddSkuListOriginMapper.updatePddSkuListOrigin(pddSkuListOrigin);
 			pddSkuListAdd.setSkuListAddId(null);
 		}
 
 		for (PddGoodsPropertiesAdd pddGoodsPropertiesAdd:pddGoodsPropertiesAddList) {
 			PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin = pddGoodsPropertiesOriginMapper.selectPddGoodsPropertiesOriginById(pddGoodsPropertiesAdd.getGoodsPropertiesAddId());
-			pddGoodsPropertiesOrigin.setStatus("02");
+			pddGoodsPropertiesOrigin.setStatus(PddStatusEnum.END.getCode());
 			pddGoodsPropertiesOriginMapper.updatePddGoodsPropertiesOrigin(pddGoodsPropertiesOrigin);
 			pddGoodsPropertiesAdd.setGoodsPropertiesAddId(null);
+		}
+	}
+
+
+	/**
+	 * 修改解析数据状态
+	 * @param pddGoodsDataOrigin
+	 * @param pddSkuListOriginList
+	 * @param pddGoodsPropertiesOriginList
+	 * @param pddStatusEnum
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateGoodsOrigin(PddGoodsDataOrigin pddGoodsDataOrigin, List<PddSkuListOrigin> pddSkuListOriginList, List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList, PddStatusEnum pddStatusEnum) {
+		pddGoodsDataOrigin.setStatus(pddStatusEnum.getCode());
+		pddGoodsDataOrigin.setRemark(pddStatusEnum.getDesc());
+		pddGoodsDataOriginMapper.updatePddGoodsDataOrigin(pddGoodsDataOrigin);
+
+		for (PddSkuListOrigin pddSkuListOrigin:pddSkuListOriginList) {
+			pddSkuListOrigin.setStatus(pddStatusEnum.getCode());
+			pddSkuListOrigin.setRemark(pddStatusEnum.getDesc());
+			pddSkuListOriginMapper.updatePddSkuListOrigin(pddSkuListOrigin);
+		}
+
+		for (PddGoodsPropertiesOrigin pddGoodsPropertiesOrigin:pddGoodsPropertiesOriginList) {
+			pddGoodsPropertiesOrigin.setStatus(pddStatusEnum.getCode());
+			pddGoodsPropertiesOrigin.setRemark(pddStatusEnum.getDesc());
+			pddGoodsPropertiesOriginMapper.updatePddGoodsPropertiesOrigin(pddGoodsPropertiesOrigin);
 		}
 	}
 

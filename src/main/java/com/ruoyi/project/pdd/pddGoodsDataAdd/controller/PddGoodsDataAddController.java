@@ -1,23 +1,20 @@
 package com.ruoyi.project.pdd.pddGoodsDataAdd.controller;
 
-import java.util.List;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.pdd.pddGoodsDataAdd.domain.PddGoodsDataAdd;
+import com.ruoyi.project.pdd.pddGoodsDataAdd.service.IPddGoodsDataAddService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.pdd.pddGoodsDataAdd.domain.PddGoodsDataAdd;
-import com.ruoyi.project.pdd.pddGoodsDataAdd.service.IPddGoodsDataAddService;
-import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 商品数据信息操作处理
@@ -122,6 +119,21 @@ public class PddGoodsDataAddController extends BaseController
 	public AjaxResult remove(String ids)
 	{		
 		return toAjax(pddGoodsDataAddService.deletePddGoodsDataAddByIds(ids));
+	}
+
+
+	@GetMapping("/skuListAddId/{goodsDataAddId}")
+	public String pddSkuListAdd(@PathVariable("goodsDataAddId") Long goodsDataAddId, ModelMap mmap)
+	{
+		mmap.put("goodsDataAddId", goodsDataAddId);
+		return "pdd/pddSkuListAdd" + "/pddSkuListAdd";
+	}
+
+	@GetMapping("/goodsPropertiesAddId/{goodsDataAddId}")
+	public String goodsPropertiesAdd(@PathVariable("goodsDataAddId") Long goodsDataAddId, ModelMap mmap)
+	{
+		mmap.put("goodsDataAddId", goodsDataAddId);
+		return "pdd/pddGoodsPropertiesAdd" + "/pddGoodsPropertiesAdd";
 	}
 	
 }

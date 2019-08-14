@@ -7,6 +7,8 @@ import com.ruoyi.project.pdd.pddGoodsPropertiesAdd.domain.PddGoodsPropertiesAdd;
 import com.ruoyi.project.pdd.pddGoodsPropertiesOrigin.domain.PddGoodsPropertiesOrigin;
 import com.ruoyi.project.pdd.pddSkuListAdd.domain.PddSkuListAdd;
 import com.ruoyi.project.pdd.pddSkuListOrigin.domain.PddSkuListOrigin;
+import com.ruoyi.project.pdd.util.PddMainStatusEnum;
+import com.ruoyi.project.pdd.util.PddStatusEnum;
 
 import java.util.List;
 
@@ -46,7 +48,17 @@ public interface IPddExtentService
 	 * @param pddGoodsPropertiesAddList
 	 * @return
 	 */
-	public int updatePddGoodsAdd(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList);
+	public int updatePddGoodsAdds(PddGoodsDataAdd pddGoodsDataAdd, List<PddSkuListAdd> pddSkuListAddList, List<PddGoodsPropertiesAdd> pddGoodsPropertiesAddList, PddStatusEnum pddStatusEnum, PddMainStatusEnum pddMainStatusEnum);
 
 
-}
+	/**
+	 * 修改解析数据状态
+	 * @param pddGoodsDataOrigin
+	 * @param pddSkuListOriginList
+	 * @param pddGoodsPropertiesOriginList
+	 * @param pddStatusEnum
+	 */
+	public void updateGoodsOrigin(PddGoodsDataOrigin pddGoodsDataOrigin, List<PddSkuListOrigin> pddSkuListOriginList, List<PddGoodsPropertiesOrigin> pddGoodsPropertiesOriginList, PddStatusEnum pddStatusEnum);
+
+
+	}

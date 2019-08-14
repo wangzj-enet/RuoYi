@@ -1,9 +1,5 @@
 package com.ruoyi.common.utils.file;
 
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
 import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
 import com.ruoyi.common.exception.file.InvalidExtensionException;
@@ -11,6 +7,11 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.Md5Utils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.config.RuoYiConfig;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 文件上传工具类
@@ -90,7 +91,7 @@ public class FileUploadUtils
      *
      * @param baseDir 相对应用的基目录
      * @param file 上传的文件
-     * @param extension 上传文件类型
+     * @param allowedExtension 上传文件类型
      * @return 返回上传成功的文件名
      * @throws FileSizeLimitExceededException 如果超出最大大小
      * @throws FileNameLengthLimitExceededException 文件名太长

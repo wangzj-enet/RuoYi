@@ -1,8 +1,9 @@
 package com.ruoyi.common.utils;
 
+import com.ruoyi.common.utils.text.StrFormatter;
+
 import java.util.Collection;
 import java.util.Map;
-import com.ruoyi.common.utils.text.StrFormatter;
 
 /**
  * 字符串工具类
@@ -360,5 +361,22 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             result.append(camel.substring(1).toLowerCase());
         }
         return result.toString();
+    }
+
+    public static String lastName(String fileName,String splitstr) {
+        int dot = fileName.lastIndexOf(splitstr);
+        if ((dot > -1) && (dot < (fileName.length() - 1))) {
+            return fileName.substring(dot + 1);
+        }
+        return "";
+    }
+
+    public static String lastNameBefore(String fileName,String splitstr) {
+        int dot = fileName.lastIndexOf(splitstr);
+        if ((dot > -1) && (dot < (fileName.length() ))) {
+            return fileName.substring(0,dot);
+        }else {
+            return fileName;
+        }
     }
 }

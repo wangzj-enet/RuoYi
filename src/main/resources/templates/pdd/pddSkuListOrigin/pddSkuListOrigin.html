@@ -11,7 +11,7 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								源数据表id：<input type="text" name="goodsDataOriginId"/>
+								源数据表id：<input type="text" name="goodsDataOriginId" th:value="${goodsDataOriginId}"/>
 							</li>
 
 							<li>
@@ -152,6 +152,7 @@
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
                 modalName: "原始商品SKU",
+				queryParams: queryParams,
 		        showExport: true,
                 columns: [{
 		            checkbox: true
@@ -302,6 +303,12 @@
             };
             $.table.init(options);
         });
+
+		function queryParams(params) {
+			var search = $.table.queryParams(params);
+			search.goodsDataOriginId = $("input[name=goodsDataOriginId]").val();
+			return search;
+		}
     </script>
 </body>
 </html>

@@ -1,23 +1,20 @@
 package com.ruoyi.project.system.files.service;
 
-import java.io.File;
-import java.util.List;
-
-import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.framework.config.RuoYiConfig;
+import com.ruoyi.project.system.files.domain.Files;
+import com.ruoyi.project.system.files.mapper.FilesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.system.files.mapper.FilesMapper;
-import com.ruoyi.project.system.files.domain.Files;
-import com.ruoyi.project.system.files.service.IFilesService;
-
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.List;
 
 
 /**
@@ -72,19 +69,31 @@ public class FilesServiceImpl implements IFilesService {
     /**
      * 新增文件上传
      *
-     * @param files 文件上传信息
+     * @param file 文件上传信息
      * @return 结果
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String insertFilesAndUpload(MultipartFile file,String type) throws Exception{
         Files files = new Files();
-        files.setFileName(file.getName());
+        files.setFileName(StringUtils.lastNameBefore(file.getName(),"|"));
         files.setType(type);
         String uploadFilePath  = FileUploadUtils.upload(RuoYiConfig.getUploadPath(), file);
         files.setSuffix(FileUploadUtils.dealName(file.getOriginalFilename()));
         files.setUrl(uploadFilePath);
-        filesMapper.insertFiles(files);
+        files.setContent(StringUtils.lastName(file.getName(),"|"));
+        //查找是否存在相同的校验码，存在区FIles
+        Files files2 = new Files();
+        files2.setType(type);
+        files2.setContent(StringUtils.lastName(file.getName(),"|"));
+        List<Files> filesList = filesMapper.selectFilesList(files2);
+        if (filesList != null && filesList.size() > 0) {
+            return filesList.get(0).getUrl();
+        }else {
+            filesMapper.insertFiles(files);
+        }
+
+
         return uploadFilePath;
     }
 
@@ -93,7 +102,7 @@ public class FilesServiceImpl implements IFilesService {
     /**
      * 新增文件上传 默认类型为图片 0
      *
-     * @param files 文件上传信息
+     * @param file 文件上传信息
      * @return 结果
      */
     @Override

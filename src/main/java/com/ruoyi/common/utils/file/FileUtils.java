@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils.file;
 
+import cn.hutool.core.io.FileUtil;
 import com.ruoyi.common.utils.StringUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -7,14 +8,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * 文件处理工具类
@@ -158,6 +154,7 @@ public class FileUtils
         if(StringUtils.isEmpty(reName)){
             reName = file.getName().split("\\.")[0];
         }
+        reName = reName+"|"+ FileUtil.checksumCRC32(file);
         FileItem item = factory.createItem(reName, "text/plain", true, file.getName());
         int bytesRead = 0;
         byte[] buffer = new byte[8192];
