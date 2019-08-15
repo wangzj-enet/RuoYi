@@ -114,17 +114,17 @@
 				{
 					field : 'mainId', 
 					title : '主记录id',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'goodsId', 
 					title : '商品id',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'startTime', 
 					title : '开始时间',
-					sortable: true,
+					sortable: false,
 					align: 'center',
 					formatter: function(value, row, index) {
 						return $.table.tooltip(value);
@@ -133,12 +133,12 @@
 				{
 					field : 'count', 
 					title : '总时长/秒',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'endTime', 
 					title : '结束时间',
-					sortable: true,
+					sortable: false,
 					align: 'center',
 					formatter: function(value, row, index) {
 						return $.table.tooltip(value);
@@ -147,20 +147,20 @@
 				{
 					field : 'thirdId', 
 					title : '三方id',
-					sortable: true,
+					sortable: false,
 					visible: false
 				},
 				{
 					field : 'jsonData', 
 					title : 'json数据',
-					sortable: true,
+					sortable: false,
 					visible: false   //这一列隐藏
 
 				},
 				{
 					field : 'mainStatus', 
 					title : '主表状态',
-					sortable: true,
+					sortable: false,
 					align: 'center',
 					formatter: function(value, row, index) {
 						return $.table.selectDictLabel(mainStatusData, value);
@@ -170,7 +170,7 @@
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true,
+					sortable: false,
 					align: 'center',
 					formatter: function(value, row, index) {
 						return $.table.selectDictLabel(statusData, value);
@@ -179,31 +179,31 @@
 				{
 					field : 'createBy', 
 					title : '创建者',
-					sortable: true,
+					sortable: false,
 					visible: false
 				},
 				{
 					field : 'createTime', 
 					title : '创建时间',
-					sortable: true,
+					sortable: false,
 					visible: false
 				},
 				{
 					field : 'updateBy', 
 					title : '更新者',
-					sortable: true,
+					sortable: false,
 					visible: false
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true,
+					sortable: false,
 					visible: false
 				},
 				{
 					field : 'remark', 
 					title : '备注信息',
-					sortable: true
+					sortable: false
 				},
 		        {
 		            title: '操作',

@@ -93,19 +93,19 @@
 					field : 'goodsId', 
 					title : '商品id',
 					align : 'center',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'goodsName', 
 					title : '商品名称',
 					align : 'center',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'jsonData', 
 					title : '商品数据',
 					align : 'center',
-					sortable: true,
+					sortable: false,
 					formatter: function(value, row, index) {
 						return '<a href="javascript:void(0)" onclick="pddGoodsDataOriginId(\'' + row.mainId + '\')">' + '原始商品数据' + '</a>'+'|'
 								+'<a href="javascript:void(0)" onclick="pddGoodsDataAddId(\'' + row.mainId + '\')">' + '本地商品数据' + '</a>';
@@ -115,7 +115,7 @@
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true,
+					sortable: false,
 					align : 'center',
 					formatter: function(value, row, index) {
 						return '<a href="javascript:void(0)" onclick="pddGoodsMainStatus(\'' + row.mainId + '\')">' + $.table.selectDictLabel(mainStatusData, value) + '</a>';
@@ -124,32 +124,32 @@
 				{
 					field : 'createBy', 
 					title : '创建者',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'createTime', 
 					title : '创建时间',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'updateBy', 
 					title : '更新者',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'remark', 
 					title : '备注信息',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'source', 
 					title : '源头',
-					sortable: true
+					sortable: false
 				},
 		        {
 		            title: '操作',

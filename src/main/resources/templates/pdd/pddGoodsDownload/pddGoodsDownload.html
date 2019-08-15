@@ -95,12 +95,12 @@
 				{
 					field : 'mainId', 
 					title : '主记录id',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'goodsId', 
 					title : '商品id',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'goodsName', 
@@ -113,18 +113,18 @@
 				{
 					field : 'goodsJson', 
 					title : 'json数据',
-					sortable: true,
+					sortable: false,
 					visible: false   //这一列隐藏
 				},
 				{
 					field : 'jsonMd5', 
 					title : '数据md5',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true,
+					sortable: false,
 					align: 'center',
 					formatter: function(value, row, index) {
 						return $.table.selectDictLabel(statusData,value);
@@ -133,27 +133,27 @@
 				{
 					field : 'createBy', 
 					title : '创建者',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'createTime', 
 					title : '创建时间',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'updateBy', 
 					title : '更新者',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true
+					sortable: false
 				},
 				{
 					field : 'remark', 
 					title : '备注信息',
-					sortable: true
+					sortable: false
 				},
 		        {
 		            title: '操作',
