@@ -66,6 +66,9 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('pdd:pddGoodsMain:edit')}]];
         var removeFlag = [[${@permission.hasPermi('pdd:pddGoodsMain:remove')}]];
+		var mainStatusData = [[${@dict.getType('pdd_main_status')}]];
+		var statusData = [[${@dict.getType('pdd_status')}]];
+
         var prefix = ctx + "pdd/pddGoodsMain";
 
         $(function() {
@@ -83,21 +86,25 @@
 				{
 					field : 'mainId', 
 					title : '主记录id',
+					align : 'center',
 					visible: false
 				},
 				{
 					field : 'goodsId', 
 					title : '商品id',
+					align : 'center',
 					sortable: true
 				},
 				{
 					field : 'goodsName', 
 					title : '商品名称',
+					align : 'center',
 					sortable: true
 				},
 				{
 					field : 'jsonData', 
-					title : 'json数据',
+					title : '商品数据',
+					align : 'center',
 					sortable: true,
 					formatter: function(value, row, index) {
 						return '<a href="javascript:void(0)" onclick="pddGoodsDataOriginId(\'' + row.mainId + '\')">' + '原始商品数据' + '</a>'+'|'
@@ -108,7 +115,11 @@
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true
+					sortable: true,
+					align : 'center',
+					formatter: function(value, row, index) {
+						return '<a href="javascript:void(0)" onclick="pddGoodsMainStatus(\'' + row.mainId + '\')">' + $.table.selectDictLabel(mainStatusData, value) + '</a>';
+					}
 				},
 				{
 					field : 'createBy', 
@@ -164,6 +175,12 @@
 		function pddGoodsDataAddId(mainId) {
 			var url = prefix + '/pddGoodsDataAddId/' + mainId;
 			$.modal.openTab("本地商品数据", url);
+		}
+
+		/*pddGoodsDataOriginId-详细*/
+		function pddGoodsMainStatus(mainId) {
+			var url = prefix + '/pddGoodsMainStatus/' + mainId;
+			$.modal.openTab("商品记录状态", url);
 		}
     </script>
 </body>

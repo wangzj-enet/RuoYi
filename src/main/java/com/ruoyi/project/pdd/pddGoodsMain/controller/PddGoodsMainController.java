@@ -149,5 +149,12 @@ public class PddGoodsMainController extends BaseController
 		mmap.put("mainId", mainId);
 		return "pdd/pddGoodsDataAdd" + "/pddGoodsDataAdd";
 	}
+
+	@GetMapping("/pddGoodsMainStatus/{mainId}")
+	public String pddGoodsMainStatus(@PathVariable("mainId") Long mainId, ModelMap mmap)
+	{
+		mmap.put("mainId", mainId);
+		return "pdd/pddGoodsMainStatus" + "/pddGoodsMainStatus";
+	}
 	
 }

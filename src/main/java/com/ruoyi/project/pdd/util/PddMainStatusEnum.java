@@ -19,6 +19,25 @@ public enum PddMainStatusEnum {
         this.desc=desc;
     }
 
+    // 普通方法
+    public static String getDesc(String code) {
+        for (PddMainStatusEnum pddMainStatusEnum : PddMainStatusEnum.values()) {
+            if (pddMainStatusEnum.getCode().equals(code)) {
+                return pddMainStatusEnum.desc;
+            }
+        }
+        return null;
+    }
+
+    // 普通方法
+    public static PddMainStatusEnum getEnum(String code) {
+        for (PddMainStatusEnum pddMainStatusEnum : PddMainStatusEnum.values()) {
+            if (pddMainStatusEnum.getCode().equals(code)) {
+                return pddMainStatusEnum;
+            }
+        }
+        return null;
+    }
     private String code;
     private String desc;
 

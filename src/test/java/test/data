@@ -1,4 +1,28 @@
-skuListOriginId
-goodsPropertiesOriginId
-goodsDataOriginId
-
+switch(PddMainStatusEnum.getEnum(pddGoodsMainStatus.getMainStatus())){
+			case INIT:
+				//下载
+				method = "downLoad";
+				break;
+			case DOWNLOAD:
+				//解析
+				method = "downLoad";
+				break;
+			case ANALYSIS:
+				//复制
+				method = "downLoad";
+				break;
+			case COPY:
+				//本地化
+				method = "downLoad";
+				break;
+			case LOCAL:
+				//规则化
+				method = "downLoad";
+				break;
+			case END:
+				//结束
+				method = "downLoad";
+				break;
+			default :
+				method = "ryParams";
+		}

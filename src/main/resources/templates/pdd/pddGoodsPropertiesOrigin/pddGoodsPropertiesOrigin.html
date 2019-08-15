@@ -102,6 +102,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('pdd:pddGoodsPropertiesOrigin:edit')}]];
         var removeFlag = [[${@permission.hasPermi('pdd:pddGoodsPropertiesOrigin:remove')}]];
+		var statusData = [[${@dict.getType('pdd_status')}]];
         var prefix = ctx + "pdd/pddGoodsPropertiesOrigin";
 
         $(function() {
@@ -189,8 +190,12 @@
 				},
 				{
 					field : 'status', 
-					title : '状态（0正常 1暂停）',
-					sortable: true
+					title : '状态',
+					sortable: true,
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(statusData,value);
+					}
 				},
 				{
 					field : 'remark', 

@@ -142,6 +142,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('pdd:pddSkuListOrigin:edit')}]];
         var removeFlag = [[${@permission.hasPermi('pdd:pddSkuListOrigin:remove')}]];
+		var statusData = [[${@dict.getType('pdd_status')}]];
         var prefix = ctx + "pdd/pddSkuListOrigin";
 
         $(function() {
@@ -197,7 +198,13 @@
 					title : 'sku预览图',
 					align: 'center',
 					formatter: function(value, row, index) {
-						return $.table.tooltip(value,20);
+						if($.common.isEmpty(value)){
+							return $.table.tooltip(value,20);
+						}else {
+							return $.table.imageView(value);
+						}
+
+						//return $.table.tooltip(value,20);
 					}
 				},
 				{
@@ -258,7 +265,11 @@
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true
+					sortable: true,
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(statusData,value);
+					}
 				},
 				{
 					field : 'remark', 

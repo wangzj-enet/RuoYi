@@ -1,23 +1,24 @@
 package com.ruoyi.project.pdd.pddGoodsMainStatus.controller;
 
-import java.util.List;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.common.exception.job.TaskException;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.monitor.job.domain.Job;
+import com.ruoyi.project.monitor.job.service.IJobService;
 import com.ruoyi.project.pdd.pddGoodsMainStatus.domain.PddGoodsMainStatus;
 import com.ruoyi.project.pdd.pddGoodsMainStatus.service.IPddGoodsMainStatusService;
-import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.project.pdd.util.PddMainStatusEnum;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 主记录状态信息操作处理
@@ -32,6 +33,8 @@ public class PddGoodsMainStatusController extends BaseController
 	
 	@Autowired
 	protected IPddGoodsMainStatusService pddGoodsMainStatusService;
+	@Autowired
+	private IJobService jobService;
 	
 	@RequiresPermissions("pdd:pddGoodsMainStatus:view")
 	@GetMapping()
@@ -122,5 +125,90 @@ public class PddGoodsMainStatusController extends BaseController
 	{		
 		return toAjax(pddGoodsMainStatusService.deletePddGoodsMainStatusByIds(ids));
 	}
+
+
+	/**
+	 * 任务调度立即执行一次
+	 */
+	@Log(title = "定时任务", businessType = BusinessType.UPDATE)
+	@PostMapping("/run")
+	@ResponseBody
+	public AjaxResult run(PddGoodsMainStatus pddGoodsMainStatus) throws SchedulerException, TaskException
+	{
+		Job job = new Job();
+		job.setJobGroup("DEFAULT");
+		job.setInvokeTarget(statusToInvokeTarget(pddGoodsMainStatus.getMainStatus(), pddGoodsMainStatus.getMainId()));
+		job.setStatus("1");
+		List<Job> jobList = jobService.selectJobList(job);
+		if(jobList != null&&jobList.size()>0){
+			job = jobList.get(0);
+		}else {
+			job.setJobName(PddMainStatusEnum.getDesc(pddGoodsMainStatus.getMainStatus())+"（"+pddGoodsMainStatus.getMainId()+"）");
+			job.setCronExpression("0/20 * * * * ?");
+			job.setMisfirePolicy("1");
+			job.setConcurrent("1");
+			jobService.insertJob(job);
+		}
+
+		jobService.run(job);
+		//jobService.deleteJob(job);
+		return success();
+	}
+
+	private String statusToInvokeTarget(String status, Long mainId) {
+		StringBuffer invokeTargetSu = new StringBuffer();
+		invokeTargetSu.append("pddTask.");
+		invokeTargetSu.append(statusToNextRunMethodName(status));
+		invokeTargetSu.append("('");
+		invokeTargetSu.append(mainId);
+		invokeTargetSu.append("')");
+		return invokeTargetSu.toString();
+	}
+
+	private String statusToNextRunMethodName(String status) {
+		String method;
+
+		switch(PddMainStatusEnum.getEnum(status)){
+			case INIT:
+				//下载
+				method = "downLoad";
+				break;
+			case DOWNLOAD:
+				//解析
+				method = "analysis";
+				break;
+			case ANALYSIS:
+				//复制
+				method = "copy";
+				break;
+			case COPY:
+				//本地化
+				method = "local";
+				break;
+			case LOCAL:
+				//规则化
+				method = "rule";
+				break;
+			case RULE:
+				//结束
+				method = "end";
+				break;
+			default :
+				method = "ryParams";
+		}
+		return method;
+	}
+
+
+
+	/*INIT("00","标记"),
+	DOWNLOAD("01","下载"),
+	ANALYSIS("02","解析"),
+	COPY("03","复制"),
+	LOCAL("04","本地化"),
+	RULE("05","规则化"),
+	END("10","结束"),
+	DISCARD("99","作废");*/
+
 
 }

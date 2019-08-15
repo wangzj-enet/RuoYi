@@ -71,6 +71,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('pdd:pddGoodsDownload:edit')}]];
         var removeFlag = [[${@permission.hasPermi('pdd:pddGoodsDownload:remove')}]];
+		var statusData = [[${@dict.getType('pdd_status')}]];
         var prefix = ctx + "pdd/pddGoodsDownload";
 
         $(function() {
@@ -123,7 +124,11 @@
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true
+					sortable: true,
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(statusData,value);
+					}
 				},
 				{
 					field : 'createBy', 

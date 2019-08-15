@@ -12,7 +12,7 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								主记录id：<input type="text" name="mainId"/>
+								主记录id：<input type="text" name="mainId" th:value="${mainId}"/>
 							</li>
 
 							<li>
@@ -86,6 +86,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('pdd:pddGoodsMainStatus:edit')}]];
         var removeFlag = [[${@permission.hasPermi('pdd:pddGoodsMainStatus:remove')}]];
+		var mainStatusData = [[${@dict.getType('pdd_main_status')}]];
+		var statusData = [[${@dict.getType('pdd_status')}]];
         var prefix = ctx + "pdd/pddGoodsMainStatus";
 
         $(function() {
@@ -96,7 +98,8 @@
 				detailUrl: prefix + "/detail/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
-                modalName: "主记录状态",
+                modalName: "商品记录状态",
+				queryParams: queryParams,
 		        showExport: true,
 				// detailView: true,
 				// detailFormatter: detailFormatter,
@@ -144,7 +147,8 @@
 				{
 					field : 'thirdId', 
 					title : '三方id',
-					sortable: true
+					sortable: true,
+					visible: false
 				},
 				{
 					field : 'jsonData', 
@@ -156,32 +160,45 @@
 				{
 					field : 'mainStatus', 
 					title : '主表状态',
-					sortable: true
+					sortable: true,
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(mainStatusData, value);
+					}
+
 				},
 				{
 					field : 'status', 
 					title : '状态',
-					sortable: true
+					sortable: true,
+					align: 'center',
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(statusData, value);
+					}
 				},
 				{
 					field : 'createBy', 
 					title : '创建者',
-					sortable: true
+					sortable: true,
+					visible: false
 				},
 				{
 					field : 'createTime', 
 					title : '创建时间',
-					sortable: true
+					sortable: true,
+					visible: false
 				},
 				{
 					field : 'updateBy', 
 					title : '更新者',
-					sortable: true
+					sortable: true,
+					visible: false
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true
+					sortable: true,
+					visible: false
 				},
 				{
 					field : 'remark', 
@@ -194,6 +211,7 @@
 		            formatter: function(value, row, index) {
 		            	var actions = [];
 						actions.push('<a class="btn btn-warning btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.detail(\'' + row.mainStatusId + '\')"><i class="fa fa-search"></i>详细</a>');
+						actions.push('<a class="btn btn-primary btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="run(\'' + row.mainId + '\', \'' + row.mainStatus + '\')"><i class="fa fa-play-circle-o"></i> 下一步</a> ');
 						actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.mainStatusId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.mainStatusId + '\')"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
@@ -203,6 +221,18 @@
             $.table.init(options);
         });
 
+		/* 立即执行一次 */
+		function run(mainId,mainStatus) {
+			$.modal.confirm("确认要立即执行一次任务吗？", function() {
+				$.operate.post(prefix + "/run", { "mainId": mainId, "mainStatus": mainStatus});
+			})
+		}
+
+		function queryParams(params) {
+			var search = $.table.queryParams(params);
+			search.mainId = $("input[name=mainId]").val();
+			return search;
+		}
 
 	</script>
 </body>
